@@ -1,0 +1,42 @@
+In de wiskunde en de informatica is een {\displaystyle n}n-tupel (ook tuple) een rij van {\displaystyle n}n objecten. In een tupel is de volgorde van belang; als de objecten in een andere volgorde staan is het een ander tupel. Een tupel kan gelijke objecten bevatten. Anderzijds hoeven de objecten van een tupel niet van hetzelfde datatype te zijn.
+
+
+Inhoud
+1	Definitie
+2	Cartesisch product
+3	Voorbeeld 1
+4	Voorbeeld 2
+5	Voorbeeld 3
+6	Tupels in informatica
+Definitie
+Voor een formele constructie uit koppels, zie aldaar.
+
+Cartesisch product
+Een belangrijk voorbeeld van een verzameling {\displaystyle n}n-tupels is een cartesisch product
+
+{\displaystyle A_{1}\times \ldots \times A_{n}}A_{1}\times \ldots \times A_{n}
+waarin elke {\displaystyle A_{i}}A_i afzonderlijk een verzameling is.
+
+Een tupel is dan dus een eindige geordende rij:
+
+{\displaystyle (a_{1},\ldots ,a_{n})}(a_{1},\ldots ,a_{n})
+met {\displaystyle a_{i}\in A_{i}}a_{i}\in A_{i} voor {\displaystyle i=1,\ldots ,n}{\displaystyle i=1,\ldots ,n}.
+
+In het bijzondere geval dat {\displaystyle n=2}n=2 spreekt men van een koppel.
+
+De objecten {\displaystyle a_{i}}a_{i}, dus de elementen van de afzonderlijke verzamelingen {\displaystyle A_{i}}A_i, worden ook de elementen van het tupel genoemd.
+
+Voorbeeld 1
+Een voorbeeld van een tupel is: ("Dorpsstraat", 123, "Jan Janssen", 38) met straatnaam (een tekenreeks), huisnummer (ook een tekenreeks, nu in de vorm van een getal. Met huisnummers en bijvoorbeeld ook telefoonnummers kan men niet rekenen. Delen, vermenigvuldigen en aftrekken zijn zinloos.), naam (ook een tekenreeks) en leeftijd (ook een natuurlijk getal). Dit is een ander tupel dan ("Dorpsstraat", 123, 38, "Jan Janssen") aangezien deze in een andere volgorde staan.
+
+Voorbeeld 2
+Verzamelingen met een wiskundige structuur kunnen worden gedefinieerd als tupel van een verzameling en een of meer items die voor de structuur zorgen, zie Ruimte (wiskunde).
+
+Voorbeeld 3
+Een tupel van {\displaystyle n}n elementen van een lichaam (Ned) / veld (Be) {\displaystyle K}K is een element van de vectorruimte {\displaystyle K^{n}}{\displaystyle K^{n}} en wordt in verband daarmee ook wel een vector genoemd.
+
+Tupels in informatica
+In bepaalde programmeertalen, zoals Haskell, kan men gebruikmaken van tupels. De volgende functie levert de eerste waarde in een tupel op, waarbij het tupel een String en een Int bevat:
+
+:fst :: (String, Int) -> String
+:fst (c, _) = c

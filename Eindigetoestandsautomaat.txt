@@ -1,0 +1,159 @@
+Een deterministische eindige automaat
+Een eindigetoestandsautomaat (in het Engels: finite-state automaton, veelal afgekort tot FA, of finite-state machine, afgekort tot FSM) is een abstract, wiskundig model voor het gedrag van een systeem waarbij het model bestaat uit een eindig aantal toestanden, overgangen tussen die toestanden en acties.
+
+In de tekening hiernaast is een FA te zien met vijf toestanden X0, ..., X4, aangegeven met cirkels, tien overgangen tussen de vijf toestanden elk aangegeven door een doorgetrokken lijn met een richtingspijl en de twee acties 0 en 1 die zijn aangegeven als label bij de doorgetrokken gerichte lijnen tussen de toestandsovergangen. Van de tien overgangen beginnen en eindigen er twee in dezelfde toestand, dit zijn lussen ofwel self-loops.
+
+De begintoestand wordt vaak aangegeven met een uit het niets inkomende pijl en accepterende eindtoestanden hebben vaak een dubbele cirkel. In de tekening is X0 de begintoestand. De accepterende eindtoestand (meerdere accepterende eindtoestanden zijn mogelijk, zie verderop) in de figuur is X4.
+
+Eindigetoestandsautomaten worden onder meer toegepast in de theorie van berekenbaarheid in de wiskunde en in formele talen in de informatica. Eindigetoestandsautomaten worden vaak gerepresenteerd als grafen en beschrijven een klasse van formele talen die reguliere talen heten. De laatste decennia zijn er ook in andere vakgebieden, zoals in de economie, biologie en taalkunde, modellen ontwikkeld die gebruikmaken van dit basismodel.
+
+
+Inhoud
+1	Twee basistypen
+2	Eindige automaten en reguliere talen
+2.1	Herkenning en generatie
+2.2	Reguliere talen
+2.3	Eindige automaten en grafen
+3	Deterministische eindige automaten
+4	Niet-deterministische eindige automaten
+5	Gelijkwaardigheid van DFA's en NFA's
+6	Overige opmerkingen
+Twee basistypen
+Er worden twee typen eindigetoestandsautomaten onderscheiden: de deterministische eindige automaten (DFA, van het Engelse deterministic finite automaton), en de niet-deterministische eindige automaten (NFA, van het Engelse nondeterministic finite automaton). Deze beide automatentypen zijn elk weliswaar aan verschillende regels onderworpen (zie hierna), maar beschrijven dezelfde klasse van talen. Een NFA is dan ook op mechanische wijze met behulp van een algoritme, de zogeheten subset-constructie, om te zetten naar een DFA die dezelfde (formele) taal representeert. DFA's zijn doorgaans sneller terwijl NFA's (veel) compacter qua geheugengebruik zijn, waardoor er een tijd versus ruimte afweging gemaakt kan worden.
+
+Eindige automaten en reguliere talen
+Herkenning en generatie
+Zoals bij ieder model van berekenbaarheid (bijvoorbeeld de turingmachine) wordt de werking van een automaat veelal beschreven in termen van het herkennen van een bepaalde, formele taal. Onder een formele taal T verstaat men een verzameling rijen van karakters (woorden), waarbij de karakters uit een strikt gedefinieerde verzameling komen. Een herkenner voor een dergelijke taal is een machine die een rij tekens kan inlezen en dan de vraag beantwoordt of die rij karakters gezamenlijk (d.w.z. in haar geheel) een woord is uit de taal T of niet. "Ja" staat hierbij voor herkenning, "nee" voor geen herkenning, weigering, of welke terminologie men hiervoor ook wenst te gebruiken.
+
+Stel: in de tekening is X0 de begintoestand en X4 de accepterende eindtoestand. De rij karakters '1110' wordt dan geaccepteerd (we eindigen bij een rondgang in toestand X4), terwijl '1111' wordt afgewezen (we eindigen in een niet-accepterende toestand X0).
+
+Een alternatieve gebruikswijze is dat men de automaat gebruikt om woorden die tot de taal T behoren te genereren. Daarbij gaat men tegengesteld te werk als bij een herkenner: uitgaande van de formele taalregels zoals die zijn beschreven door een automaat, worden woorden gecreëerd.
+
+Reguliere talen
+Eindige automaten herkennen een klasse van talen die bekendstaat als de klasse der reguliere talen. Dit zijn talen die qua structuur (d.w.z. voor wat betreft woord- en zinsopbouw) relatief eenvoudig zijn. Dat wil overigens niet zeggen dat het kleine of simpele talen zijn – een reguliere taal kan best oneindig veel woorden bevatten. Maar voor al die woorden geldt wel dat ze aan relatief simpele vormregels voldoen.
+
+Een voorbeeld van een reguliere taal T met als alfabet Σ (= verzameling toegestane tekens) de verzameling {a, b, c}, is de verzameling van woorden die gevormd worden door de regels:
+
+eerst 0 of meer keer een a,
+dan ten minste één c,
+vervolgens drie keer een a of een b,
+dan 0 of meer keer een c,
+en ten slotte de tekenrij abc.
+Voorbeelden van woorden (strings) uit de taal T zijn dan ccbbbabc, aaaaaccabacabc, aacaaaabc, cbbbabc, aaccccccccccccccbabccabc en acaaacabc.
+
+Daarentegen hoort het woord bcbaa niet in T thuis. Evenmin als aaaacaaaccab, ccde en aaaaaaabc.
+
+Eindige automaten en grafen
+Eindige automaten worden vrijwel altijd weergegeven als een gerichte graaf. De reden hiervoor is dat een graaf zo mooi past bij de manier waarop een reguliere taal werkt.
+
+Een definitie van een reguliere taal bestaat uit een opsomming van vormregeltjes die afgewandeld worden om te beoordelen of een gegeven woord ook tot de taal behoort. Kan een woord netjes gelezen c.q. verwerkt worden met behulp van die regeltjes (of gevormd worden met behulp van die regeltjes), dan is het woord onderdeel van die beschreven taal. Anders niet.
+
+Een eindige automaat die dit modelleert, moet dus het idee implementeren dat je op een gegeven moment bezig bent met een gegeven regel; dat je in die toestand een karakter in kunt lezen; dat dat karakter bij die regel past, aangeeft dat je overgaat naar de volgende regel, of vastloopt. Dit idee valt zeer goed te vangen in een graaf:
+
+Voor iedere toestand van de automaat, bevat de graaf een punt.
+Ieder inlezen van een karakter past bij een kant (gerichte transitie) van de graaf.
+Een kant tussen punten, is een overgang van de ene toestand naar een andere toestand – en dus van de ene vormregel naar een andere;
+Een kant die een lus is, komt overeen met een regel dat aangeeft "nul of meer keer karakter X inlezen".
+Voer daarnaast afspraken in dat je altijd in een vast punt (een vaste toestand) begint, dat niet verder kunnen in bepaalde toestanden in orde is ("accepterende toestanden") en in andere toestanden niet (de automaat "loopt vast") en je hebt een eindige automaat.
+
+Daarnaast heeft het gebruik van een graafmodel het voordeel dat bekende graafalgoritmen kunnen gebruikt worden om de taal te analyseren. Minimale modellen opstellen, bepalen of iedere toestand in het model wel bereikbaar is, testen op aanwezigheid van een cycle, sterk verbonden zijn, etc. Al dat soort dingen behoren tot het "standaardarsenaal" van de grafentheorie. En bovendien, kleine automaten zijn eenvoudig te illustreren door de bijbehorende graaf te tekenen.
+
+Nemen we als voorbeeld de taal T van hierboven en splitsen we de regels verder op. Ieder woord in de taal T is dan te vangen in de volgende reeks vormregeltjes:
+
+begint met 0 of meer keer een a;
+dan volgt een c;
+dan volgen 0 of meer c's;
+dan volgt een a of een b;
+dan volgt een a of een b;
+dan volgt een a of een b;
+dan volgen 0 of meer c's;
+dan volgt een a;
+dan volgt een b;
+dan volgt een c;
+dan volgt niets meer.
+We kunnen deze taal illustreren met de volgende graaf:
+
+
+Gerichte graaf van de hierboven beschreven reguliere taal T
+In de bovenstaande graaf zijn de kanten gedecoreerd met de tekens die horen bij die toestandsovergangen. Merk de lussen op die voor "0 of meer keer ..." gebruikt worden. Met een "losse toestandsovergang" (een kant die nergens vandaan komt) is aan de linkerkant aangegeven wat de begintoestand van de automaat is. Met een extra punt is aangegeven wat de accepterende toestand is – komt de automaat bij het lezen van de invoer in deze toestand en is de invoer dan op, dan accepteert de automaat en behoorde de invoer tot onze voorbeeldtaal. Volgt er daarna nog invoer, dan volgt een overgang naar een niet-accepterende toestand waarvandaan geen transities meer zijn; de automaat loopt dan vast in die niet-accepterende toestand en de invoer kan dan niet herkend worden als een woord uit de voorbeeldtaal. Deze regel geldt overigens ook algemeen: als er vanuit een bepaalde toestand geen kant is gedecoreerd met het volgende invoerkarakter, dan zit de automaat vast.
+
+Deterministische eindige automaten
+Formeel is een deterministische eindige automaat (DFA) een automaat {\displaystyle M=(Q,\Sigma ,\delta ,q_{0},F)}M=(Q,\Sigma ,\delta ,q_{0},F) met
+
+{\displaystyle Q}Q een eindige verzameling toestanden
+{\displaystyle \Sigma }\Sigma  een eindige verzameling symbolen, het alfabet van de automaat (of taal) geheten
+{\displaystyle \delta }\delta  een totale functie {\displaystyle Q\times \Sigma \rightarrow Q}Q\times \Sigma \rightarrow Q, de transitiefunctie, waarbij de uitkomst opnieuw een toestand is
+{\displaystyle q_{0}\in Q}q_{0}\in Q de begintoestand
+{\displaystyle F\subseteq Q}F\subseteq Q de verzameling accepterende toestanden
+Van deze automaat {\displaystyle M}M zeggen we dat hij een taal {\displaystyle L(M)}L(M) accepteert. Deze taal is de verzameling van woorden – rijen symbolen uit het alfabet – waarvoor geldt dat M in een accepterende toestand eindigt bij verwerking van die woorden.
+
+De bovenstaande definitie geeft een machine M die overeenkomt met simpele grafen zoals hierboven geïllustreerd; de toestanden komen overeen met knopen in de graaf, elementen van de transitiefunctie met kanten, het alfabet zijn de symbolen die verwerkt worden, de eindige toestanden uit de verzameling toestanden zijn aangegeven en ook de begintoestand.
+
+De "werking" van de machine wordt beschreven door de transitiefunctie {\displaystyle \delta }\delta . Deze functie definieert voor iedere toestand en voor ieder mogelijk volgend invoersymbool wat de toestand is waarnaar de automaat overgaat. Voor ieder paar (toestand, symbool) is maar één volgende toestand gedefinieerd – de automaat is deterministisch.
+
+Merk op dat volgens deze definitie, de transitiefunctie een definitie moet geven voor ieder paar van toestand en symbool. Zelfs als vanuit de gegeven toestand een bepaald symbool niet "ingelezen mag worden". Dit is handig bij het modelleren en ook makkelijk bij de wiskunde. Om het tekenen van deterministische automaten makkelijker te maken, worden toestanden waaruit geen eindtoestand kan worden bereikt vaak weggelaten (zoals hierboven ook gebeurd is, in het vorige hoofdstuk).
+
+Iedere deterministische eindige automaat heeft precies één begintoestand. Er mogen echter meerdere accepterende toestanden zijn – sterker nog, het is goed mogelijk een automaat te hebben waarin iedere toestand accepterend is. In het bijzonder komt het regelmatig voor dat de begintoestand accepterend is; in dat geval zit het lege woord in de taal.
+
+Het is niet helemaal duidelijk wie een DFA voor het eerst heeft beschreven, maar doorgaans wordt het artikel van de Amerikanen Warren Sturgis McCulloch en Walter Pitts, "A logical calculus of the ideas imminent in nervous activity" uit 1943 genoemd.
+
+Niet-deterministische eindige automaten
+Formeel is een niet-deterministische eindige automaat (NFA) een automaat {\displaystyle M=(Q,\Sigma ,\delta ,I,F)}{\displaystyle M=(Q,\Sigma ,\delta ,I,F)} met
+
+{\displaystyle Q}Q een eindige verzameling toestanden
+{\displaystyle \Sigma }\Sigma  een eindige verzameling symbolen, het alfabet van de automaat (of taal) geheten
+{\displaystyle \delta }\delta  een functie {\displaystyle Q\times (\Sigma \cup \{\epsilon \})\rightarrow \wp (Q)}Q\times (\Sigma \cup \{\epsilon \})\rightarrow \wp (Q), de transitiefunctie
+{\displaystyle I\subseteq Q}I\subseteq Q de verzameling begintoestanden
+{\displaystyle F\subseteq Q}F\subseteq Q de verzameling accepterende toestanden
+Deze automaat lijkt op de DFA die hierboven beschreven is. Er zijn echter enkele verschillen:
+
+De transitiefunctie definieert bij een NFA voor ieder paar (toestand, symbool) een verzameling van vervolgtoestanden. Bij de verwerking van invoer wordt uit deze toestanden een willekeurige toestand gekozen als vervolgtoestand. Dat wil zeggen dat het verloop van de verwerking van invoer niet altijd voorspelbaar is – de machine is niet-deterministisch.
+Er is een verzameling begintoestanden waaruit er 1 wordt gekozen als relevante begintoestand bij het controleren van een woord.
+Daarnaast zijn er NFA's met stille overgangen. Deze worden soms aangeduid met {\displaystyle \epsilon }\epsilon-NFA. Vanuit iedere toestand kan zo'n automaat een element van de invoer proberen te verwerken, maar er zijn bij deze {\displaystyle \epsilon }\epsilon-NFA's ook "stille overgangen" – een soort van "gratis" transitie, waarbij indien dit zo gedefinieerd werd in de transitiefunctie van 1 bepaalde toestand naar een andere kan worden overgesprongen zonder invoer. Een dergelijke transitie komt overeen met het idee dat een rij symbolen hetzelfde is als diezelfde rij symbolen met een aantal "lege karakters" tussengevoegd:
+
+{\displaystyle abcabcabc=abc\epsilon abc\epsilon \epsilon \epsilon a\epsilon bc}abcabcabc=abc\epsilon abc\epsilon \epsilon \epsilon a\epsilon bc
+De aanwezigheid van lege karakters maakt een automaat niet-deterministisch, omdat in een toestand de keuze kan bestaan tussen het verwerken van een invoerkarakter of overgaan naar de volgende toestand via een {\displaystyle \epsilon }\epsilon-transitie, waarbij {\displaystyle \epsilon }\epsilon al dan niet een element van {\displaystyle \Sigma }\Sigma  kan zijn.
+
+Van de automaat {\displaystyle M}M zeggen we dat hij taal {\displaystyle L(M)}L(M) accepteert. Deze taal is de verzameling van woorden {\displaystyle w}w – rijen symbolen uit het alfabet {\displaystyle \Sigma }\Sigma  – waarvoor geldt
+
+{\displaystyle \delta ^{*}(q_{0},w)\cap F\neq \emptyset }\delta ^{*}(q_{0},w)\cap F\neq \emptyset 
+waarbij {\displaystyle q_{0}\in I}q_{0}\in I, dit wil zeggen dat ten minste een van de toestanden die bereikt kan worden door {\displaystyle w}w in te geven een eindtoestand is.
+
+NFA's zijn voor het eerst beschreven door Michael Rabin en Dana Scott in hun gezamenlijke artikel "Finite Automata and Their Decision Problem" dat gepubliceerd werd in 1959.
+
+Gelijkwaardigheid van DFA's en NFA's
+Er doet zich nu de vraag voor welke soort automaat de meeste uitdrukkingskracht heeft. Welke automaat – DFA of NFA – accepteert de grootste verzameling talen?
+
+Een DFA is deterministisch, makkelijker te besturen en te plannen dan een NFA. Maar een NFA heeft meer soorten transities en kan zelfs meerdere vervolgtoestanden definiëren per toestand en invoerkarakter. Daar staat tegenover – een NFA kan misschien een keuze maken voor een vervolgtoestand die resulteert in een vastloper, zelfs als de invoer wel tot de taal van de automaat behoort.
+
+Welke is nu sterker als model? Het antwoord is opvallend: geen van beide. Voor iedere NFA bestaat een gelijkwaardige DFA, voor iedere DFA ten minste een gelijkwaardige NFA.
+
+Om te beginnen met het laatste: voor iedere DFA bestaat ten minste een gelijkwaardige NFA. Het bewijs van deze stelling is triviaal. Volgens de definitie heeft een DFA voor elk paar van toestand en alfabetteken precies één opvolgertoestand, terwijl een NFA voor elk paar een willekeurig aantal opvolgertoestanden kan hebben. Dat betekent dat elke DFA al een speciaal soort NFA is, omdat 'willekeurig' ook 1 kan zijn.
+
+Bovendien kan elke NFA in een gelijkwaardige DFA omgezet worden. Of formeel gesteld: Zij {\displaystyle M_{N}=(Q_{N},\Sigma _{N},\delta _{N},q_{0},F_{N})}M_{N}=(Q_{N},\Sigma _{N},\delta _{N},q_{0},F_{N}) een NFA. Dan bestaat er een DFA {\displaystyle M_{D}=(Q_{D},\Sigma _{D},\delta _{D},\{q_{0}\},F_{D})}M_{D}=(Q_{D},\Sigma _{D},\delta _{D},\{q_{0}\},F_{D}) met {\displaystyle L(M_{D})=L(M_{N})}L(M_{D})=L(M_{N}). Deze DFA valt te construeren uit {\displaystyle M_{N}}M_{N} door middel van het volgende algoritme, dat bekendstaat onder de naam subset-constructie:
+
+Begin een nieuwe graaf met als enige knoop {\displaystyle \{q_{0}\}}\{q_{0}\}.
+Herhaal de volgende stappen, totdat er voor iedere knoop van de graaf een uitgaande kant is voor ieder element van het alfabet:
+Neem een knoop {\displaystyle \{q_{i},q_{j},\ldots ,q_{k}\}}\{q_{i},q_{j},\ldots ,q_{k}\} die voor één of andere {\displaystyle a\in \Sigma }a \in \Sigma geen uitgaande kant heeft.
+Bereken voor {\displaystyle q_{i},q_{j},\ldots ,q_{k}}q_{i},q_{j},\ldots ,q_{k} in de NFA de verzameling toestanden die te bereiken zijn via transitie-overgangen met {\displaystyle a}a – dat zijn dus de directe overgangen, de {\displaystyle \epsilon }\epsilon-transities vanuit {\displaystyle q_{i},q_{j},\ldots ,q_{k}}q_{i},q_{j},\ldots ,q_{k} en de {\displaystyle \epsilon }\epsilon-transities vanuit de eerder genoemde directe overgangen.
+Zij {\displaystyle q_{l},q_{m},\ldots ,q_{n}}q_{l},q_{m},\ldots ,q_{n} de verzameling van alle toestanden die in de vorige stap gevonden zijn.
+Als de knoop {\displaystyle \{q_{l},q_{m},\ldots ,q_{n}\}}\{q_{l},q_{m},\ldots ,q_{n}\} nog niet bestaat in de nieuwe graaf, voeg hem dan toe.
+Voeg een kant toe in de nieuwe graaf van {\displaystyle \{q_{i},q_{j},\ldots ,q_{k}\}}\{q_{i},q_{j},\ldots ,q_{k}\} naar {\displaystyle \{q_{l},q_{m},\ldots ,q_{n}\}}\{q_{l},q_{m},\ldots ,q_{n}\} gelabeld {\displaystyle a}a.
+Stel de verzameling {\displaystyle F_{D}}F_{D} samen: dit is de verzameling knopen in de nieuwe graaf die een {\displaystyle q_{i}}q_i bevatten uit de NFA met {\displaystyle q_{i}\in F_{N}}q_{i}\in F_{N}.
+Als {\displaystyle M_{N}}M_{N} het lege woord accepteert ({\displaystyle q_{0}}q_{0} is accepterend of een {\displaystyle \epsilon }\epsilon-transitie vanuit {\displaystyle q_{0}}q_{0} leidt tot een accepterende toestand), maak dan {\displaystyle \{q_{0}\}}\{q_{0}\} accepterend.
+Bewijs van het bovenstaande algoritme:
+
+Als het algoritme klopt, dan bestaat er voor iedere NFA een equivalente DFA. We concentreren dus verder alleen op het algoritme.
+Het algoritme is eindig; het kan nooit eeuwig doorlopen en dus geen antwoord geven. Dit valt als volgt in te zien:
+Stappen 1, 3 en 4 zijn triviaal eindig.
+Iedere herhaling van stap 2 voegt een kant toe aan de nieuwe kant van de nieuwe graaf (dus de DFA). Maar het aantal knopen van de NFA is eindig. En het aantal knopen van de DFA kan hoogstens de machtsverzameling zijn van de verzameling knopen van de NFA. En het maximaal aantal kanten van de DFA is dus {\displaystyle 2^{|Q_{N}|}|\Sigma |}2^{{|Q_{N}|}}|\Sigma |. Dat is eindig, dus het maximaal aantal herhalingen van stap 2 is ook eindig.
+De correctheid van het algoritme volgt uit inductie naar de lengte van de invoer van de automaat:
+Basisgeval, invoerlengte = 0: Als de NFA het lege woord accepteert, dan is {\displaystyle q_{0}}q_{0} accepterend (of een toestand bereikbaar uit {\displaystyle q_{0}}q_{0} via {\displaystyle \epsilon }\epsilon-transities). Dan is in de DFA {\displaystyle \{q_{0}\}}\{q_{0}\} accepterend en accepteert de DFA het lege woord. Accepteert de NFA het lege woord niet, dan is {\displaystyle \{q_{0}\}}\{q_{0}\} niet accepterend en loopt de DFA vast op het lege woord.
+Hypothese, invoerlengte is n: Als een invoer v ter lengte n de NFA in een toestand {\displaystyle q_{i}}q_i brengt, dan is er in de DFA een toestand {\displaystyle Q_{i}=\{\ldots ,q_{i},\ldots \}}Q_{i}=\{\ldots ,q_{i},\ldots \} waarin de DFA terechtkomt bij invoer v.
+Stap, invoer = va, invoerlengte = n + 1: Door verwerking van de eerste n karakters van de invoer (het gedeelte v) door de DFA, komen we in toestand {\displaystyle Q_{i}}Q_{i} vanuit toestand {\displaystyle \{q_{0}\}}\{q_{0}\}, zoals volgt uit de hypothese. In de NFA komen we in een toestand {\displaystyle q_{i}}q_i, vanuit {\displaystyle q_{0}}q_{0}. Komen we vervolgens door verwerking van a in de NFA in toestand {\displaystyle q_{j}}q_{j} vanuit {\displaystyle q_{i}}q_i. Volgens de constructie van stap 2 van het algoritme, moet er in de DFA nu een transitie zijn vanuit toestand {\displaystyle Q_{i}}Q_{i} naar {\displaystyle Q_{j}=\{\ldots ,q_{j},\ldots \}}Q_{j}=\{\ldots ,q_{j},\ldots \} met label a. En dus kan de DFA vanuit {\displaystyle \{q_{0}\}}\{q_{0}\} in toestand {\displaystyle Q_{j}}Q_{j} komen. Bovendien geldt dat als {\displaystyle q_{j}}q_{j} accepterend is in de NFA, dat {\displaystyle Q_{j}}Q_{j} accepterend is in de DFA.
+Overige opmerkingen
+Eindige automaten blijken een specifiek geval van een zogeheten Petrinet te zijn. DFA's en NFA's kunnen op elk moment slechts in 1 toestand verkeren. Met Petrinets kunnen daarnaast meertoestandssituaties worden beschreven. NFA's zijn bovendien te beschouwen als een speciaal geval van een alternerende eindige automaat.
+
+Reguliere grammatica's, eindigetoestandsautomaten en reguliere expressies genereren in de Chomskyhiërarchie de reguliere talen, wat inhoudt dat ze equivalent zijn. Daardoor kunnen relaties tussen de eigenschappen van deze verschillende beschrijvingswijzen gevonden worden. Zo is bekend dat een DFA zonder cycles een eindig aantal woorden herkent en een DFA met cycles een onbeperkte woordenschat.
+
+Er zijn verschillende computertalen gedefinieerd om op vlotte wijze eindige automaten te implementeren. W3C ontwikkelde SCXML, State Chart XML. Er is tevens een generiek ontwerppatroon voor ontwikkeld: het State-ontwerppatroon.

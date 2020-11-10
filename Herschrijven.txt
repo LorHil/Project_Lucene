@@ -1,0 +1,84 @@
+In de theoretische informatica is herschrijven (Engels: rewriting) een onderzoeksgebied dat zich bezighoudt met stapsgewijze, discrete transformaties van objecten, vaak met het doel een bepaald eindresultaat (bijvoorbeeld de uitkomst van een berekening) te bereiken. De mogelijke stappen die genomen kunnen worden, worden gespecificeerd in een herschrijfsysteem. Herschrijfsystemen zijn vaak niet-deterministisch: het wordt niet voorgeschreven welke van de mogelijke stappen de volgende stap is.
+
+Er bestaan verschillende vormen van herschrijven, bijvoorbeeld termherschrijven, graafherschrijven en stringherschrijven.
+
+
+Inhoud
+1	Informeel voorbeeld
+2	Vormen van herschrijven
+2.1	Herschrijven in het algemeen
+2.2	Termherschrijven
+2.2.1	Definitie
+2.2.2	Voorbeeld: Optellen
+2.3	Hogere-orde-termherschrijven
+2.4	Graafherschrijven
+3	Eigenschappen van herschijfsystemen
+3.1	Terminatie en normalisatie
+3.2	Confluentie en de stelling van Church-Rosser
+3.3	Het woordprobleem
+4	Literatuur
+Informeel voorbeeld
+Rekenen met optellen, aftrekken, vermenigvuldigen en delen kan als herschrijfsysteem worden gemodelleerd. De objecten die herschreven worden zijn rekenkundige uitdrukkingen, terwijl in een herschrijfstap één rekenkundige bewerking kan worden uitgevoerd. Zo bestaat bijvoorbeeld de volgende herschrijfrij:
+
+{\displaystyle (42+3)/(7-2)=45/(7-2)=45/5=9}{\displaystyle (42+3)/(7-2)=45/(7-2)=45/5=9}
+Sommige rekenkundige bewerkingen staan twee verschillende stappen toe. Uit {\displaystyle (42+3)/(7-2)}{\displaystyle (42+3)/(7-2)} kunnen we met een enkele stap niet alleen {\displaystyle 45/(7-2)}{\displaystyle 45/(7-2)} afleiden, maar ook {\displaystyle (42+3)/5}{\displaystyle (42+3)/5}. Sommige rekenkundige uitdrukkingen kunnen helemaal niet verder vereenvoudigd worden, bijvoorbeeld {\displaystyle 9}{\displaystyle 9}. Zo'n uitdrukking wordt normaalvorm genoemd en representeert als het ware de uitkomst van een berekening.
+
+Vormen van herschrijven
+Herschrijven in het algemeen
+Er bestaan herschrijfsystemen die met verschillende soorten objecten werken, zoals termen, strings of grafen. Herschrijfsystemen hebben echter een aantal eigenschappen met elkaar gemeen. Om deze algemene eigenschappen te definiëren en te onderzoeken worden abstracte herschrijfsystemen gebruikt. In een abstract herschrijfsysteem wordt geabstraheerd van het specifieke object waarmee het systeem werkt. Een abstract herschrijfsysteem bestaat uit een verzameling {\displaystyle A}A (de verzameling van objecten die herschreven kunnen worden) en een tweeplaatsige relatie op {\displaystyle A}A (de herschrijfrelatie), die meestal als {\displaystyle \rightarrow }\rightarrow wordt geschreven. We schrijven dus {\displaystyle a\rightarrow b}{\displaystyle a\rightarrow b} als het object {\displaystyle a}a in één stap naar het object {\displaystyle b}b herschreven kan worden.
+
+De herschrijfrelatie bevat de mogelijke atomaire stappen die genomen kunnen worden. Op basis van de herschrijfrelatie kunnen we afgeleide relaties definiëren:
+
+{\displaystyle \leftarrow }\leftarrow is de inverse van {\displaystyle \rightarrow }\rightarrow, dat wil zeggen, {\displaystyle a\leftarrow b}{\displaystyle a\leftarrow b} geldt precies dan als {\displaystyle b\rightarrow a}{\displaystyle b\rightarrow a};
+{\displaystyle {\leftrightarrow }={\rightarrow }\cup {\rightarrow }}{\displaystyle {\leftrightarrow }={\rightarrow }\cup {\rightarrow }}, dat wil zeggen dat {\displaystyle a\leftrightarrow b}{\displaystyle a\leftrightarrow b} geldt als {\displaystyle a\rightarrow b}{\displaystyle a\rightarrow b} of {\displaystyle a\leftarrow b}{\displaystyle a\leftarrow b}
+{\displaystyle \rightarrow ^{*}}{\displaystyle \rightarrow ^{*}}, {\displaystyle \leftarrow ^{*}}{\displaystyle \leftarrow ^{*}} en {\displaystyle \leftrightarrow ^{*}}{\displaystyle \leftrightarrow ^{*}} zijn de reflexief-transitieve afsluitingen van respectievelijk {\displaystyle \rightarrow }\rightarrow, {\displaystyle \leftarrow }\leftarrow en {\displaystyle \leftrightarrow }\leftrightarrow. Dat betekent bijvoorbeeld dat {\displaystyle a\rightarrow ^{*}b}{\displaystyle a\rightarrow ^{*}b} als {\displaystyle b}b in nul of meer stappen uit {\displaystyle a}a bereikt kan worden.
+Termherschrijven
+Bij termherschrijven zijn de objecten die herschreven worden termen. Termen bestaan uit functiesymbolen en operatoren, constanten en variabelen, zoals bijvoorbeeld rekenkundige uitdrukkingen en logische formules.
+
+Definitie
+De taal van een term wordt gegeven door een zogenaamde signatuur. Een signatuur is een eindige verzameling {\displaystyle \Sigma }\Sigma  van functiesymbolen, waarbij aan elk functiesymbool {\displaystyle f\in \Sigma }{\displaystyle f\in \Sigma } een plaatsigheid toegekend is. Gegeven een signatuur {\displaystyle \Sigma }\Sigma  en een oneindige verzameling {\displaystyle X}X van variabelen, wordt een (eerste-orde) term inductief gedefinieerd door:
+
+Een variabele {\displaystyle x\in X}x\in X is een term.
+Als {\displaystyle f\in \Sigma }{\displaystyle f\in \Sigma } een {\displaystyle n}n-plaatsig functiesymbool is, en {\displaystyle t_{1},\ldots ,t_{n}}t_{1},\ldots ,t_{n} termen, dan is {\displaystyle f(t_{1},\ldots ,t_{n})}{\displaystyle f(t_{1},\ldots ,t_{n})} een term. Tweeplaatsige functiesymbolen worden ook vaak tussen hun argumenten genoteerd, bijvoorbeeld {\displaystyle (t_{1}+t_{2})}{\displaystyle (t_{1}+t_{2})} in plaats van {\displaystyle +(t_{1},t_{2})}{\displaystyle +(t_{1},t_{2})}.
+Voorbeelden van termen zijn logische formules ({\displaystyle \Sigma =\{{\land },{\lor },{\rightarrow },{\leftrightarrow },{\neg }\}}{\displaystyle \Sigma =\{{\land },{\lor },{\rightarrow },{\leftrightarrow },{\neg }\}}) en rekenkundige expressies ({\displaystyle \Sigma =\{{+},{-},{\times },{/},\ldots \}}{\displaystyle \Sigma =\{{+},{-},{\times },{/},\ldots \}}).
+
+Een termherschrijfsysteem bestaat uit een eindig aantal termherschrijfregels. Elke herschrijfregel is van de vorm {\displaystyle l\rightarrow r}{\displaystyle l\rightarrow r}, waarbij {\displaystyle l}l en {\displaystyle r}r termen zijn en alle variabelen die in {\displaystyle r}r voorkomen óók in {\displaystyle l}l voorkomen. In een regel {\displaystyle l\rightarrow r}{\displaystyle l\rightarrow r} wordt {\displaystyle l}l de linkerkant en {\displaystyle r}r de rechterkant genoemd. We kunnen een herschrijfregel {\displaystyle l\rightarrow r}{\displaystyle l\rightarrow r} op een term {\displaystyle u}u toepassen door:
+
+eerst de variabelen in {\displaystyle l}l en {\displaystyle r}r door willekeurige termen te vervangen, waarbij dezelfde variabele wel altijd door dezelfde term moet worden vervangen;
+een voorkomen van de linkerkant in {\displaystyle u}u te zoeken;
+en ten slotte dit voorkomen door de rechterkant te vervangen.
+Voorbeeld: Optellen
+We beschouwen de signatuur {\displaystyle \Sigma =\{{\mathsf {0}},{\mathsf {s}},{\mathsf {plus}}\}}{\displaystyle \Sigma =\{{\mathsf {0}},{\mathsf {s}},{\mathsf {plus}}\}}, waarbij {\displaystyle {\mathsf {0}}}{\displaystyle {\mathsf {0}}} 0-plaatsig is (dat wil zeggen: het is een constante), {\displaystyle {\mathsf {s}}}{\displaystyle {\mathsf {s}}} 1-plaatsig en {\displaystyle {\mathsf {plus}}}{\displaystyle {\mathsf {plus}}} 2-plaatsig. Hoewel termherschrijven een zuiver syntactische bezigheid is, kunnen we, om het voorbeeld beter te begrijpen, de termen als volgt interpreteren: {\displaystyle {\mathsf {0}}}{\displaystyle {\mathsf {0}}} is het getal 0, {\displaystyle {\mathsf {s}}}{\displaystyle {\mathsf {s}}} is de opvolgerfunctie (dus {\displaystyle {\mathsf {s}}({\mathsf {0}})}{\displaystyle {\mathsf {s}}({\mathsf {0}})} betekent 1, en {\displaystyle {\mathsf {s}}({\mathsf {s}}({\mathsf {0}}))}{\displaystyle {\mathsf {s}}({\mathsf {s}}({\mathsf {0}}))} betekent 2) en {\displaystyle {\mathsf {plus}}}{\displaystyle {\mathsf {plus}}} is de optelfunctie.
+
+Optellen kan nu worden gedefinieerd met het volgende termherschrijfsysteem:
+
+{\displaystyle {\begin{array}{rcl}{\mathsf {plus}}(x,{\mathsf {0}})&\rightarrow &x\\{\mathsf {plus}}(x,{\mathsf {s}}(y))&\rightarrow &{\mathsf {s}}({\mathsf {plus}}(x,y))\end{array}}}{\displaystyle {\begin{array}{rcl}{\mathsf {plus}}(x,{\mathsf {0}})&\rightarrow &x\\{\mathsf {plus}}(x,{\mathsf {s}}(y))&\rightarrow &{\mathsf {s}}({\mathsf {plus}}(x,y))\end{array}}}
+Met dit herschrijfsysteem kunnen we bijvoorbeeld {\displaystyle 1+2}{\displaystyle 1+2} berekenen:
+
+{\displaystyle {\mathsf {plus}}({\mathsf {s}}({\mathsf {0}}),{\mathsf {s}}({\mathsf {s}}({\mathsf {0}})))\rightarrow {\mathsf {s}}({\mathsf {plus}}({\mathsf {s}}({\mathsf {0}}),{\mathsf {s}}({\mathsf {0}})))\rightarrow {\mathsf {s}}({\mathsf {s}}({\mathsf {plus}}({\mathsf {s}}({\mathsf {0}}),{\mathsf {0}})))\rightarrow {\mathsf {s}}({\mathsf {s}}({\mathsf {s}}({\mathsf {0}})))}{\displaystyle {\mathsf {plus}}({\mathsf {s}}({\mathsf {0}}),{\mathsf {s}}({\mathsf {s}}({\mathsf {0}})))\rightarrow {\mathsf {s}}({\mathsf {plus}}({\mathsf {s}}({\mathsf {0}}),{\mathsf {s}}({\mathsf {0}})))\rightarrow {\mathsf {s}}({\mathsf {s}}({\mathsf {plus}}({\mathsf {s}}({\mathsf {0}}),{\mathsf {0}})))\rightarrow {\mathsf {s}}({\mathsf {s}}({\mathsf {s}}({\mathsf {0}})))}
+Hogere-orde-termherschrijven
+Er bestaan ook varianten van termherschrijven waarbij gebonden variabelen kunnen voorkomen. Dit maakt het mogelijk ook hogere-orde-bewerkingen te modelleren, bijvoorbeeld de map-operatie die een functie op alle elementen van een lijst toepast. Om deze reden worden zulkte termherschrijfsystemen hogere-orde-termherschrijfsystemen genoemd. Een bekend voorbeeld van een hogere-orde-termherschrijfsysteem is de lambdacalculus.
+
+Graafherschrijven
+Bij graafherschrijven zijn de objecten die herschreven worden grafen. Bij graafherschrijven zoeken we de linkerkant van een graafherschrijfregel als ondergraaf in de te herschrijven graaf en vervangen deze door de rechterkant van de regel.
+
+Eigenschappen van herschijfsystemen
+Terminatie en normalisatie
+Een normaalvorm van een object {\displaystyle a}a is een object {\displaystyle b}b dat zelf niet herschreven kan worden en waarvoor geldt dat {\displaystyle a\rightarrow ^{*}b}{\displaystyle a\rightarrow ^{*}b}. Een (abstract) herschrijfsysteem heet normaliserend wanneer elk object een normaalvorm heeft. In het geval dat een object {\displaystyle a}a precies één normaalvorm heeft spreken we ook wel over de normaalvorm van {\displaystyle a}a, geschreven {\displaystyle a{\downarrow }}{\displaystyle a{\downarrow }}.
+
+Een herschrijfsysteem is terminerend wanneer het geen oneindige herschrijfrijtjes toelaat, dat wil zeggen dat er geen oneindige rijtjes {\displaystyle a_{1},a_{2},\ldots }{\displaystyle a_{1},a_{2},\ldots } bestaan zodat {\displaystyle a_{i}\rightarrow a_{i+1}}{\displaystyle a_{i}\rightarrow a_{i+1}} voor alle {\displaystyle i\geq 0}{\displaystyle i\geq 0}.
+
+Een terminerend herschrijfsysteem is noodzakelijkerwijs ook normaliserend. Om voor een willekeurig object {\displaystyle a}a een normaalvorm te vinden, kunnen we herschrijfstappen uitvoeren totdat we een object bereikt hebben dat niet verder te herschrijven is. Dat is dan een normaalvorm van {\displaystyle a}a. Omdat het herschrijfsysteem termineert bereiken we ook altijd een normaalvorm. Andersom is echter niet het geval: er bestaan herschrijfsystemen die weliswaar normaliserend zijn, maar niet termineren. Neem bijvoorbeeld het abstract herschrijfsysteem dat uit de objecten 0 en 1 en de herschrijfrelatie {\displaystyle 0\rightarrow 0,0\rightarrow 1}{\displaystyle 0\rightarrow 0,0\rightarrow 1}. Dit systeem is normaliserend, omdat de normaalvorm 1 vanaf beide objecten bereikt kan worden. Het is echter niet terminerend vanwege de oneindige herschrijfrij {\displaystyle 0\rightarrow 0\rightarrow \cdots }{\displaystyle 0\rightarrow 0\rightarrow \cdots }.
+
+Confluentie en de stelling van Church-Rosser
+We beschouwen de volgende mogelijke eigenschappen van (abstracte) herschrijfsystemen:
+
+Confluentie. Een herschrijfsysteem is confluent wanneer geldt dat als {\displaystyle a\rightarrow ^{*}b}{\displaystyle a\rightarrow ^{*}b} en {\displaystyle a\rightarrow ^{*}c}{\displaystyle a\rightarrow ^{*}c}, er dan een {\displaystyle d}d moet bestaan zodat {\displaystyle b\rightarrow ^{*}d}{\displaystyle b\rightarrow ^{*}d} en {\displaystyle c\rightarrow ^{*}d}{\displaystyle c\rightarrow ^{*}d}.
+Lokale confluentie. Een herschrijfsysteem is lokaal confluent wanneer geldt dat als {\displaystyle a\rightarrow b}{\displaystyle a\rightarrow b} en {\displaystyle a\rightarrow c}{\displaystyle a\rightarrow c}, er dan een {\displaystyle d}d moet bestaan zodat {\displaystyle b\rightarrow ^{*}d}{\displaystyle b\rightarrow ^{*}d} en {\displaystyle c\rightarrow ^{*}d}{\displaystyle c\rightarrow ^{*}d}.
+Church-Rosser-eigenschap. Een herschrijfsysteem heeft de Church-Rosser-eigenschap, als geldt dat {\displaystyle a\leftrightarrow ^{*}b}{\displaystyle a\leftrightarrow ^{*}b} impliceert dat er een {\displaystyle c}c bestaat zodat {\displaystyle a\rightarrow ^{*}c}{\displaystyle a\rightarrow ^{*}c} en {\displaystyle b\rightarrow ^{*}c}{\displaystyle b\rightarrow ^{*}c}.
+Het is triviaal het geval dat een confluent herschrijfsysteem ook lokaal confluent is. Andersom is dit echter niet het geval: er bestaan lokaal confluente herschrijfsystemen die niet confluent zijn. Max Newman bewees in 1942 echter wel Newmans lemma: voor een terminerend herschrijfsysteem geldt wél dat als het systeem lokaal confluent is, het ook confluent is.
+
+Confluentie en de Church-Rosser-eigenschap zijn op het eerste gezicht verschillende eigenschappen. In 1936 bewees Alonzo Church samen met zijn student John Barkley Rosser echter dat de twee eigenschappen samenvallen. Deze stelling wordt de Stelling van Church-Rosser genoemd.
+
+Het woordprobleem
+Het woordprobleem voor een herschrijfsysteem {\displaystyle A}A is het beslissingsprobleem dat, gegeven twee objecten {\displaystyle a}a en {\displaystyle b}b van dat herschrijfsysteem, de vraag stelt of {\displaystyle a\leftrightarrow ^{*}b}{\displaystyle a\leftrightarrow ^{*}b}. In het algemeen is het woordprobleem op herschrijfsystemen onbeslisbaar. Als {\displaystyle A}A echter terminerend en confluent is, is het woordprobleem voor {\displaystyle A}A beslisbaar: we kunnen beide objecten tot hun normaalvorm reduceren. Er geldt {\displaystyle a\leftrightarrow ^{*}b}{\displaystyle a\leftrightarrow ^{*}b} dan en slechts dan als beide objecten dezelfde normaalvorm hebben.

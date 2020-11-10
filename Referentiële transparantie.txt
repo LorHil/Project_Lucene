@@ -1,0 +1,16 @@
+Referentiële transparantie is een eigenschap van delen van broncode van computerprogramma's.
+
+Een expressie is referentieel transparant als deze vervangen kan worden door de waarde van die expressie zonder dat de werking van het programma verandert. Om dit te bewerkstelligen mag een referentieel transparante expressie alleen bestaan uit constanten en functies die geen neveneffecten hebben en moet ze voor dezelfde invoer telkens dezelfde uitvoer geven. Referentiële transparantie is een van de principes van functionele programmeertalen.
+
+De eigenschap van referentiële transparantie wordt met name gebruikt om te redeneren over de correctheid van een computerprogramma. Doordat een referentieel transparante expressie vervangen kan worden door haar waarde, kan de code vereenvoudigd worden om zo de correcte werking van het programma in te zien en te bewijzen. De referentiële transparantie van expressies kan ook gebruikt worden om de code te optimaliseren en te vervangen door kortere en efficiëntere expressies.
+
+Voorbeelden
+Rekenkundige operaties zijn referentieel transparant: 5 * 5 kan vervangen worden door 25.
+
+Veel functies, met name wiskundige functies, zijn referentieel transparant. De functie sin(x) is referentieel transparant aangezien deze voor een gegeven x altijd dezelfde waarde oplevert.
+
+De C++ expressie x++ is niet referentieel transparant aangezien het de waarde van x verandert. Deze expressie is een verkorte notatie voor x = x + 1. Het aanroepen van bijvoorbeeld int increment(int i) { return i + 1; } is echter wel referentieel transparant aangezien deze functie geen neveneffecten heeft.
+
+In de meeste programmeertalen is print("Hello world") niet transparant, aangezien vervanging van de expressie ervoor zorgt dat "Hello world" niet getoond wordt.
+
+Ook de functie today() is niet referentieel transparant, aangezien de waarde die deze expressie vandaag heeft (bijvoorbeeld de string "1 januari 2000") niet dezelfde is als de waarde van morgen.

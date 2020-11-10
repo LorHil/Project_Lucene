@@ -1,0 +1,119 @@
+De Van Wijngaarden-grammatica, ook wel W-grammatica genoemd, is een formalisme voor de definitie van de syntaxis van een formele taal, ontwikkeld en gebruikt door Adriaan van Wijngaarden bij het definiëren van de programmeertaal Algol 68.
+
+Het formalisme is een natuurlijke uitbreiding van de contextvrije grammatica, die bekende beperkingen in uitdrukkingskracht heeft. Ruwweg kan een contextvrije grammatica wel uitdrukken hoe de uitdrukkingen in een taal hiërarchisch uit verschillende soorten onderdelen opgebouwd kunnen zijn, maar niet hoe elementen binnen die onderdelen specifieke correspondenties moeten vertonen, wat vaak het geval is. Een veelgebruikte manier om dit op te lossen is om de regels van de contextvrije grammatica parametriseerbaar te maken, waarbij de parameters de bedoelde overeenkomst kunnen uitdrukken. In W-grammatica's gebeurt dat door deze geparametriseerde grammaticaregels te genereren met een tweede niveau van grammaticaregels, de metaregels. W-grammatica's zijn daarmee een vorm van twee-niveau-grammatica.
+
+
+Inhoud
+1	Definitie
+1.1	Syntaxis
+1.2	Semantiek
+2	Voorbeelden
+2.1	Overeenkomst in getal
+2.2	Definitie van identifiers in programmeertalen
+3	Uitdrukkingskracht
+4	Toepassingen buiten Algol-68
+5	Zie ook
+6	Externe links
+7	Literatuurverwijzingen
+Definitie
+Syntaxis
+Een W-grammatica is een paar W = <M, H>, waarbij:
+
+M, de metagrammatica, een eindige verzameling contextvrije grammaticaregels is;
+H, de hypergrammatica, eveneens een eindige verzameling contextvrije grammaticaregels is, met de bijzonderheid dat de niet-terminale symbolen strings zijn waar linkerkanten van de regels van M in kunnen voorkomen
+Semantiek
+Laat, als s een linkerkant van een metaregel is, M(s) staan voor de verzameling strings die de metagrammatica uit s kan genereren.
+
+Noem een toewijzing volgens M een functie fM van linkerkanten van regels in de metagrammatica naar strings zodanig dat {\displaystyle \forall s:f_{M}(s)\in M(s)}{\displaystyle \forall s:f_{M}(s)\in M(s)}.
+
+Noem de invulling van een hyperregel R door een toewijzing fM de contextvrije grammaticaregel die ontstaat door elke linkerkant van een metaregel s die in R voorkomt overal in R te vervangen door f(s).
+
+De grammatica generereerd door W is de vereniging van alle invullingen van hyperregels in H door toewijzingen volgens M. Dit is een contextvrije grammatica, behalve dat het aantal regels oneindig kan zijn.
+
+De taal gegenereerd door W is de verzameling strings die (een eindig fragment van) de grammatica generereerd door W kan genereren uit toewijzingen volgens M aan het startsymbool van H.
+
+Opmerking: als M leeg is, is H zelf de grammatica gegenereerd door W, en is de taal gegenereerd door W gewoon de taal gegenereerd door H.
+
+Voorbeelden
+Overeenkomst in getal
+Stel, we willen eenvoudige Nederlandse zinnen beschrijven van het soort
+
+de kat eet vis
+Jan houdt van Marie
+de kanarie haat popmuziek
+muzikanten spelen Mozart
+Dat kan met een contextvrije grammatica:
+
+S : N V N
+
+V : eet
+V : houdt van
+V : haat
+V : spelen
+
+N : de kat
+N : Jan
+N : de kanarie
+N : muzikanten
+N : vis
+N : Marie
+N : popmuziek
+N : Mozart
+
+Die beschrijft inderdaad willekeurige zinnen van deze vorm, zoals de bovenstaande voorbeelden, maar er zijn ongrammaticale bij, zoals
+
+Jan spelen popmuziek
+muzikanten houdt van Mozart
+We moeten "deze vorm" dus iets verfijnen. Het probleem is dat in het Nederlands N en V een getal hebben, en dat de eerste N en de V in getal moeten overeenkomen.
+
+In een W-grammatica kunnen we dat als volgt opschrijven:
+
+S-voud : N-voud V-voud N-ookvoud
+
+V-enkelvoud : eet
+V-enkelvoud : houdt van
+V-enkelvoud : haat
+V-meervoud : spelen
+
+N-enkelvoud : de kat
+N-enkelvoud : Jan
+N-enkelvoud : de kanarie
+N-meervoud : muzikanten
+N-enkelvoud : vis
+N-enkelvoud : Marie
+N-enkelvoud : popmuziek
+N-enkelvoud : Mozart
+
+voud :: enkelvoud
+voud :: meervoud
+ookvoud :: voud
+
+De rechtse kolom is de metagrammatica M; de andere vormen de hypergrammatica H. In dit voorbeeld komen de metanonterminals maar in een regel voor, namelijk die voor S, en genereren ze een taal van maar twee elementen; daardoor heeft het invullen van M in H als effect dat die ene regel voor S wordt vervangen door de volgende:
+
+S-enkelvoud : N-enkelvoud V-enkelvoud N-enkelvoud
+S-enkelvoud : N-enkelvoud V-enkelvoud N-meervoud
+S-meervoud : N-meervoud V-meervoud N-enkelvoud
+S-meervoud : N-meervoud V-meervoud N-meervoud
+
+Samen met de andere regels van H is dit een contextvrije grammatica, die precies de gewenste overeenstemming in getal uitdrukt.
+
+In dit geval is het resultaat een gewone (eindige) contextvrije grammatica, omdat M een eindige verzameling strings genereert (alleen enkelvoud en meervoud).
+
+Definitie van identifiers in programmeertalen
+Een programmeertaal zoals Algol 68 eist van elke identifier (bijvoorbeeld een constante, variabele, of functie) dat elke toepassing ervan ondubbelzinnig aan een definitie gekoppeld is. De regels die dit beschrijven kunnen voor veel talen statisch bepaald worden, dat wil zeggen, door alleen naar de programmatekst te kijken; dan is de welgedefinieerdheid van elke identifier een syntactische eigenschap. De overeenstemmingseis is in dit geval dat voor elke identifier alle voorkomens zich bevinden in het bereik van een definitie van diezelfde identifier. Voor Algol-68 is de precieze formulering van deze eigenschap zeer ingewikkeld; de W-grammatica's gemaakt voor Algol 68 drukken deze exact uit.
+
+Uitdrukkingskracht
+W-grammatica's zijn Turing-volledig.
+
+Het ontleden is daarmee onbeslisbaar: er bestaat geen methode om van een willekeurige uitdrukking en W-grammatica te bepalen of de uitdrukking door de grammatica gegenereerd kan worden.
+
+In de jaren zeventig en 80 zijn er beperkte varianten op W-grammatica's ontwikkeld met als doel de uitdrukkingskracht zo veel mogelijk te handhaven terwijl voldoende efficiënte ontleding mogelijk wordt.
+
+Een voorbeeld dat zeer dicht bij de W-grammatica's komt is de Extended Affix Grammar, gedefinieerd door D.A. Watt (1974), waar aan de universiteit van Nijmegen in de jaren 80 ontleders voor ontwikkeld zijn.[1]
+
+Toepassingen buiten Algol-68
+De afleidingsregels van W-grammatica's zijn sterk verwant aan inferentieregels uit de logica. De logische programmeertaal Prolog is in feite ontstaan uit een sterk op W-grammatica's lijkend formalisme;[2] unificatie in Prolog komt overeen met de consequente substitutie van linkerkanten van metaregels in W-grammatica's.
+
+Anthony Fisher heeft geprobeerd een parser te construeren voor algemene W-grammatica's.
+
+Men heeft voorgesteld de methode te gebruiken om complexe menselijke interacties in de ergonomie te beschrijven.

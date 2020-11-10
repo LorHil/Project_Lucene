@@ -1,0 +1,15 @@
+In de informatica is corecursie een operatietype dat het duale is van recursie. Corecursie wordt typisch in samenhang met luie evaluatie gebruikt om oneindige datastructuren te representeren.
+
+De regel voor primitieve corecursie op codata is de duale van de regel voor primitieve recursie op data.
+
+In plaats van de argumenten van boven naar beneden te bekijken, lopen we de resultaten van beneden naar boven door. Merk op dat de corecursie (mogelijk oneindige) codata creëert, terwijl de gewone recursie (noodzakelijkerwijs eindige) data analyseert. Gewone recursie is niet toepasbaar op de codata, omdat de recursie mogelijk niet eindigt. Omgekeerd is corecursie niet toepasbaar als het resultaattype van de data eindig moet zijn.
+
+Een anamorfisme is op dezelfde manier een vorm van corecursie als een catamorfisme een vorm van recursie is.
+
+De bewijsassistent Coq ondersteunt corecursie en coinductie en maakt daarbij gebruik van het CoFixpoint commando.
+
+Voorbeeld
+Hieronder een voorbeeld in Haskell. De volgende definitie produceert in lineaire tijd de rij van Fibonacci:
+
+fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
+De oneindige lijst wordt geproduceerd door corecursie - de latere elementen van de lijst worden op aanvraag berekend, startend bij de twee beginelementen 0 en 1. Zo'n definitie is alleen mogelijk vanwege de luie evaluatie, die algoritmes toestaat niet de gehele datastructuur te genereren; zulke technieken zijn een belangrijk onderdeel van het programmeren in luie functionele programmeertalen als Haskell.

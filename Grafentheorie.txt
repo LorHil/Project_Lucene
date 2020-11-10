@@ -1,0 +1,393 @@
+De grafentheorie is een deelgebied van de wiskunde dat de eigenschappen van grafen bestudeert.
+
+Een graaf bestaat uit een verzameling punten, knopen genoemd, waarvan sommige verbonden zijn door lijnen, de zijden, kanten, takken of bogen. Afhankelijk van de toepassing kunnen de lijnen gericht zijn, dan worden ze ook wel pijlen genoemd, men spreekt dan van een gerichte graaf. Ook worden wel gewichten aan de lijnen toegekend door middel van getallen, deze stellen dan bijvoorbeeld de afstand tussen twee punten voor. Een graaf met gewichten noemt men een gewogen graaf.
+
+Structuren die als grafen weergegeven kunnen worden, komen veel voor. Grafen worden bijvoorbeeld gebruikt om eindigetoestandsautomaten te modelleren of om een schematische routekaart te maken tussen een aantal plaatsen met de afstanden daartussen. Verschillende soorten grafen spelen in de informatica een rol, niet alleen in de vorm van boomstructuren, maar ook om dataverkeer over netwerken weer te geven. Er kunnen algoritmes worden uitgevoerd om bepaalde eigenschappen van zo'n graaf te berekenen en aan de hand daarvan voorspellingen te doen of beslissingen te nemen over de optimale route voor een datapakket; binnen de informatica is dit dan ook een belangrijk onderwerp.
+
+Complexe netwerken vormen een vrij recent gebied in het onderzoek rond grafen, dat minder is gericht op de studie van kleine grafen en de eigenschappen van individuele knopen en zijden in deze grafen, maar eerder op de statistische eigenschappen van grootschalige netwerken.
+
+
+Inhoud
+1	Definitie
+2	Terminologie en notatie
+3	Enkelvoudige graaf
+3.1	Componenten en samenhangende grafen
+3.2	Matrixvoorstelling van een graaf
+3.3	De boom
+3.4	De cykelgraaf
+3.5	De volledige graaf
+4	Euler en Hamilton
+5	Overige grafen
+5.1	De planaire graaf
+5.2	De bipartiete graaf
+5.3	De Petersengraaf
+5.3.1	Graafoperaties, de 2-graaf en geïnduceerde grafen
+5.4	Gerichte grafen
+5.4.1	Enige verschillen ten opzichte van enkelvoudige grafen
+5.5	Gelabelde en gewogen grafen
+5.6	Hypergrafen
+6	Problemen op grafen
+7	Belangrijke algoritmes op grafen
+8	Gerelateerde wiskundige gebieden
+Definitie
+Er zijn verschillende definities gangbaar om grafen te definiëren. Hier volgen de definities zoals ze in deze encyclopedie worden gehanteerd.
+
+Een graaf bestaat uit een verzameling knopen of toppen (Engels: vertices) en een verzameling zijden, kanten, bogen of takken (Engels: edges) van paren knopen. Formeler:
+
+Een graaf {\displaystyle G=(V,E)}{\displaystyle G=(V,E)} is een geordend paar, waarin {\displaystyle V}V een willekeurige verzameling is en waarin {\displaystyle E}E een verzameling is bestaande uit multisets van twee al dan niet verschillende elementen uit {\displaystyle V}V. De elementen van {\displaystyle V}V heten de knopen (of punten) van de graaf {\displaystyle G}G en de elementen van {\displaystyle E}E heten de zijden (ook kanten, lijnen, bogen of takken) van {\displaystyle G}G. De knopen die een zijde vormen, heten de eindpunten van de zijde.
+
+Ter verduidelijking schrijft men ook
+
+{\displaystyle V_{G}{\text{ of }}V(G)}{\displaystyle V_{G}{\text{ of }}V(G)} voor de knopen van {\displaystyle G}G
+{\displaystyle E_{G}{\text{ of }}E(G)}{\displaystyle E_{G}{\text{ of }}E(G)} voor de zijden van {\displaystyle G}G
+Normaal wordt ervan uitgegaan dat een zijde twee verschillende knopen met elkaar verbindt of eventueel een lus is en bij dezelfde knoop terugkomt.
+
+Een ruimer begrip graaf laat toe dat twee knopen door meer dan één zijde zijn verbonden: men spreekt van een multigraaf. De verzameling zijden {\displaystyle E}E is dan een multiset van deelverzamelingen van {\displaystyle V}V met twee elementen. In de grafische voorstelling wordt soms, in plaats van elke zijde afzonderlijk, het aantal zijden tussen twee knopen weergegeven als één zijde met daarnaast een getal dat het aantal zijden voorstelt.
+
+Terminologie en notatie
+De elementen van {\displaystyle V_{G}}V_{G} heten de knopen of punten van de graaf {\displaystyle G}G.
+De elementen van {\displaystyle E_{G}}{\displaystyle E_{G}} heten de zijden, lijnen, kanten, bogen of takken van de graaf {\displaystyle G}G.
+Men noteert {\displaystyle v_{1}\sim v_{2}}v_{1}\sim v_{2} als de twee knopen {\displaystyle v_{1}}v_1 en {\displaystyle v_{2}}v_{2} met elkaar zijn verbonden.
+Twee knopen heten met elkaar verbonden als er een zijde tussen hen is.
+Als de knoop {\displaystyle v}v een begin- of eindpunt is van de zijde {\displaystyle e}e, heet {\displaystyle v}v verbonden met {\displaystyle e}e.
+Een lus is een zijde die een knoop met zichzelf verbindt.
+Een wandeling tussen twee verbonden knopen {\displaystyle a}a en {\displaystyle b}b is een rij verbonden knopen, waarvan {\displaystyle a}a het begin en {\displaystyle b}b het einde is. De rij knopen {\displaystyle (v_{1},\ldots ,v_{n})}{\displaystyle (v_{1},\ldots ,v_{n})} is dus een wandeling tussen {\displaystyle a}a en {\displaystyle b}b, als
+{\displaystyle a=v_{1}\sim v_{2}\sim \ldots \sim v_{n}=b}{\displaystyle a=v_{1}\sim v_{2}\sim \ldots \sim v_{n}=b}
+In een ongewogen graaf is de lengte van een wandeling het aantal zijden in de wandeling (het aantal knopen min 1).
+Een graaf heet samenhangend, als er tussen elk paar knopen van de graaf een wandeling mogelijk is.
+Een pad tussen twee verbonden knopen {\displaystyle a}a en {\displaystyle b}b is een wandeling tussen {\displaystyle a}a en {\displaystyle b}b waarin geen knoop meer dan eenmaal voorkomt.
+De afstand {\displaystyle d(a,b)}{\displaystyle d(a,b)} tussen twee knopen {\displaystyle a}a en {\displaystyle b}b de lengte van het kortste pad tussen {\displaystyle a}a en {\displaystyle b}b. Als er geen wandeling mogelijk tussen {\displaystyle a}a en {\displaystyle b,}{\displaystyle b,} is de afstand tussen {\displaystyle a}a en {\displaystyle b}b ongedefinieerd.
+De diameter van een samenhangende graaf {\displaystyle G}G is het maximum van de lengtes van de kortste paden tussen twee knopen in {\displaystyle G}G.
+Een cykel in een graaf is een pad met lengte groter dan nul van een knoop naar zichzelf.
+De taille van een samenhangende graaf is de lengte van de kortste cykel in de graaf.
+De graad {\displaystyle \mathrm {deg} (v)}{\displaystyle \mathrm {deg} (v)} van een knoop {\displaystyle v}v is het aantal zijden waarmee {\displaystyle v}v verbonden is.
+Als alle knopen van een graaf dezelfde graad {\displaystyle g}g hebben, wordt de graaf {\displaystyle g}g-regulier genoemd. Een graaf heet regulier als er een getal {\displaystyle g}g is, zo dat de graaf {\displaystyle g}g-regulier is.
+Twee grafen {\displaystyle G_{1}}G_{1} en {\displaystyle G_{2}}G_{2} heten isomorf, als de ene graaf ontstaat uit de andere door slechts de namen van de knopen te veranderen. Meer formeel is er dan een bijectie {\displaystyle f:V(G_{1})\to V(G_{2})}{\displaystyle f:V(G_{1})\to V(G_{2})} zodanig dat {\displaystyle (u,v)\in E(G_{1})}(u,v)\in E(G_{1}) dan en slechts dan als {\displaystyle (f(u),f(v))\in E(G_{2})}(f(u),f(v))\in E(G_{2}).
+De graaf {\displaystyle G_{1}}G_{1} heet een deelgraaf van de graaf {\displaystyle G_{2},}{\displaystyle G_{2},} als de knopen en zijden van {\displaystyle G_{1}}G_{1} ook knopen en zijden van {\displaystyle G_{2}}G_{2} zijn, dus als {\displaystyle V(G_{1})\subseteq V(G_{2})}{\displaystyle V(G_{1})\subseteq V(G_{2})} en {\displaystyle E(G_{1})\subseteq E(G_{2})}{\displaystyle E(G_{1})\subseteq E(G_{2})}.
+Een partitie van een graaf {\displaystyle G}G is een partitie van de verzameling knopen {\displaystyle V_{G}}V_{G} van {\displaystyle G}G, dus een disjuncte opdeling van de knopen.
+Enkelvoudige graaf
+De enkelvoudige graaf is de meest gebruikte soort graaf. In een enkelvoudige graaf komen geen lussen voor en is er niet meer dan één zijde tussen twee knopen.
+
+6n-graf.svg
+De enkelvoudige graaf vindt veel toepassing binnen de wiskunde en de informatica. Over deze grafen is een groot aantal stellingen bewezen.
+
+Componenten en samenhangende grafen
+
+Een graaf, die bestaat uit twee componenten.
+Binnen een enkelvoudige ongerichte graaf {\displaystyle G}G is een component van {\displaystyle G}G een deelgraaf {\displaystyle C=(V_{C},E_{C})}{\displaystyle C=(V_{C},E_{C})} waarvan alle knopen onderling verbonden zijn en niet verbonden met enige andere knoop. Dus:
+
+{\displaystyle V_{C}\subseteq V_{G}}V_{C}\subseteq V_{G}
+als {\displaystyle v,v'\in V_{C}}{\displaystyle v,v'\in V_{C}}, dan {\displaystyle v\sim v'}{\displaystyle v\sim v'} en
+voor alle {\displaystyle v\in V_{C},v'\in V_{G}\setminus V_{C}}{\displaystyle v\in V_{C},v'\in V_{G}\setminus V_{C}} geldt: {\displaystyle v\not \sim v'}{\displaystyle v\not \sim v'}
+Een graaf die slechts één component heeft, en waarin dus een wandeling tussen elk paar punten bestaat, is daarmee een samenhangende graaf. Verder volgt dat de zijden van een graaf alleen tussen knopen in dezelfde component lopen, dus zijn de componenten van een graaf in het bijzonder samenhangende deelgrafen. Een enkelvoudige ongerichte graaf valt uiteen in onderling disjuncte componenten.
+
+Matrixvoorstelling van een graaf
+We kunnen een eindige graaf eenvoudig voorstellen in een matrix, de bogenmatrix. Dit is een vierkante matrix met dimensies {\displaystyle n\times n}n\times n, waarin {\displaystyle n}n het aantal knopen in de graaf is. Het element {\displaystyle a_{ij}}a_{{ij}} in de bogenmatrix {\displaystyle A}A is 1 als er een zijde (boog) bestaat die van {\displaystyle i}i naar {\displaystyle j}j gaat en 0 als dit niet het geval is.
+
+Gelabelde graaf	Bogenmatrix
+6n-graph2.svg	{\displaystyle {\begin{pmatrix}1&1&0&0&1&0\\1&0&1&0&1&0\\0&1&0&1&0&0\\0&0&1&0&1&1\\1&1&0&1&0&0\\0&0&0&1&0&0\\\end{pmatrix}}}{\begin{pmatrix}1&1&0&0&1&0\\1&0&1&0&1&0\\0&1&0&1&0&0\\0&0&1&0&1&1\\1&1&0&1&0&0\\0&0&0&1&0&0\\\end{pmatrix}}
+Is de bogenmatrix opgesteld, dan kan deze worden gebruikt om af te lezen hoeveel paden er van een knoop naar een andere zijn. Door de bogenmatrix {\displaystyle A}A tot de macht {\displaystyle n}n te verheffen, kan men in de kolom {\displaystyle s}s op rij {\displaystyle t}t aflezen hoeveel paden er zijn van lengte {\displaystyle n}n van knoop {\displaystyle s}s naar knoop {\displaystyle t}t.
+
+In het bovenstaande voorbeeld is
+
+{\displaystyle A^{2}={\begin{pmatrix}3&2&1&1&2&0\\2&3&0&2&1&0\\1&0&2&0&2&1\\1&2&0&3&0&0\\2&1&2&0&3&1\\0&0&1&0&1&1\\\end{pmatrix}}}{\displaystyle A^{2}={\begin{pmatrix}3&2&1&1&2&0\\2&3&0&2&1&0\\1&0&2&0&2&1\\1&2&0&3&0&0\\2&1&2&0&3&1\\0&0&1&0&1&1\\\end{pmatrix}}}
+De boom
+
+Een boom met 6 knopen en 5 lijnen.
+Een samenhangende graaf zonder cykels heet een boom. Dit omdat een dergelijke graaf in een tekening vaak op een boom lijkt. Een boom heeft één kant minder dan hij knopen heeft.
+
+Een boom met verzameling knopen {\displaystyle V_{B}}V_{B} heeft {\displaystyle |V_{B}|-1}|V_{B}|-1 kanten
+
+Bewijs
+Het bewijs gaat met volledige inductie naar het aantal knopen.
+
+Met maar één knoop zijn er geen zijden en is de uitspraak waar,
+Stel dat de uitspraak waar is voor een grotere boom.
+Een nieuwe knoop is via precies één zijde met deze boom verbonden, want als de knoop met twee zijden met de boom wordt verbonden, ontstaat een cykel.
+Per nieuwe knoop komt er dus één nieuwe zijde bij.
+Het is bij algoritmes op bomen vaak handig en ook gebruikelijk om een knoop in de boom aan te wijzen en deze een speciale status binnen de boom te geven, vaak wordt deze knoop gezien als het 'begin' van de boom. Deze knoop wordt dan de wortel van de boom genoemd.
+
+Bomen behoren tot de fundamentele structuren in de wiskunde en de informatica. Bomen worden vaak gebruikt (of gekozen) om model te staan voor verzamelingen van objecten waar een inherente hiërarchie in zit. Bomen zijn terug te vinden in aandachtsgebieden als:
+
+onderzoek naar taal en structuur van wiskunde, als model van de opbouw van termen, documenten en dergelijke
+compilatie, als model voor de structuur van formele talen
+bestandssystemen, als het model waarnaar een bestandssysteem opgebouwd wordt
+codeertheorieën, zoals Huffmancodering
+De veelvuldigheid en populariteit van bomen maakt dat er voor bomen als zodanig vele algoritmen gedefinieerd zijn. Voorbeelden hiervan zijn
+
+Breadth-first search
+Depth-first search
+Minimaal opspannende boom
+De cykelgraaf
+
+De cykelgraaf {\displaystyle C_{6}}{\displaystyle C_{6}}
+De cykelgraaf met {\displaystyle n}n knopen, {\displaystyle C_{n}}C_{n}, is de enkelvoudige, samenhangende graaf met {\displaystyle n}n knopen, waarin iedere knoop verbonden is met twee andere. Een dergelijke graaf heeft de vorm van een cirkel en er komen evenveel knopen als zijden in voor. De cykelgraaf met het minste aantal knopen en zijden is de graaf {\displaystyle K_{3}}K_{3}.
+
+Cykelgrafen zijn binnen de informatica zeer bekend als netwerkmodel. Het Token Ring netwerk is hierop gebaseerd. Cykelgrafen dienen ook vaak als model voor lokale zoekalgoritmen.
+
+De volledige graaf
+De volledige graaf met {\displaystyle n}n knopen, {\displaystyle K_{n}}K_{n}, is de graaf waarin alle knopen onderling verbonden zijn.
+
+De volgende grafen zijn voorbeelden van volledige grafen:
+
+Complete graph K1.svg	Complete graph K2.svg	Complete graph K3.svg	Complete graph K4.svg	Complete graph K5.svg	Complete graph K6.svg	Complete graph K7.svg	Complete graph K8.svg
+De volledige grafen {\displaystyle K_{1}...K_{8}}K_{1}...K_{8}.
+Het aantal zijden van {\displaystyle K_{n}}K_{n} is {\displaystyle {\tfrac {1}{2}}n(n-1)}{\displaystyle {\tfrac {1}{2}}n(n-1)}, het {\displaystyle (n-1)}{\displaystyle (n-1)}-ste driehoeksgetal.
+
+Bewijs
+Het aantal zijden is gelijk aan het aantal mogelijke paren knopen, dus het aantal manieren om uit {\displaystyle n}n objecten er twee te kiezen. Dat aantal is de binomiaalcoëfficiënt {\displaystyle {\binom {n}{2}}={\tfrac {1}{2}}n(n-1)}{\displaystyle {\binom {n}{2}}={\tfrac {1}{2}}n(n-1)}.
+
+Een clique of kliek is een deelverzameling knopen waarin elke knoop verbonden is met alle andere knopen in die deelverzameling. Samen met de zijden waarmee ze verbonden zijn, vormen ze een volledige graaf.
+
+Euler en Hamilton
+De eulergraaf is een speciaal soort graaf die is bedacht door de wiskundige Leonhard Euler toen hij bezig was met het probleem van de zeven bruggen van Koningsbergen. Dit probleem komt neer op de vraag of het mogelijk is in een samenhangende graaf een wandeling te maken waarin alle kanten van de graaf precies één keer voorkomen, een eulerwandeling, of zelfs een dergelijke wandeling te maken zodat deze begint en eindigt in dezelfde knoop, een eulercykel.
+
+In 1736 loste Euler dit probleem op:
+
+Een enkelvoudige samenhangende graaf bevat een eulercykel dan en slechts dan als de graad van alle knopen even is.
+
+Bewijs
+{\displaystyle \Rightarrow }\Rightarrow 
+
+Iedere keer dat een eulercykel langs een knoop komt, is er een zijde waarover de cykel aankomt en een waarover de cykel vertrekt.
+{\displaystyle \Leftarrow }\Leftarrow 
+
+Stel, er zijn twee gesloten wandelingen, dus cykels, allebei zonder dubbel gebruikte kanten, die niet een kant maar wel een knoop {\displaystyle k}k gemeen hebben. Die cykels kunnen aan elkaar geplakt tot een nieuwe wandeling: start de eerste wandeling in {\displaystyle k.}{\displaystyle k.} Maak hem af en ga dan verder met de volgende, die weer eindigt in {\displaystyle k.}{\displaystyle k.} Stel nu dat in een enkelvoudige samenhangende graaf alle knopen een even graad hebben. In deze graaf kan een cykel worden gemaakt zonder dubbele kanten: kies een knoop en begin over kanten te lopen totdat het niet verder kan. Het eindpunt is gelijk aan het beginpunt (alle knopen hebben even graad, dus de enige knoop die tijdens de wandeling een ongebruikte ingang en geen ongebruikte uitgangen heeft is die knoop waar is begonnen). Haal nu de kanten die in de cykel zijn gebruikt weg. Herhaal dit proces totdat alle kanten op zijn. Nu is er een aantal losse gesloten wandelingen die geen kanten, maar wel een aantal punten gemeen hebben. Plak nu op de manier van de algemene opmerking boven alle wandelingen aan elkaar, en de graaf waarmee begonnen was is terug met de erin gemaakte Eulercykel.
+Complete graph K3.svg	Complete graph K5.svg	Königsberg graph.svg
+{\displaystyle K_{3},\ K_{5}}{\displaystyle K_{3},\ K_{5}} en de "zeven bruggen"
+De grafen {\displaystyle K_{3}}K_{3} en {\displaystyle K_{5}}K_{5} bevatten beide eulercykels. De graaf die het probleem van de zeven bruggen voorstelt, bevat geen eulercykel.
+
+De voorwaarde voor een eulerwandeling is iets minder streng.
+
+Een enkelvoudige samenhangende graaf bevat een eulerwandeling dan en slechts dan als de graad van alle knopen, eventueel op twee na, even is.
+
+Bewijs
+{\displaystyle \Rightarrow }\Rightarrow 
+
+Als de eulerwandeling begint en eindigt in dezelfde knoop is het een eulercykel en hebben alle knopen een even graad. Anders is een eulerwandeling in feite een eulercykel met een ontbrekende kant. Neem nu de eulerwandeling in de graaf en plaats een fictieve kant tussen de begin- en eindknoop, dan is er een eulercykel, waarvan de graad van alle knopen dus even is. Als nu de fictieve kant wordt weggehaald gaat er een af van de graad van de begin- en eindknoop. Hun graden worden dan oneven, de graad van de rest van de knopen blijft gelijk.
+{\displaystyle \Leftarrow }\Leftarrow 
+
+Zoek de twee knopen met oneven graad, als die er zijn, trek er een fictieve zijde tussen. Nu zijn de graden van alle knopen even, dus is er een eulercykel. Haal de fictieve zijde weer weg, een eulercykel minus één zijde is een eulerwandeling.
+Behalve de eulercykels en -wandelingen is er nog een variant: de cykel en de wandeling, waarin iedere knoop één keer voorkomt. Dit zijn de hamiltoncykel en hamiltonwandeling. Deze variant is bedacht door William Hamilton. Er bestaat geen karakteristiek van grafen die een hamiltoncykel bevatten. De wiskundige Øystein Ore bewees wel de volgende stelling: De graaf {\displaystyle G}G bevat een hamiltoncykel als de som van de graden van elk tweetal niet-verbonden knopen samen groter is dan het aantal knopen van de graaf.
+
+Over het algemeen is het vinden van een hamiltoncykel in een graaf een NP-volledig probleem; dit in tegenstelling tot het zoeken naar een eulercykel dat in polynomiale tijd kan worden opgelost dankzij de bovengenoemde regels. Een hamiltoncykel is een eenvoudig geval van het handelsreizigersprobleem. Bij dit probleem worden ook afstanden aan de verbindingen tussen de knopen of plaatsen toegevoegd en is het de opdracht de kortste rondreis te bepalen.
+
+Overige grafen
+De planaire graaf
+Planaire of vlakke grafen zijn grafen die op een plat vlak kunnen worden getekend zonder dat de zijden van de graaf elkaar snijden.
+
+Complete graph K3.svg	Complete graph K5.svg
+{\displaystyle K_{3}}K_{3} is planair, {\displaystyle K_{5}}K_{5} is niet planair
+Dergelijke grafen zijn van belang bij de modellering van zaken als pijpleidingen en printplaten voor elektronica, waar de verbindingen geen contact mogen maken. Wat dat eerste betreft zijn planaire grafen dan ook bij het grotere publiek bekend in de vorm van puzzeltjes zoals "probeer drie huizen aan te sluiten op de gas-, water- en elektra-bronnen, zonder dat enige van de leidingen elkaar snijden". Dit is in feite de vraag of {\displaystyle K_{3,3}}K_{{3,3}} planair is.
+
+Ook over planaire grafen heeft Leonhard Euler nagedacht en hij vond de stelling van Euler. Deze stelling is gebaseerd op het aantal knopen, zijden en gebieden van een graaf. Een gebied van een graaf is een deel van de graaf dat geheel door zijden of door buitenste knopen van de graaf wordt omgeven. Men kan een gebied zien als een gedeelte van het papier waarop de graaf is getekend. Het aantal gebieden hangt ervan af hoe de graaf precies getekend wordt, maar het blijkt dat een bepaalde graaf altijd met een aantal gebieden kan worden getekend dat niet verandert, hoe de graaf ook precies is getekend, behalve als de graaf niet-planair is getekend.
+
+Graaf gebieden.png
+Stelling van Euler
+Zij {\displaystyle G}G een samenhangende, planaire graaf met {\displaystyle v}v knopen, {\displaystyle e}e zijden en {\displaystyle f}f gebieden. Dan geldt
+
+{\displaystyle v-e+f=2}v-e+f=2
+Bewijs
+Het bewijs gaat met inductie naar {\displaystyle e-v}e-v. Omdat {\displaystyle G}G samenhangend is, geldt altijd {\displaystyle e-v\geq -1}e-v\geq -1.
+
+Stel {\displaystyle e-v=-1}e-v=-1, de graaf is dan een boom. Aangezien {\displaystyle G}G geen cykels bevat, is het aantal gebieden 1. Dus
+
+{\displaystyle v-e+f=1+1=2}{\displaystyle v-e+f=1+1=2}
+Inductiestap: Neem aan dat voor alle vlakke grafen met {\displaystyle -1\leq e-v<n}{\displaystyle -1\leq e-v<n} geldt dat {\displaystyle v-e+f=2}v-e+f=2.
+
+We moeten bewijzen dat voor een willekeurige vlakke graaf met {\displaystyle e-v=n}{\displaystyle e-v=n} de eigenschap ook geldt.
+
+De graaf bevat nu een cykel. Deze cykel scheidt een apart gebied af. Verwijderen we nu een zijde uit de cykel, dan hebben we een graaf met een kant en een gebied minder. Als we het aantal knopen, zijden en gebieden in deze graaf {\displaystyle v',\,e'}{\displaystyle v',\,e'} en {\displaystyle f'}f' noemen, geldt
+
+{\displaystyle e'-v'=(e-1)-v=(e-v)-1=n-1}e'-v'=(e-1)-v=(e-v)-1=n-1,
+en dus vanwege de inductiehypothese:
+
+{\displaystyle v'-e'+f'=2}v'-e'+f'=2
+Hieruit kunnen we afleiden dat
+
+{\displaystyle v-e+f=v'-(e'+1)+(f'+1)=v'-e'+f'=2}v-e+f=v'-(e'+1)+(f'+1)=v'-e'+f'=2,
+wat precies is wat we moesten bewijzen.
+
+
+Met de stelling van Euler kan aangetoond worden dat een samenhangende graaf alleen planair kan zijn als hij niet al te veel zijden heeft.
+
+Zij {\displaystyle G}G een samenhangende, planaire graaf met {\displaystyle v\geq 3}{\displaystyle v\geq 3} knopen en {\displaystyle e}e zijden. Dan geldt
+
+{\displaystyle e\leq 3v-6}e\leq 3v-6
+Bewijs
+Het idee achter de stelling is dat er een relatie is tussen het aantal zijden in {\displaystyle K_{n}}K_{n} en het soort gebieden waarin {\displaystyle G}G het vlak verdeelt. In een planaire muur fungeert iedere zijde als "binnenmuur" en als "buitenmuur" van een (afgesloten) gebied – de "buitenkant" van de graaf telt als één groot gebied. Tellen we alle binnen- en buitenmuren, dan komen we aan {\displaystyle 2e}{\displaystyle 2e} (iedere zijde tel je zo twee keer). Verder is het zo dat ieder gebied afgezonderd door de graaf een bepaalde vorm heeft: driehoek, vierhoek, vijfhoek, etc. Iedere {\displaystyle n}n-hoek heeft dan {\displaystyle n}n binnenmuren. Noemen we het aantal driehoekige gebieden {\displaystyle f_{3}}f_{3}, het aantal vierhoekige {\displaystyle f_{4}}f_{4}, het aantal vijfhoekige {\displaystyle f_{5}}f_{5}, enz., dan kunnen we het aantal muren ook op een andere manier tellen:
+
+{\displaystyle \sum _{i=3}^{n}n\cdot f_{n}}{\displaystyle \sum _{i=3}^{n}n\cdot f_{n}},
+zodat
+
+{\displaystyle 2e=3f_{3}+4f_{4}+5f_{5}+\ldots }2e=3f_{3}+4f_{4}+5f_{5}+\ldots 
+Dus we weten ook dat
+
+{\displaystyle 2e\geq 3f_{3}+3f_{4}+3f_{5}+\ldots =3f}2e\geq 3f_{3}+3f_{4}+3f_{5}+\ldots =3f
+Dat betekent
+
+{\displaystyle v-e+{\frac {2e}{3}}\geq 2}v-e+{\frac  {2e}{3}}\geq 2
+waaruit volgt:
+
+{\displaystyle 3v-e\geq 6}3v-e\geq 6
+Met deze informatie in de hand, kunnen we zo narekenen dat bijvoorbeeld {\displaystyle K_{5}}K_{5} niet planair is.
+
+Op een soortgelijke manier als hierboven, kunnen we ook bewijzen voor samenhangende planaire grafen zonder driehoeken (dus het "kleinste" gebied is een vierhoek) dat {\displaystyle e\leq 2v-4}e\leq 2v-4. Hiermee is ook het puzzeltje opgelost: {\displaystyle K_{3,3}}K_{{3,3}} is niet planair.
+
+Een opmerkelijke en nuttige stelling is die van Kuratowski: een graaf is planair dan en slechts dan als hij niet {\displaystyle K_{5}}K_{5} of {\displaystyle K_{3,3}}K_{{3,3}} bevat. Oftewel, alleen die twee grafen zijn in feite niet-planair.
+
+De bipartiete graaf
+
+Een voorbeeld van een bipartiete graaf
+Een bipartiete graaf {\displaystyle G}G is een graaf waarvan de knopen verdeeld zijn over een partitie {\displaystyle V_{1},V_{2}}{\displaystyle V_{1},V_{2}} met de eigenschap dat een knoop in het ene deel alleen verbonden is met een knoop in het andere deel. Formeel:
+
+{\displaystyle V_{G}=V_{1}\cup V_{2}}{\displaystyle V_{G}=V_{1}\cup V_{2}}
+{\displaystyle V_{1}\cap V_{2}=\varnothing }{\displaystyle V_{1}\cap V_{2}=\varnothing }
+{\displaystyle v_{1}\in V_{1}{\text{ en }}v_{1}\sim v_{2}}{\displaystyle v_{1}\in V_{1}{\text{ en }}v_{1}\sim v_{2}}, dan {\displaystyle v_{2}\in V_{2}}{\displaystyle v_{2}\in V_{2}}
+Hierbij is het ook toegestaan dat een van beide verzamelingen leeg is, of zelfs allebei, zodat ook een graaf op 0 of 1 knoop bipartiet is.
+
+Eveneens is duidelijk dat {\displaystyle C_{3}}C_{3} de kleinste, niet-bipartiete graaf is. Met dit inzicht valt ook goed in te zien dat een graaf niet-bipartiet is, als deze een cykel van oneven lengte bevat. Met name geldt voor alle grafen {\displaystyle C_{2n+1}}{\displaystyle C_{2n+1}} dat deze niet bipartiet zijn, sterker nog:
+
+Een graaf {\displaystyle G}G is bipartiet {\displaystyle \Leftrightarrow }\Leftrightarrow {\displaystyle G}G bevat geen oneven cykels
+
+Bewijs
+{\displaystyle \Rightarrow }\Rightarrow 
+
+Stel {\displaystyle G}G is een bipartiete graaf. Alle kanten van {\displaystyle G}G lopen dus over de partitiegrens heen. Is er nu een cykel van oneven lengte, dan ligt er één knoop van de cykel meer in de ene deelverzameling dan in de andere – zogezegd, de "eerste" en "laatste" knoop van de cykel liggen in dezelfde deelverzameling. Deze twee knopen kunnen echter niet verbonden zijn om de cykel te sluiten: zijn ze het wel, dan is de graaf niet bipartiet.
+{\displaystyle \Leftarrow }\Leftarrow 
+
+Stel {\displaystyle G}G bevat geen oneven cykels. Dat wil zeggen, voor iedere cykel in {\displaystyle G}G die niet samenhangt met een andere kan ik een knoop kiezen, die in {\displaystyle V_{1}}V_{1} plaatsen, de volgende in {\displaystyle V_{2}}V_{2}, de volgende weer in {\displaystyle V_{1}}V_{1}, enzovoorts, en de laatste in {\displaystyle V_{2}}V_{2} en dan lopen alle kanten in de cykel over de partitiegrens. Voor alle andere knopen (cykels, anderzijds) geldt dan dat dat hun verdeling over de partities vastligt zodra de verdeling van bovengenoemde cykels gekozen is (en merk op: ook voor cykels in deze situatie geldt dat ze perfect verdeeld kunnen worden, omdat ze even lengte hebben). Daarmee is de graaf bipartiet.
+Er zijn ook {\displaystyle k}k-partiete grafen, waarbij de graaf wordt opgesplitst in {\displaystyle k}k partities waarvoor er wederom geen lijnen zijn tussen punten in dezelfde partitie. Voor {\displaystyle k=2}{\displaystyle k=2} heb je weer de bipartiete graaf.
+
+De Petersengraaf
+
+Petersengraaf.
+De volgende graaf staat bekend als de Petersengraaf, gedefinieerd door de Deense wiskundige Petersen.
+
+Op zich is er niets speciaals mee aan de hand; de Petersengraaf komt echter binnen de grafentheorie vaak voor, als voorbeeld bij bewijzen of als tegenvoorbeeld om stellingen mee te ontkrachten. De Petersengraaf wordt dan vaak gebruikt als deelgraaf van een andere, meer complexe graaf.
+
+Overigens is de Petersengraaf ook een voorbeeld van een graaf die {\displaystyle K_{5}}K_{5} bevat: als we de buitenste "ring" van knopen en de binnenste "ring" samentrekken, vinden we de {\displaystyle K_{5}}K_{5}-graaf. We kunnen dan ook duidelijk zien dat de Petersengraaf niet planair is.
+
+Graafoperaties, de 2-graaf en geïnduceerde grafen
+
+De rechtse graaf is een geïnduceerde subgraaf op de linker.
+Uitgaande van een graaf {\displaystyle G}G (of een aantal verschillende grafen) kunnen we, via allerlei operaties, andere grafen maken.
+
+Om te beginnen is er de op {\displaystyle G}G geïnduceerde graaf {\displaystyle G'.}{\displaystyle G'.} Deze graaf is gedefinieerd door:
+
+{\displaystyle G'=(V',E')}{\displaystyle G'=(V',E')}
+met
+
+{\displaystyle V'\subseteq V_{G}}{\displaystyle V'\subseteq V_{G}}
+en zo dat voor alle knopen {\displaystyle v_{1},v_{2}\in V'}{\displaystyle v_{1},v_{2}\in V'} geldt
+
+{\displaystyle \{v_{1},v_{2}\}\in E_{G}\Rightarrow \{v_{1},v_{2}\}\in E'}{\displaystyle \{v_{1},v_{2}\}\in E_{G}\Rightarrow \{v_{1},v_{2}\}\in E'}
+De door {\displaystyle G}G geïnduceerde graaf {\displaystyle G'}G' is de graaf bestaande uit een aantal knopen van {\displaystyle G}G en de bijbehorende zijden van {\displaystyle G}G.
+
+
+Graaf met zijn complementgraaf.
+Daarnaast is er de complementgraaf (of complementaire graaf) {\displaystyle {\overline {G}}}\overline {G} van {\displaystyle G,}{\displaystyle G,} gedefinieerd door:
+
+{\displaystyle {\overline {G}}=(V_{\overline {G}},E_{\overline {G}})}{\displaystyle {\overline {G}}=(V_{\overline {G}},E_{\overline {G}})}
+met
+
+{\displaystyle V_{\overline {G}}=V_{G}}{\displaystyle V_{\overline {G}}=V_{G}}
+en zo dat voor alle knopen {\displaystyle v_{1},v_{2}\in V',\ v_{1}\neq v_{2}}{\displaystyle v_{1},v_{2}\in V',\ v_{1}\neq v_{2}} geldt
+
+{\displaystyle \{v_{1},v_{2}\}\not \in E_{G}\Rightarrow \{v_{1},v_{2}\}\in E_{\overline {G}}}{\displaystyle \{v_{1},v_{2}\}\not \in E_{G}\Rightarrow \{v_{1},v_{2}\}\in E_{\overline {G}}}
+De complementgraaf {\displaystyle {\overline {G}}}\overline {G} van {\displaystyle G}G heeft dus dezelfde knopen als {\displaystyle G}G, maar alle mogelijke zijden die juist niet in {\displaystyle G}G zitten.
+
+
+Graaf met bijbehorende lijngraaf.
+Ook is er de lijngraaf {\displaystyle L(G)=(V_{L},E_{L})}{\displaystyle L(G)=(V_{L},E_{L})} van {\displaystyle G}G, die de zijden van {\displaystyle G}G als knopen heeft. De knopen van {\displaystyle L(G)}{\displaystyle L(G)} worden verbonden door een zijde, als de oorspronkelijke zijden van {\displaystyle G}G - bij {\displaystyle {\overline {G}}}\overline {G} knopen - een knoop gemeen hebben.
+
+Deze graaf is gedefinieerd door:
+
+{\displaystyle V_{L}=E(G)}V_{L}=E(G)
+{\displaystyle \{\{v_{1},v_{2}\},\{v_{1}',v_{2}'\}\}\in E_{L}}{\displaystyle \{\{v_{1},v_{2}\},\{v_{1}',v_{2}'\}\}\in E_{L}} als
+{\displaystyle v_{1}=v_{1}'{\text{ of }}v_{1}=v_{2}'{\text{ of }}v_{2}=v_{1}'{\text{ of }}v_{2}=v_{2}'}{\displaystyle v_{1}=v_{1}'{\text{ of }}v_{1}=v_{2}'{\text{ of }}v_{2}=v_{1}'{\text{ of }}v_{2}=v_{2}'}
+
+De vereniging van twee disjuncte grafen.
+Voor twee grafen {\displaystyle G}G die geen knopen of kanten gemeen hebben, kan ook de vereniging en het cartesisch product gedefinieerd worden. De vereniging van {\displaystyle G}G en {\displaystyle H}H is de graaf {\displaystyle G\cup H}{\displaystyle G\cup H} met
+
+{\displaystyle V(G\cup H)=V(G)\cup V(H)}V(G\cup H)=V(G)\cup V(H)
+{\displaystyle E(G\cup H)=E(G)\cup E(H)}E(G\cup H)=E(G)\cup E(H)
+
+Het cartesisch product van twee grafen.
+Het cartesisch product van {\displaystyle G}G en {\displaystyle H}H is de graaf {\displaystyle G\times H}G\times H met als knopen de paren van knopen van {\displaystyle G}G en {\displaystyle H}H en twee dergelijke knopen zijn verbonden door een zijde als een van de knopen in de twee paren dezelfde zijn en de andere verbonden waren. De vereniging is dus gedefinieerd door:
+
+{\displaystyle V(G\times H)=V(G)\times V(H)}V(G\times H)=V(G)\times V(H)
+{\displaystyle \{(g,h),(g',h')\}\in E(G\times H)}{\displaystyle \{(g,h),(g',h')\}\in E(G\times H)} als
+{\displaystyle (g=g'{\text{ en }}h\sim h'){\text{ of }}(g\sim g'{\text{ en }}h=h')}{\displaystyle (g=g'{\text{ en }}h\sim h'){\text{ of }}(g\sim g'{\text{ en }}h=h')}
+
+V.l.n.r.: {\displaystyle K_{2}^{0},\ K_{2}^{1},\ K_{2}^{2}}{\displaystyle K_{2}^{0},\ K_{2}^{1},\ K_{2}^{2}} en {\displaystyle K_{2}^{3}}{\displaystyle K_{2}^{3}}.
+Een bekend voorbeeld van graaf-vermenigvuldiging is de rij van de "machten" van de 2-graaf (d.i. {\displaystyle K_{2}}K_{2}): dit zijn de {\displaystyle n}n-dimensionale kubussen hier rechts.
+
+Gerichte grafen
+Een type graaf die naast de enkelvoudige graaf vaak voorkomt, is de gerichte graaf. Formeel is een gerichte graaf een graaf {\displaystyle G=(V,E)}{\displaystyle G=(V,E)} met
+
+{\displaystyle E\subseteq \{(v_{1},v_{2})\mid v_{1},v_{2}\in V,v_{1}\not =v_{2}\}}{\displaystyle E\subseteq \{(v_{1},v_{2})\mid v_{1},v_{2}\in V,v_{1}\not =v_{2}\}}
+Het verschil met de enkelvoudige graaf is dat de zijden niet langer ongeordende paren zijn, maar juist geordende paren (intuïtief wil dat zeggen: de zijden hebben een richting). Merk op dat in de bovenstaande definitie een zijde een geordend paar is en niet een verzameling. Dit betekent dat de zijde {\displaystyle (a,b)}(a,b) niet dezelfde is als de zijde {\displaystyle (b,a)}{\displaystyle (b,a)}.
+
+Vanwege de richting is het normaal om bij een gerichte graaf de zijden als pijlen te tekenen.
+
+Veel van de concepten zoals die gedefinieerd zijn voor enkelvoudige grafen, bestaan ook voor gerichte grafen. Bomen, volledige grafen, somgrafen en productgrafen bestaan allemaal. Alleen is de uitwerking soms anders, omdat de richting nu meespeelt. Zo is het bij enkelvoudige grafen zo dat er voor iedere knoop zijde {\displaystyle k}k maar één pad is van de wortel naar {\displaystyle k}k; bij een gerichte graaf kunnen er meerdere zijn, zonder dat dit een cykel oplevert.
+
+Gerichte grafen worden vaak toegepast in de modellering van problemen waarbij het niet zinnig is om paden in meer dan één richting te doorlopen. Gebruik je bijvoorbeeld een graaf om aan tijdsplanning te doen voor de bouw van een woning, dan heeft het alleen zin om de bouw van de fundering voor de bouw van de muren plaats te laten vinden en andersom heeft geen zin.
+
+Enige verschillen ten opzichte van enkelvoudige grafen
+Er zijn een aantal typische dingen die anders zijn in gerichte grafen in vergelijking met enkelvoudige grafen. Graad heeft bijvoorbeeld een andere betekenis. De graad van een knoop is in een enkelvoudige graaf het aantal zijden waarmee de knoop verbonden is; in een gerichte graaf is de definitie iets anders:
+
+ingraad van een knoop {\displaystyle k}k: het aantal zijden {\displaystyle (m,k)\in E}(m,k)\in E
+uitgraad van een knoop {\displaystyle k}k: het aantal zijden {\displaystyle (k,n)\in E}(k,n)\in E
+Een gerichte graaf bevat dan en slechts dan een eulerwandeling als voor alle knopen in de graaf de in- en uitgraad aan elkaar gelijk zijn. Het bewijs hiervoor is vrijwel hetzelfde als dat voor de enkelvoudige eulergraaf.
+
+Een gerichte graaf heet samenhangend als er voor iedere partitie {\displaystyle V=V_{1}\cup V_{2}}V=V_{1}\cup V_{2} een zijde loopt van {\displaystyle V_{1}}V_{1} naar {\displaystyle V_{2}}V_{2} of omgekeerd. Loopt er altijd een dergelijke zijde in beide richtingen, dat wil zeggen als er tussen iedere twee knopen een wandeling is in beide richtingen, dan heet de graaf sterk samenhangend.
+
+Gelabelde en gewogen grafen
+Een andere uitbreiding op de enkelvoudige graaf die vaak voorkomt is die van labeling. Hierbij wordt de graaf {\displaystyle G}G uitgebreid met een of twee functies {\displaystyle f}f en {\displaystyle g:}{\displaystyle g:}
+
+{\displaystyle f:E(G)\to A}{\displaystyle f:E(G)\to A}
+{\displaystyle g:V(G)\to B}{\displaystyle g:V(G)\to B}
+De functies {\displaystyle f}f voegt aan iedere zijde, en de functie {\displaystyle g}g aan iedere knoop een element toe uit een of andere verzameling symbolen. Het labelen van de zijden komt meer voor dan labelen van de knopen.
+
+Als de symbolen getallen zijn ({\displaystyle \mathbb {N} ,\mathbb {Z} ,\mathbb {Q} ,\mathbb {R} ,\mathbb {C} }{\displaystyle \mathbb {N} ,\mathbb {Z} ,\mathbb {Q} ,\mathbb {R} ,\mathbb {C} }, etc.), heet we de labeling een weging. De graaf heet dan een gewogen graaf. Een gewogen, gerichte graaf wordt ook wel een netwerk genoemd.
+
+Labeling en met name weging worden gebruikt om aan een graaf speciale betekenissen toe te kennen. Wordt een graaf gebruikt als model voor een wegennet bij routeplanning, dan kan bij een weging bijvoorbeeld gedacht worden aan de lengte van de weg, of de drukte. Optimaliseringsproblemen op grafen gebruiken meestal weging als criterium aan de hand waarvan wordt geoptimaliseerd.
+
+Het aantal gelabelde bomen op {\displaystyle v}v knopen is {\displaystyle v^{v-2}}v^{{v-2}}
+
+Bewijs
+Het bewijs volgt uit de codering van Prüfer van knoop-gelabelde bomen. Deze constructie werkt als volgt:
+
+Van knoopgelabelde boom met {\displaystyle v}v knopen naar prüferrij ter lengte {\displaystyle v-2:}{\displaystyle v-2:} kies het blad (knoop met graad 1) van de boom met het laagste label. Verwijder deze knoop en noteer het label van zijn buur. Ga zo door totdat er maar twee knopen over zijn en verwijder deze gewoon. Nu is er een prüferrij ter lengte {\displaystyle v-2}{\displaystyle v-2}, door steeds bladeren te verwijderen naar volgorde van grootte.
+Tree graph Prufer code step 1.svg Tree graph Prufer code step 2.svg Tree graph Prufer code step 3.svg Tree graph Prufer code step 4.svg Tree graph Prufer code step 5.svg
+
+Van de prüferrij ter lengte {\displaystyle v-2}{\displaystyle v-2} naar knoopgelabelde boom met {\displaystyle v}v' knopen: Merk om te beginnen op dat een element van de prüferrij een buur is van een andere knoop in de boom. Alleen labels van bladeren in de nog op te bouwen (deel)boom staan dus niet in de rij. Schrijf nu alle getallen {\displaystyle 1,2,\ldots ,v}{\displaystyle 1,2,\ldots ,v} op. Kies uit dit rijtje het laagste element dat niet in de prüferrij staat. Verbindt dit element met het eerste element van de prüferrij en streep beide weg. Herhaal dit totdat de Prüferrij leeg is. Er staan nu nog twee getallen in de rij – verbindt deze twee in de boom. Nu heb je een boom opgebouwd met {\displaystyle v}v' knopen, door steeds bladeren toe te voegen naar volgorde van grootte.
+Prufer graph construction step 1.svg Prufer graph construction step 2.svg Prufer graph construction step 3.svg Prufer graph construction step 4.svg Prufer graph construction.svg
+
+Iedere boom op {\displaystyle v}v knopen kan dus eenduidig gecodeerd worden als een rij van lengte {\displaystyle v-2}{\displaystyle v-2}. Ieder van deze elementen kan een van de getallen {\displaystyle 1,2,\ldots ,v}{\displaystyle 1,2,\ldots ,v} zijn. Dat zijn dus {\displaystyle v^{v-2}}v^{{v-2}} mogelijke combinaties.
+Hypergrafen
+Hypergrafen zijn een veralgemening van grafen, in zoverre dat in een hypergraaf een hyperkant een willekeurig aantal knopen kan verbinden, gaande van 1 tot het aantal knopen in de graaf.
+
+Problemen op grafen
+Kleuren van grafen: de vierkleurenstelling
+De fundamenten van identificatie en systematisering van de grafen grafs (pdf)
+Routeproblemen:
+Zeven bruggen van Koningsbergen
+Minimaal opspannende boom
+Kortstepadprobleem
+Chinees postbodeprobleem
+Handelsreizigersprobleem
+Stromen:
+Max-flow-min-cut-stelling
+Belangrijke algoritmes op grafen
+Dijkstra's algoritme
+Kruskals algoritme
+Prims algoritme
+Hongaarse methode
+Algoritme van Bellman-Ford
+Gerelateerde wiskundige gebieden
+Ramsey-theorie
+Combinatoriek
+Complexe netwerken

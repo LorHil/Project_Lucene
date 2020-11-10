@@ -1,0 +1,24 @@
+In de klassieke mechanica is de configuratieruimte (Engels: configuration space) de ruimte van alle mogelijke toestanden die een natuurkundig systeem kan aannemen. Een punt in de configuratieruimte komt overeen met een toestand van het natuurkundige systeem, ook wel een configuratie genoemd. Veel natuurkundige systemen hebben een variëteit als configuratieruimte.
+
+Enkele voorbeelden: de configuratieruimte van een puntdeeltje in een Euclidische ruimte is {\displaystyle \mathbb {R} ^{3}}\mathbb{R} ^{3} en de configuratieruimte van {\displaystyle N}N puntdeeltjes is {\displaystyle \mathbb {R} ^{3N}}{\displaystyle \mathbb {R} ^{3N}} ({\displaystyle \mathbb {R} ^{3}}\mathbb{R} ^{3} per deeltje).
+
+
+Inhoud
+1	Configuratieruimten bij bewegingsplanning
+1.1	Voorbeelden van configuratieruimten
+2	Zie ook
+3	Externe links
+Configuratieruimten bij bewegingsplanning
+1rightarrow blue.svg Zie Bewegingsplanning voor het hoofdartikel over dit onderwerp.
+
+Voorbeeld van een werkruimte.
+
+Configuratieruimte voor een rechthoekige robot die kan bewegen (het rode vlak). Wit = {\displaystyle C_{\text{free}}}{\displaystyle C_{\text{free}}}, grijs = {\displaystyle C_{\text{obs}}}{\displaystyle C_{\text{obs}}} (donkergrijs = de objecten, lichtgrijs = configuraties waarbij de robot een object zou raken of de werkruimte zou verlaten).
+Configuratieruimten worden gebruikt bij het plannen van bewegingen van robots. De omgeving van de robot (zoals een twee- of driedimensionale ruimte, ook de werkruimte genoemd) en de handelingen die de robot kan uitvoeren (zoals zich verplaatsen, ronddraaien of een arm bewegen) bepalen de grootte van de configuratieruimte. In dit geval komt elk punt in de configuratieruimte overeen met een toestand van de robot (locatie en oriëntatie).
+
+Het plannen van een beweging (zoals een pad van A naar B in de omgeving) bestaat nu uit het vinden van een pad in de configuratieruimte van de begintoestand naar de eindtoestand. Dit wordt bemoeilijkt doordat niet alle configuraties in de configuratieruimte toegankelijk zijn voor de robot: sommige configuraties zullen namelijk overeenkomen met plekken waar bijvoorbeeld objecten staan of plekken waar de robot een object zal raken. De configuratieruimte (vaak aangeduid met {\displaystyle C}C) is dus onder te verdelen in een toegankelijk ({\displaystyle C_{\text{free}}}{\displaystyle C_{\text{free}}}) en niet-toegankelijk deel ({\displaystyle C_{\text{obs}}}{\displaystyle C_{\text{obs}}}, van obstacles). Een pad van plek A naar B zal dus door het toegankelijke deel van de configuratieruimte moeten lopen.
+
+Voorbeelden van configuratieruimten
+Een robot die zich over een tweedimensionaal vlak kan bewegen heeft twee variabelen nodig om de locatie te specificeren: {\displaystyle x}x en {\displaystyle y}y. De configuratieruimte is dus {\displaystyle \mathbb {R} ^{2}}\mathbb{R} ^{2}.
+Een robot die zich over een tweedimensionaal vlak kan bewegen en ook kan ronddraaien heeft drie variabelen nodig om de locatie en oriëntatie te specificeren: een locatie {\displaystyle (x,y)}(x,y) en een draaihoek {\displaystyle \theta }\theta . De configuratieruimte van deze robot is {\displaystyle SE(2)=\mathbb {R} ^{2}\times SO(2)}{\displaystyle SE(2)=\mathbb {R} ^{2}\times SO(2)} (waarbij {\displaystyle SO(2)}{\displaystyle SO(2)} de speciale orthogonale groep van tweedimensionale rotatiematrices is) waarmee alle mogelijke locaties en oriëntaties uitgedrukt kunnen worden.
+Bij een robot in een driedimensionale ruimte met drie draaihoeken bestaat de configuratieruimte uit de zesdimensionale ruimte, {\displaystyle SE(3)=\mathbb {R} ^{3}\times SO(3)}{\displaystyle SE(3)=\mathbb {R} ^{3}\times SO(3)} (waarbij {\displaystyle SO(3)}{\displaystyle SO(3)} de orthogonale groep van driedimensionale rotatiematrices is). Een configuratie wordt uitgedrukt met drie coördinaten: {\displaystyle x,y,z}{\displaystyle x,y,z}, en drie draaihoeken: {\displaystyle \theta ,\varphi ,\psi }{\displaystyle \theta ,\varphi ,\psi }.

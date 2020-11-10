@@ -1,0 +1,224 @@
+Relationele algebra is een formele taal, of eigenlijk een geheel van transformatieregels, die toelaten om een relationele database te ondervragen. Ze vormt de theoretische grondslag voor de relationele taal SQL, en werd in 1970 voor het eerst geformuleerd door Edgar F. Codd (zie literatuur), waardoor hij effectief een revolutie tot stand bracht in de database-wereld.
+
+N.B.: Er is verwantschap, maar er zijn ook verschillen tussen relationele algebra en relatie algebra.
+
+
+Inhoud
+1	Inleiding
+2	Terminologie
+3	Bewerkingen
+3.1	Elementaire bewerkingen
+3.1.1	Voorbeeld
+3.2	Projectie
+3.2.1	Voorbeeld
+3.3	Selectie
+3.3.1	Voorbeeld
+3.4	Cartesisch product
+3.4.1	Voorbeeld
+3.5	Hernoemen
+3.5.1	Voorbeeld
+3.6	Joins
+3.6.1	Voorbeeld
+4	Literatuur
+Inleiding
+Zoals de calculus of de rekenkundige algebra is de relationele algebra gebaseerd op atomische bewerkingen (operatoren) en op entiteiten (operanden). In tegenstelling tot de calculus of rekenkundige algebra levert de relationele algebra altijd in een eindig aantal stappen een eindresultaat.
+
+In de relationele algebra zijn de entiteiten de relaties. Relationele algebra is gebaseerd op de verzamelingenleer: alle relaties zijn inderdaad verzamelingen, en zo ook de resultaten van een relationele operatie.
+
+Terminologie
+Het eerste basis-ingrediënt van een relatie is een attribuut of kenmerk; dit is niets meer dan een willekeurige (enkelvoudige) verzameling, met een naam (en dus betekenis). Typische voorbeelden zijn: telefoonnummer, kleur, leeftijd, aantal, ... Voor elk attribuut moet het domein gedefinieerd zijn, dat wil zeggen de opsomming of beschrijving van alle mogelijke waarden die door dit attribuut kunnen aangenomen worden.
+
+Het tweede basis-ingrediënt is een tupel; dit is een geordend n-tal attribuut-waarden.
+
+Een relatie is een verzameling tupels van dezelfde lengte en met dezelfde attributen. Anders gezegd, een relatie is een tabel, en dit is niets anders dan een deelverzameling van het cartesisch product van n attributen.
+
+Het getal n, dus het aantal verzamelingen in dit cartesisch product, of het aantal elementen in elk tupel, wordt de orde van de relatie genoemd. Dit is dus het aantal kolommen van de tabel, of het aantal attributen in een tupel. Elke rij van de tabel is dus een n-tupel van de relatie. Een dergelijk n-tupel wordt ook wel een individu genoemd.
+
+Omdat elementen van een verzameling niet gesorteerd zijn, hebben ook de rijen van de tabel geen voorgedefinieerde volgorde. Bovendien kunnen twee rijen niet gelijk zijn, vermits een verzameling geen twee identieke elementen kan bevatten. Na projectie (zie verder) kan dit echter mogelijk wel toegelaten zijn. (Dit is een van de controverses van de relationele algebra.) Eigenlijk breidt men dus het model uit door van een multiset te vertrekken in plaats van van een verzameling.
+
+Bewerkingen
+Er zijn vier soorten bewerkingen:
+
+De gewone, elementaire bewerkingen met verzamelingen – vereniging of unie, doorsnede en verschil
+Bewerkingen die een relatie beperken – projectie en selectie
+Bewerkingen die tupels combineren – het cartesisch product en de verschillende "join"s
+Bewerkingen die de tupels in een relatie niet wijzigen, maar b.v. de naam van een attribuut wijzigen
+Elementaire bewerkingen
+De drie elementaire bewerkingen met verzamelingen gelden ook in de relationele algebra:
+
+De unie van de relaties R en S bestaat uit de n-tupels die hetzij tot R, hetzij tot S, hetzij tot beide behoren. Een n-tupel dat in beide relaties voorkomt, zal slechts eenmaal in de unie voorkomen. De notatie voor de unie tussen R en S is R ∪ S.
+
+De doorsnede van de relaties R en S bestaat uit de n-tupels die zowel in R als in S voorkomen. De notatie hiervoor is R ∩ S.
+
+Het verschil van de relaties R en S bestaat uit de tupels van R die niet in S voorkomen. Hiervoor is de notatie R \ S.
+
+Opdat deze drie bewerkingen zouden geldig zijn moeten R en S dezelfde attributen hebben, in dezelfde volgorde. Ook het domein van elk van de attributen moet hetzelfde zijn.
+
+Voorbeeld
+Als men de volgende twee relaties R en S heeft, beide met de attributen A, B en C:
+
+R:
+A	B	C
+1	A	x
+1	B	y
+2	C	x
+S:
+A	B	C
+3	D	x
+3	B	x
+1	B	y
+1	A	z
+dan worden unie, doorsnede en verschil:
+
+R ∪ S:
+A	B	C
+1	A	x
+1	A	z
+1	B	y
+2	C	x
+3	B	x
+3	D	x
+R ∩ S:
+A	B	C
+1	B	y
+R \ S:
+A	B	C
+1	A	x
+2	C	x
+S \ R:
+A	B	C
+3	D	x
+3	B	x
+1	A	z
+Projectie
+De bewerking projectie creëert uit een relatie R een nieuwe relatie die slechts enkele van de attributen van R heeft. Een projectie wordt geschreven als {\displaystyle \pi _{a_{1},...,a_{n}}(R)}{\displaystyle \pi _{a_{1},...,a_{n}}(R)}, waarbij {\displaystyle a_{1},...,a_{n}}{\displaystyle a_{1},...,a_{n}} (een deel van) de attribuutnamen van de relatie R is.
+
+Voorbeeld
+{\displaystyle R}R
+A	B	C
+1	A	x
+1	B	y
+2	C	x
+{\displaystyle \pi _{A,B}(R)}{\displaystyle \pi _{A,B}(R)}
+A	B
+1	A
+1	B
+2	C
+{\displaystyle \pi _{A}(R)}{\displaystyle \pi _{A}(R)}
+A
+1
+2
+De projectie {\displaystyle \pi _{A,B}(R)}{\displaystyle \pi _{A,B}(R)} bewaart slechts de kolommen A en B van R in de nieuwe relatie. Met de projectie {\displaystyle \pi _{A}(R)}{\displaystyle \pi _{A}(R)} wordt enkel kolom A bewaard. Merk op dat in dit laatste geval twee identieke 1-tupels ontstaan, waarvan er maar één bewaard blijft. Wanneer relationele algebra opgebouwd wordt met behulp van multisets, blijven beide tupels bewaard.
+
+Selectie
+Toepassen van een selectie-bewerking op een relatie R geeft een nieuwe relatie die slechts een deel van de tupels van R bevat. De overgebleven tupels zijn degene die aan een voorwaarde C voldoen op de attributen van R. Een selectie wordt geschreven als {\displaystyle \sigma _{C}(R)}{\displaystyle \sigma _{C}(R)}, waarbij C de voorwaarde is en R een relatie.
+
+Voorbeeld
+{\displaystyle R}R
+A	B	C
+1	A	x
+1	A	z
+1	B	y
+2	C	x
+3	B	x
+3	D	x
+{\displaystyle \sigma _{A=1}(R)}{\displaystyle \sigma _{A=1}(R)}
+A	B	C
+1	A	x
+1	A	z
+1	B	y
+{\displaystyle \sigma _{A>2}(R)}{\displaystyle \sigma _{A>2}(R)}
+A	B	C
+3	B	x
+3	D	x
+{\displaystyle \sigma _{A\geq 2\land C=x}(R)}{\displaystyle \sigma _{A\geq 2\land C=x}(R)}
+A	B	C
+2	C	x
+3	B	x
+3	D	x
+De selectie {\displaystyle \sigma _{A=1}(R)}{\displaystyle \sigma _{A=1}(R)} laat alle tupels verdwijnen die niet de waarde 1 hebben voor attribuut A. Op een gelijkwaardige manier kan een conditie op andere attributen gespecifieerd worden.
+
+Cartesisch product
+Het cartesisch product (soms ook kruisproduct genoemd, naar het Engelse crossproduct) van twee relaties R en S is de relatie die ontstaat door alle tupels van R te paren met alle tupels van S. Dit wordt geschreven als R x S. Als de orde van R gelijk is aan n en die van S gelijk aan m, is de orde van R x S gelijk aan n+m: de eerste n elementen van elk tupel komen uit R, terwijl de laatste m uit S komen.
+
+Voorbeeld
+{\displaystyle R}R:
+A	B	C
+1	A	x
+1	B	y
+2	C	x
+{\displaystyle S}S:
+E	F
+mm	22
+nn	88
+R x S:
+A	B	C	E	F
+1	A	x	mm	22
+1	B	y	mm	22
+2	C	x	mm	22
+1	A	x	nn	88
+1	B	y	nn	88
+2	C	x	nn	88
+Hernoemen
+Soms wil men een relatie of zijn attributen een nieuwe naam geven. Om de relatie R de nieuwe naam S te geven, schrijft men {\displaystyle \rho _{S(A_{1},...,A_{n})}(R)}{\displaystyle \rho _{S(A_{1},...,A_{n})}(R)}, waar {\displaystyle A_{1},...,A_{n}}{\displaystyle A_{1},...,A_{n}} de (nieuwe) attribuutnamen zijn van de nieuwe relatie S.
+
+Voorbeeld
+{\displaystyle R}R:
+A	B	C
+1	A	x
+1	B	y
+2	C	x
+{\displaystyle \rho _{S(D,E,F)}(R)}{\displaystyle \rho _{S(D,E,F)}(R)}:
+D	E	F
+1	A	x
+1	B	y
+2	C	x
+Hier heeft dus zowel de relatie de nieuwe naam S gekregen, alsook de attributen. De waarden van de relatie zijn hierbij niet veranderd.
+
+Joins
+Naast de bovenstaande bewerkingen, die eigenlijk rechtstreeks uit de verzamelingenleer komen, is de belangrijkste bewerking de "join", die essentieel een cartesisch product is van twee relaties, gevolgd door een selectie. Deze selectie eist meestal dat twee attributen (één uit elk van de samenstellende delen) gelijk moeten zijn aan elkaar.
+
+In een natuurlijke join tussen de relaties R en S worden tupels gepaard op basis van gelijknamige attributen. Dit wordt geschreven als {\displaystyle R\triangleright \!\!\triangleleft \,S}{\displaystyle R\triangleright \!\!\triangleleft \,S}. Tupels die niet matchen met een tupel uit de andere relatie in één of meerdere overeenkomstige attributen, maken geen deel uit van de nieuwe relatie.
+
+Een theta-join tussen twee relaties R en S fungeert als een natuurlijke join, met dit verschil dat tupels gepaard worden als ze aan een bepaalde voorwaarde voldoen, genoemd θ. Dit wordt genoteerd als {\displaystyle R\triangleright \!\!\triangleleft \,_{\mathrm {\theta } }S}{\displaystyle R\triangleright \!\!\triangleleft \,_{\mathrm {\theta } }S}.
+
+Een outer-join is een theta-join, maar met daarbij ook nog alle tupels die niet "paren", hetzij enkel uit de linker relatie (left-outer-join), of enkel uit de rechter (right-outer-join", of uit beide (full-outer-join). In elk van deze gevallen worden de elementen in een tupel die niet aanwezig zijn door NULL-waarden vervangen.
+
+Voorbeeld
+{\displaystyle R}R:
+A	B	C	D
+1	2	3	4
+4	5	6	7
+7	8	9	0
+{\displaystyle S}S:
+A	F	G
+1	2	3
+7	8	9
+{\displaystyle R\triangleright \!\!\triangleleft \,S}{\displaystyle R\triangleright \!\!\triangleleft \,S}:
+A	B	C	D	F	G
+1	2	3	4	2	3
+7	8	9	0	8	9
+De natuurlijke join van de relaties R en S is een nieuwe relatie waarin de tupels gematcht worden volgens gelijknamige attributen. In dit voorbeeld worden tupels gepaard die dezelfde waarde hebben voor het attribuut A.
+
+R:
+A	B	C	D
+1	2	3	4
+4	5	6	7
+7	8	9	0
+S:
+E	F	G
+1	2	3
+7	8	9
+R x S:
+A	B	C	D	E	F	G
+1	2	3	4	1	2	3
+4	5	6	7	1	2	3
+7	8	9	0	1	2	3
+1	2	3	4	7	8	9
+4	5	6	7	7	8	9
+7	8	9	0	7	8	9
+{\displaystyle R\triangleright \!\!\triangleleft \,_{\mathrm {A=E} }S}{\displaystyle R\triangleright \!\!\triangleleft \,_{\mathrm {A=E} }S}:
+A	B	C	D	E	F	G
+1	2	3	4	1	2	3
+7	8	9	0	7	8	9
+Een theta-join tussen twee relaties ontstaat door eerst het cartesisch product uit te voeren. Daarna worden alle tupels verwijderd die niet aan de voorwaarde voldoen. In dit voorbeeld bestaat de voorwaarde erin dat de waarde in attributen A en E dezelfde moet zijn.

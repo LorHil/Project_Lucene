@@ -1,0 +1,120 @@
+Complexe netwerken vormen een vrij recent onderzoeksdomein voortgevloeid uit de grafentheorie en dat zich minder concentreert op de studie van kleine grafen, en de eigenschappen van individuele knopen en zijden in deze grafen, maar meer op de statistische eigenschappen van grootschalige netwerken.
+
+
+Inhoud
+1	Inleiding
+2	Eigenschappen van netwerken
+2.1	Mean geodesic en smallworldeffect
+2.2	Gradenverdeling
+2.3	Machtsfunctie, paretoverdeling en Wet van Zipf
+2.4	Clustering
+2.5	Patronen
+3	Scale-freenetwerken
+4	Randomnetwerken
+4.1	Eerste randomnetwerkmodellen
+4.2	Het smallworldmodel
+4.3	Netwerkgroeimodellen
+5	Software
+Inleiding
+Een netwerk is een verzameling items met verbindingen tussen. De items noemen we knopen, de verbindingen ertussen bogen. In de wiskundige literatuur worden netwerken meestal grafen genoemd. Voorbeelden van netwerken zijn het internet, sociale netwerken, neurale netwerken, netwerken van referenties in wetenschappelijke papers enz. Het onderzoek rond netwerken in de vorm van grafentheorie is een van de belangrijkste onderdelen van de discrete wiskunde. De oplossing van Euler voor het "Zeven bruggen van Koningsbergen"-probleem in 1735 wordt meestal gezien als het eerste bewijs in de grafentheorie. De laatste jaren is er een nieuwe stroming in het onderzoek rond grafen ontstaan die minder gericht is op de studie van kleine grafen en de eigenschappen van individuele knopen en bogen in deze grafen, maar meer op de statistische eigenschappen van grootschalige netwerken. Deze stroming is ontstaan doordat de mogelijkheid er is gekomen om met computers data te analyseren op een veel grotere schaal, dan vroeger mogelijk was. Vroeger deed men studies met grafen van enkele tientallen of soms enkele honderden knopen, terwijl nu netwerken onderzocht worden met miljoenen of zelfs miljarden knopen. Er is nog een bijkomende reden waarom het onderzoek rond netwerken veranderd is. Voor grafen met enkele tientallen of enkele honderden knopen is het nog mogelijk om een voorstelling van de graaf te maken met punten en lijnen, en aan de hand van deze figuur antwoorden op bepaalde vragen af te leiden. Voor grafen met miljoenen of zelfs miljarden knopen is dit niet meer mogelijk. Statistische methoden moeten nu deze taak overnemen en een inzicht geven in de structuur van het netwerk.
+
+Eigenschappen van netwerken
+Mean geodesic en smallworldeffect
+De mean geodesic l van een netwerk is de gemiddelde kortste afstand tussen twee knopen in het netwerk. In de jaren zestig deed Stanley Milgram een experiment waarbij brieven werden verstuurd tussen twee willekeurige personen in Noord-Amerika via sociale contacten. Uit dit experiment bleek dat er maar een klein aantal stappen (ongeveer zes) nodig is om een brief van persoon a naar persoon b te sturen. In dit geval komt het aantal stappen overeen met de mean geodesic in het sociaal netwerk. Het bestaan van een kort pad tussen twee willekeurige knopen in een complex netwerk wordt in de literatuur het small-world effect genoemd. Dat een kort pad tussen twee willekeurige knopen bestaat is statistisch aan te tonen voor random grafen. Een belangrijkere conclusie die we uit de resultaten van het experiment kunnen trekken is dat mensen blijkbaar in staat zijn om dit pad te vinden met enkel lokale kennis van het netwerk.
+
+De mean geodesic kan als volgt gedefinieerd worden:
+
+{\displaystyle l={\frac {1}{{\frac {1}{2}}n(n+1)}}\sum _{i\geq j}d_{ij}}{\displaystyle l={\frac {1}{{\frac {1}{2}}n(n+1)}}\sum _{i\geq j}d_{ij}}
+waarbij {\displaystyle d_{ij}}{\displaystyle d_{ij}} de kortste afstand van knoop i tot knoop j is. Merk op dat in de formule de afstand van elke knoop tot zichzelf (die nul is) is meegerekend. De mean geodesic kan voor een netwerk met n knopen en m bogen berekend worden in {\displaystyle O(mn)}{\displaystyle O(mn)} met een breedte-eerst zoekalgoritme.
+
+Het toepassen van deze formule geeft problemen voor grafen met meer dan één component. In deze gevallen bestaan er namelijk knopen-paren waartussen geen pad bestaat. Normaal wordt de afstand tussen zulke knopen gelijkgesteld aan oneindig, maar dan zou l ook oneindig worden. Daarom wordt l voor deze netwerken meestal gedefinieerd als de gemiddelde kortste afstand tussen alle paren waartussen een pad bestaat. Paren met knopen in verschillende componenten worden dus niet meegerekend in het gemiddelde.
+
+Gradenverdeling
+We kunnen voor een netwerk de gemiddelde graad van zijn knopen berekenen. Dit getal geeft ons echter niet veel informatie omdat het niets zegt over hoe de graden verdeeld zijn. Daarom is het interessanter om een verdeling op te stellen van de graden in het netwerk. Het percentage knopen in het netwerk met graad k wordt gedefinieerd als {\displaystyle p_{k}}{\displaystyle p_{k}}. Deze waarde komt overeen met de kans dat een random gekozen knoop graad k heeft. De reeks {\displaystyle \{p_{1},p_{2},...\}}{\displaystyle \{p_{1},p_{2},...\}}, noemen we de gradenverdeling. De gradenverdeling kan visueel worden voorgesteld in een histogram. In plaats van percentages {\displaystyle p_{k}}{\displaystyle p_{k}} kunnen ook het aantal knopen met graad k in het histogram worden weergegeven.
+
+Deze voorstelling geeft problemen voor grafen met enkele knopen met een erg hoge graad, zoals grafen met een power-law gradenverdeling. Bij de hoge graden worden de statistische afwijkingen zo groot dat er duidelijke ruis in de histogrammen te zien is. Een alternatieve voorstelling die dit probleem minimaliseert is de cumulatieve gradenverdeling. Hierin worden in plaats van de kansen {\displaystyle p_{k}}{\displaystyle p_{k}} de kansen {\displaystyle P_{k}}{\displaystyle P_{k}} gegeven met {\displaystyle P_{k}=\sum _{k'=k}^{\infty }p_{k'}}{\displaystyle P_{k}=\sum _{k'=k}^{\infty }p_{k'}}, of met andere woorden de kans op een knoop met een graad groter of gelijk aan k.
+
+Bipartitegrafen hebben knopen van twee verschillende soorten. Knopen van dezelfde soort hebben nooit onderlinge bogen, bijgevolg kunnen we voor bipartitegrafen twee gradenverdelingen opstellen.
+
+Machtsfunctie, paretoverdeling en Wet van Zipf
+Een veelvoorkomende gradenverdeling bij realworldnetwerken, waaronder het internet en sociale netwerken, is een machtsfunctiegradenverdeling. Een machtsfunctieverdeling is een verdeling van de vorm:
+
+{\displaystyle P[X=x]=Cx^{-\alpha }}{\displaystyle P[X=x]=Cx^{-\alpha }}
+De cumulatieve distributie hiervan noemt men een paretoverdeling:
+
+{\displaystyle P[X>x]=Cx^{-\lambda }}{\displaystyle P[X>x]=Cx^{-\lambda }}
+De exponent {\displaystyle \lambda }\lambda van een paretoverdeling is gelijk aan {\displaystyle \alpha -1}{\displaystyle \alpha -1}, met {\displaystyle \alpha }\alpha de exponent van de overeenkomstige power-law verdeling. Als we de graden van alle knopen van deze grafen plotten volgens grootte krijgen we een Wet van Zipf:
+
+{\displaystyle y=Cx^{-\tau }}{\displaystyle y=Cx^{-\tau }}
+Hierbij is de exponent {\displaystyle \alpha }\alpha van de overeenkomstige machtsfunctieverdeling (gradenverdeling) gelijk aan {\displaystyle 1+{\frac {1}{\tau }}}{\displaystyle 1+{\frac {1}{\tau }}}
+
+Als we van beide leden van {\displaystyle y=ax^{k}}{\displaystyle y=ax^{k}} de logaritme nemen, krijgen we {\displaystyle \log(y)=k\log(x)+\log(a)}{\displaystyle \log(y)=k\log(x)+\log(a)}, wat equivalent is met {\displaystyle y=mx+c}{\displaystyle y=mx+c}, de vergelijking van een rechte. Machtsfunctie (en ook paretoverdelingen en wetten van Zipf) zijn met andere woorden te herkennen als een rechte op een grafiek in logaritmische schaal.
+
+Clustering
+In vele real-worldnetwerken werd vastgesteld dat als een knoop A verbonden is met een knoop B, en knoop B met een knoop C, er een grotere kans is dat knoop A ook verbonden is met knoop C. Voor sociale netwerken bijvoorbeeld is de kans dat twee vrienden van een bepaalde persoon ook vrienden van elkaar zijn groter dan dat twee random personen vrienden zijn. Deze eigenschap wordt clustering genoemd. In termen van netwerktopologie betekent clustering dat er een hoog aantal driehoeken in het netwerk voorkomen. Een driehoek is een verzameling van drie knopen die elk met elkaar verbonden zijn. Een maat voor de clustering in een netwerk is de clusteringscoëfficiënt C:
+
+{\displaystyle C={\frac {3\times {\mbox{het aantal driehoeken in het netwerk}}}{\mbox{het aantal geconnecteerde tripletten van knopen}}}}{\displaystyle C={\frac {3\times {\mbox{het aantal driehoeken in het netwerk}}}{\mbox{het aantal geconnecteerde tripletten van knopen}}}}
+waarbij het aantal geconnecteerde tripletten van knopen het aantal subgrafen van 3 knopen en 2 bogen is. De clusteringscoëfficiënt geeft het percentage tripletten met een derde boog die er een driehoek van maakt.
+
+Patronen
+De clusteringscoëfficiënt geeft een maat voor het voorkomen van driehoeken in een netwerk. In real world netwerken komen dikwijls ook complexere patronen (ook wel motieven genoemd) terug. Om aan te tonen dat het voorkomen van een bepaald motief niet te wijten is aan toeval moet worden aangetoond dat het motief significant meer voorkomt in het originele netwerk dan in vergelijkbare random netwerken. Vergelijkbare random netwerken kunnen we opstellen met het configuratiemodel. Het aantal motieven in het echte netwerk ({\displaystyle N_{real}}{\displaystyle N_{real}}) kan dan vergeleken worden met het gemiddelde aantal motieven in de random netwerken ({\displaystyle N_{rand}\pm \sigma }{\displaystyle N_{rand}\pm \sigma }, met {\displaystyle \sigma }\sigma de standaardafwijking). Aan de hand van de Z-score kan aangetoond worden of het motief significant meer voorkomt in de originele graaf. De Z-score geeft aan hoeveel standaardafwijkingen het verschil groter is voor de originele graaf: {\displaystyle Z={\frac {N_{real}-N_{rand}}{\sigma }}}{\displaystyle Z={\frac {N_{real}-N_{rand}}{\sigma }}}
+
+Scale-freenetwerken
+Scale-freenetwerken zijn een specifiek soort netwerken die in praktijk veel voorkomen. De belangrijkste eigenschap van scale-freenetwerken is dat het merendeel van de knopen een lage graad hebben, maar enkele knopen een heel hoge graad hebben. Deze knopen met een hoge graad worden hubs genoemd en houden het netwerk samen. Door deze eigenschap zijn scale-freenetwerken robuust voor random aanvallen (het wegnemen van een random knoop) maar kwetsbaar voor gerichte aanvallen (het worstcasegeval, namelijk het wegnemen van een hub).
+
+Ondanks het feit dat de aandacht voor scale-freenetwerken de laatste jaren erg groot is, was er tot voor kort geen exacte definitie voor. Verder waren er ook geen bewijzen voor de aangenomen eigenschappen van deze netwerken. Het kan zelfs aangetoond worden dat in de theorieën contradicties zaten en foutieve aannames werden gemaakt. Pas in 2005 werd voor het eerst een formele definitie voorgesteld waarmee een groot deel van de aangenomen eigenschappen van scale-freenetwerken kon bewezen worden.
+
+De meeste grafen die als scale-free worden bestempeld zijn grafen met een machtsfunctiegradenverdeling. Door M.E.J. Newman in The structure and function of complex networks wordt een scale-freenetwerk gezien als een synoniem voor een netwerk met een machtsfunctieverdeling. Als argument wordt aangehaald dat scale-free enkel slaat op gradenverdeling. De term scale free verwijst namelijk naar elke functie f(x) die onveranderd blijft, op een schalingsfactor b na, als het argument x met een factor a wordt vermenigvuldigd: {\displaystyle f(ax)=bf(x)}{\displaystyle f(ax)=bf(x)}. Machtsfuncties zijn de enige functie die aan deze voorwaarde voldoen. Een machtsfunctiegradenverdeling impliceert het bestaan van enkele knopen met een hoge graad naast vele knopen met een lage graad. De zogenoemde hubs hebben echter niet alleen een hoge graad, maar hebben ook de eigenschap het netwerk samen te houden (robuust maar kwetsbaar).
+
+Buiten de machtsfunctiegradenverdeling worden ook andere eigenschappen met scale-freenetwerken geassocieerd. Dit zijn de belangrijkste eigenschappen van scale-free (SF) netwerken die in de literatuur worden beschreven:
+
+SF netwerken hebben een machtsfunctiegradenverdeling.
+SF netwerken kunnen gegenereerd worden door bepaalde random grafmodellen (zoals het model van Barabasi en Albert).
+In SF netwerken komen hubs voor die het netwerk samenhouden en ervoor zorgen dat het netwerk zowel robuust als kwetsbaar is voor het wegvallen van bepaalde knopen.
+SF netwerken zijn generisch
+Patronen van een SF netwerk komen terug in subgrafen van het netwerk (self-simularity).
+SF netwerken zijn universeel, of maw onafhankelijk van domeinspecifieke eigenschappen.
+Dikwijls wordt een van deze eigenschappen (meestal de machtsfunctiegradenverdeling) aangetoond om een netwerk scale-free te noemen. De andere eigenschappen worden dan als gevolg gezien.
+
+In Towards a theory of scale-free graphs: Definition, properties, and implications introduceert men een nieuwe definitie die zo veel mogelijk van deze eigenschappen overkoepelt. Hiervoor werd voor een graf g de s-metric s(g) ingevoerd:
+
+{\displaystyle s(g)=\sum _{(i,j)\in \epsilon }d_{i}d_{j}}{\displaystyle s(g)=\sum _{(i,j)\in \epsilon }d_{i}d_{j}}
+Hierin is {\displaystyle \epsilon }\epsilon de verzameling bogen van g en {\displaystyle d_{i}}d_{i} de graad van knoop i. Deze s-metric geeft een maat voor de aanwezigheid van hubs omdat ze gemaximaliseerd wordt als knopen met een hoge graad met elkaar verbonden zijn (dit volgt uit de rearrangement inequality). Voor een gegeven graf g kan de maximale s-metric {\displaystyle s_{max}}{\displaystyle s_{max}} berekend worden voor alle grafen met dezelfde gradenverdeling als g. Hiermee kan een maat tussen 0 en 1 gedefinieerd worden: {\displaystyle S(g)={\frac {s(g)}{s_{max}}}}{\displaystyle S(g)={\frac {s(g)}{s_{max}}}} Grafen met {\displaystyle S(g)\approx 1}{\displaystyle S(g)\approx 1} zijn scale-free, grafen met een lagere {\displaystyle S(g)}{\displaystyle S(g)} scale-rich. Men kan aantonen dat deze definitie de meeste van de gegeven eigenschappen van scale-free netwerken overkoepelt. Het is echter niet zo dat enkel een machtsfunctieverdeling impliceert dat een netwerk scale-free is.
+
+Randomnetwerken
+Om eigenschappen van netwerken te bestuderen wordt dikwijls met randomnetwerken gewerkt. Randomnetwerken kunnen op verschillende manieren worden opgesteld. Hieronder volgen besprekingen van enkele veelgebruikte modellen.
+
+Eerste randomnetwerkmodellen
+Een eerste model om een willekeurige graaf op te stellen werd voorgesteld door Paul Erdős en Alfréd Rényi in 1959. Erdös en Rényi definieerden het model {\displaystyle G_{n,p}}{\displaystyle G_{n,p}}, een graaf opgesteld volgens dit model heeft n knopen en een kans op een boog tussen een willekeurig knopenpaar gelijk aan p.
+
+Om de limiet voor hoge n te nemen wordt de gemiddelde graad constant gehouden op {\displaystyle z=p(n-1)}{\displaystyle z=p(n-1)}. In dit geval heeft het model een poissongradenverdeling omdat de aan- of afwezigheid van een boog onafhankelijk is, en bijgevolg de kans dat een boog graad k heeft gelijk is aan:
+
+{\displaystyle p_{k}={n \choose k}p^{k}(1-p)^{n-k}\simeq {\frac {z^{k}e^{-z}}{k!}}}{\displaystyle p_{k}={n \choose k}p^{k}(1-p)^{n-k}\simeq {\frac {z^{k}e^{-z}}{k!}}}
+De benaderende gelijkheid wordt exact in de limiet voor hoge n en vaste k. Vandaar worden deze grafen ook Poissonrandomgrafen genoemd.
+
+De structuur van een poissonrandomgraaf wordt vooral bepaald door de waarde van p. Een belangrijke eigenschap van poissonrandomgrafen is de overgang van een graaf met weinig bogen en kleine componenten voor een kleine p, tot een graf met veel bogen en één grote component en enkele kleine. Deze eigenschap wordt in de literatuur de fasetransitie genoemd. De ene component die opvallend groter is dan alle andere noemen we de giant component. De aanwezigheid van een giant component is een eigenschap die ook in veel realworldnetwerken aanwezig is.
+
+Een poissongradenverdeling komt bij realworldnetwerken zelden voor. Een gesofisticeerder, en meer realistisch, model is het configuratiemodel. Bij dit model wordt een graf met n knopen opgesteld volgens een opgegeven gradenverdeling. De gradenverdeling geeft voor elke graad k de kans dat een knoop in de graf voorkomt met graad k. We kunnen de gradenverdeling voorstellen als een opeenvolging van graden {\displaystyle k_{i}}k_{i} van de knopen i=1, ...,n. We kunnen een graaf volgens dit model opstellen door aan elke knoop i eerst {\displaystyle k_{i}}k_{i} halve bogen te hangen en vervolgens deze halve bogen random met elkaar te verbinden. Merk op dat het niet voor elke gradenverdeling mogelijk is om een graf op te stellen. Het configuratiemodel is interessant omdat we voor een gegeven graf een random graf kunnen opstellen met dezelfde gradenverdeling. Hiervoor knippen we gewoon alle bogen in twee en plakken ze vervolgens weer random aan elkaar. Op die manier kunnen we bijvoorbeeld aantonen dat een kenmerk met parameter x specifiek is voor de gegeven graf als x voor de gegeven graaf significant afwijkt van x voor randomgrafen met een gelijke gradenverdeling. Het model kan uitgebreid worden om bipartiete randomgrafen op te stellen. In dit geval zijn twee gradenverdelingen nodig om de randomgraaf op te stellen.
+
+Het smallworldmodel
+De topologie van netwerken kan gestructureerd zijn of kan volledig random zijn. Voorbeelden van netwerken uit de praktijk (zoals sociale netwerken) liggen echter meestal ergens tussen beide. Ze worden gekenmerkt door korte gemiddelde padlengtes en een hoge clusteringscoëfficiënt. Deze netwerken worden naar analogie met het smallworldeffect smallworldnetwerken genoemd.
+
+Een volledig gestructureerd netwerk kunnen we opstellen door een ring met n knopen en k bogen per knoop op te stellen. Van zo'n gestructureerd netwerk kunnen we een randomnetwerk maken door voor elke boog met kans p een knoop te verwisselen. Hoe lager p hoe gestructureerder het netwerk, hoe hoger p hoe meer random. Een small-worldnetwerk ligt ergens tussen beide. Dit model werd voorgesteld door Watts en Strogatz in 1998.
+
+Volledig gestructureerde netwerken hebben een hoge clusteringscoëfficiënt maar een lange gemiddelde padlengte. Random netwerken hebben wel een korte padlengte, maar hebben dan weer een lage clusteringscoëfficiënt. Als we de gemiddelde padlengte en de clusteringscoëfficiënt bekijken voor netwerken volgens het voorgestelde model met een toenemende p dan zien we inderdaad dat er een overgangsfase is waarbij het netwerk zowel een korte gemiddelde padlengte als een hoge clusteringscoëfficiënt heeft.
+
+Dit model kan vereenvoudigd worden door in plaats van één knoop beide knopen van een boog te verwisselen en door dubbele bogen en lussen toe te staan. Monasson stelde een alternatief model voor waarbij geen bogen worden herlegd maar bogen aan de cirkelstructuur worden toegevoegd. Dit model heeft het voordeel dat het netwerk altijd geconnecteerd blijft en de afstand tussen twee willekeurige knopen dus altijd gedefinieerd is.
+
+Netwerkgroeimodellen
+De modellen uit de vorige secties laten ons toe randomnetwerken op te stellen met eigenschappen die terugkomen in realworldnetwerken. Een belangrijke vraag is echter ook hoe deze eigenschappen tot stand komen. Typische realworldnetwerken zijn onderhevig aan veranderingen. Zo groeien de meeste netwerken over tijd. Zo komen er op het internet bijvoorbeeld dagelijks nieuwe webpagina's bij. Uitgaande van dit feit werden enkele nieuwe modellen voorgesteld. De belangrijkste zijn het model van Price en het model van Barabasi en Albert.
+
+In 1965 bestudeerde Derek de Solla Price het netwerk van literatuurverwijzingen in wetenschappelijke artikelen. Dit netwerk is gericht en acyclisch (een artikel kan niet verwijzen naar een artikel dat later verschenen is). Hij stelde vast dat de knopen in het netwerk een inkomende en uitgaande machtsfunctiegradenverdeling hadden en zocht naar een model om deze eigenschap te verklaren. Machtsfuncties ontstaan typisch wanneer de rijkste rijker wordt. Het was Price' bijdrage om dit toe te passen op de groei van een netwerk. Voor wetenschappelijke verwijzingen is het ook aannemelijk dat de kans dat bij de artikelen waar veel naar verwezen wordt, de kans opnieuw groter wordt om naar verwezen te worden, dan naar artikelen waar weinig naar verwezen wordt.
+
+Het model gaat als volgt. Beschouw een graaf met n knopen en {\displaystyle p_{k}}{\displaystyle p_{k}} het percentage knopen in het netwerk met inkomende graad k. Er worden voortdurend nieuwe knopen aan het netwerk toegevoegd. Deze knopen hebben een zekere uitgaande graad die achteraf niet meer kan veranderen, deze graad kan variëren, maar de gemiddelde uitgaande graad wordt constant gehouden op m. De waarde m is ook de gemiddelde inkomende graad van het netwerk. De kans dat een nieuwe boog wordt gekoppeld aan een bepaalde knoop is proportioneel met zijn inkomende graad k op dat moment. Aangezien de initiële inkomende graad van een nieuwe knoop steeds nul is zou de kans dat een boog toekomt in deze knoop altijd nul blijven. Daarom stelde Price voor om de kans dat een boog gekoppeld wordt aan een bepaalde knoop proportioneel te maken met {\displaystyle k+k_{0}}{\displaystyle k+k_{0}}, met {\displaystyle k_{0}}{\displaystyle k_{0}} een constante. In de meeste gevallen wordt {\displaystyle k_{0}}{\displaystyle k_{0}} gelijkgesteld aan één.
+
+Een ander model is het model van Barabasi en Albert. Dit model komt redelijk overeen met het model van Price, maar maakt geen onderscheid tussen inkomende en uitgaande graden. Het is dus een model voor ongerichte grafen. Net als bij Price wordt gestart met n knopen en worden nieuwe knopen toegevoegd met een bepaalde graad. Ook hier wordt de gemiddelde graad constant gehouden op m. Aangezien er geen onderscheid wordt gemaakt tussen inkomende en uitgaande bogen is de initiële kans dat een nieuwe boog toekomt in een knoop niet nul maar proportioneel met zijn graad.
+
+Het idee (de rijke wordt rijker) achter de modellen van Price en van Barabasi en Albert wordt tegenwoordig dikwijls gezien als de oorzaak van machtsfunctieverdelingen die terugkomen in realworldnetwerken. Toch volstaat een mogelijke modellering niet als verklaring voor het voorkomen in praktijk.
+
+Software
+(en) NetworkX is een in Python geschreven opensourceprogramma voor het maken, manipuleren en bestuderen van de structuur, eigenschappen en functie van complexe netwerken

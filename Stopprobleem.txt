@@ -1,0 +1,13 @@
+Het stopprobleem (beter bekend als 'halting problem') is het probleem uit de wiskunde en informatica, of het mogelijk is vast te stellen of een algoritme bij een eindige invoer eindigt in een eindig aantal stappen of eindeloos blijft doorgaan. Het is een bekend voorbeeld van een wiskundig probleem dat onbeslisbaar is, en een van de eerste als dusdanig herkende problemen. Dit werd bewezen door Alan Turing in 1936.
+
+Bewijs van onberekenbaarheid
+Het eigenlijke bewijs is complex, maar de kern van het bewijs is ongeveer dit:
+
+De onberekenbaarheid van het stopprobleem kan bewezen worden met behulp van een bewijs uit het ongerijmde. Dat wil zeggen, neem aan dat we een programma halt(A,x) hebben, dat als resultaat "1" geeft als het algoritme A eindigt indien toegepast op invoer x, en "0" als het niet eindigt.
+Vorm nu het algoritme paradox(A), dat voor een algoritme A een waarde geeft (geeft niet welke) als halt(A,A) 0 oplevert, en oneindig door blijft gaan als halt(A,A) 1 oplevert.
+De vraag is nu, eindigt paradox als het paradox als invoer krijgt?
+Indien ja, dan zal dus volgens de definitie van paradox, halt(paradox,paradox) 0 moeten opleveren. Volgens de definitie van halt, betekent dit dat paradox niet eindigt met paradox als invoer.
+Indien nee, dan zal dus volgens de definitie van paradox, halt(paradox,paradox) 1 moeten opleveren. Volgens de definitie van halt, betekent dit dat paradox eindigt met paradox als invoer.
+Dus paradox(paradox) kan niet eindigen en niet niet eindigen. Tegenspraak, dus onze oorspronkelijke aanname, dat halt bestaat, is onjuist.
+Turingmachine
+Het was voor zijn bewijs van de onberekenbaarheid van het stopprobleem, of beter gezegd voor het geven van een definitie van het algoritme, dat Turing het later beroemd geworden idee van de turingmachine bedacht.

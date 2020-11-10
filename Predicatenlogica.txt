@@ -1,0 +1,27 @@
+Predicatenlogica is wiskundig-formele logica waarin expliciet predicaten voorkomen, waarmee eigenschappen van en relaties tussen verzamelingen objecten worden beschreven. Vaak wordt vooral de eerste-orde-predicatenlogica bedoeld.
+
+Eerste-orde-predicatenlogica
+De eerste-orde-predicatenlogica is een uitbreiding van de propositielogica. De taal is uitgebreid met constanten, variabelen, predicaten en soms ook functiesymbolen. Een propositie is een speciaal geval van een predicaat, namelijk een predicaat met plaatsigheid nul. De taal van de predicatenlogica bevat verder twee kwantoren: de universele kwantor {\displaystyle \forall }\forall en de existentiële kwantor {\displaystyle \exists }\exists.
+
+In de propositielogica kan een propositie als Wikipedia is een encyclopedie worden uitgedrukt met een letter, bijvoorbeeld P. In de predicatenlogica kan dit worden uitgedrukt met een predicaat dat een encyclopedie zijn vertegenwoordigt, bijvoorbeeld met de letter E aangegeven, en een constante voor Wikipedia, bijvoorbeeld w. De bewering Wikipedia is een encyclopedie kan dan worden uitgedrukt met de formule: E(w). Een atomaire propositie is in de predicatenlogica een formule waarin geen voegtekens (connectieven) voorkomen.
+
+Als de letter {\displaystyle N}N het predicaat nuttig zijn uitdrukt, kan de zin Als Wikipedia een encyclopedie is, is Wikipedia nuttig als volgt met een predicaatlogische formule representeren:
+
+{\displaystyle E(w)\to N(w)}{\displaystyle E(w)\to N(w)}.
+Ook een uitdrukking als Alle encyclopedieën zijn nuttig kan in predicatenlogica worden uitgedrukt, bijvoorbeeld als:
+
+{\displaystyle \forall x:(E(x)\to N(x))}{\displaystyle \forall x:(E(x)\to N(x))}.
+De formele taal waarin de logica werkt, legt het aantal constanten, relaties en functies en de ariteit van de relaties en functies vast. Deze gegevens vormen het similariteitstype.
+
+Hogere-orde-predicatenlogica
+Men onderscheidt predicatenlogica's van verschillende ordes:
+
+binnen de eerste orde predicatenlogica kan alleen over constanten en variabelen worden geprediceerd,
+binnen de tweede orde predicatenlogica kan ook over eerste-orde-predicaten geprediceerd worden,
+in het algemeen kan in {\displaystyle n}n-de-orde predicatenlogica's over predicaten van orde ten hoogste {\displaystyle n-1}n-1 worden geprediceerd .
+Deze ordening wordt aangebracht om de Russellparadox te vermijden.
+
+Een eenvoudig voorbeeld van prediceren over een predicaat, is als belangrijk zijn wordt uitgedrukt met {\displaystyle \mathbf {B} }{\displaystyle \mathbf {B} }, en nuttig zijn is belangrijk met: {\displaystyle \mathbf {B} (N)}{\displaystyle \mathbf {B} (N)}. De zin Wikipedia is nuttig en nuttig zijn is belangrijk zou dan weergeven kunnen worden als:
+
+{\displaystyle N(w)\land \mathbf {B} (N)}{\displaystyle N(w)\land \mathbf {B} (N)}.
+Het voegteken {\displaystyle \land }\land is de conjunctie. Het symbool & wordt hier ook wel voor gebruikt.

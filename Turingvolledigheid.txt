@@ -1,0 +1,41 @@
+In de berekenbaarheidstheorie wordt een programmeertaal, of een ander systeem om bewerkingen mee uit te drukken, turingvolledig (vaker: turingcompleet) genoemd als het de uitdrukkingskracht heeft van een universele turingmachine. Dat betekent ruwweg dat elke berekening of gegevensbewerking die geprogrammeerd kan worden, ook in dit systeem geprogrammeerd kan worden.
+
+Het woord verwijst naar de wiskundige Alan Turing, die de turingmachine als algemene maatstaf van berekenbaarheid heeft uitgevonden.
+
+
+Inhoud
+1	Nadere omschrijving
+2	Voorbeelden
+3	Voorbeelden van turing(on)volledigheid
+4	Kenmerken van turingvolledigheid
+5	Zie ook
+Nadere omschrijving
+Turingvolledigheid heeft betrekking op systemen waarin afbeeldingen kunnen worden gespecificeerd. Zo'n afbeelding kan worden beschouwd als een bewerking die invoer van een bepaalde vorm omzet in uitvoer van een bepaalde (mogelijk andere) vorm, zodanig dat gegeven de invoer de uitvoer vaststaat.
+
+Turingmachines zijn zelf zo'n systeem: elke turingmachine specificeert een bewerking op eindige reeksen symbolen.
+
+Een systeem is turingvolledig als met de specificaties die in het systeem gedefinieerd kunnen worden de werking van turingmachines te simuleren is. Zo'n simulatie bestaat uit drie afbeeldingen:
+
+een afbeelding van eindige symboolreeksen naar mogelijke invoeren van (de specificaties in) het systeem;
+een afbeelding van eindige symboolreeksen naar mogelijke uitvoeren van (de specificaties in) het systeem;
+een afbeelding van turingmachines naar specificaties in het systeem, zodanig dat voor elke turingmachine deze drie afbeeldingen, na elkaar toegepast, dezelfde bewerking op symboolreeksen specificeren als de turingmachine zelf.
+Werkelijke turingvolledigheid vereist dat een systeem tijdens het bewerken over willekeurig veel werkgeheugen kan beschikken. Informeel worden ook systemen die slechts een vaste hoeveelheid geheugen beschikbaar stellen wel turingvolledig genoemd, als deze beperking in de simulatie geen rol speelt en als implementatiedetail kan worden beschouwd.
+
+Voorbeelden
+Het eerste voorbeeld van zo'n turingvolledige machine zou de analytische machine van Charles Babbage zijn geweest, maar deze is nooit echt gebouwd. De eerste echte machine die, afgezien van haar eindige geheugen, turingvolledig genoemd kon worden, was de Z3 van Konrad Zuse. Deze machine werd reeds in 1941 gebouwd, doch pas in 1998 is bewezen dat ze turingvolledig was. De eerste machine waarvan men wist dat ze turingvolledig was, was de ENIAC. Ook alle thuiscomputers zijn turingvolledig.
+
+Dat dit begrip een belangrijk begrip is voor de informatica kan ingezien worden door het feit dat elke (echt maakbare) computer die tot dusver ontworpen is, supercomputers en kwantumcomputer inbegrepen, door een turingmachine geëmuleerd kan worden. Voor een computer die turingvolledig is, geldt dit ook, in beginsel (afgezien van geheugenbeperkingen) kan een thuiscomputer elke berekening doen die een supercomputer ook kan doen. Uiteraard zal een thuiscomputer er véél langer over doen, en een equivalent programma voor een turingmachine maken zal waarschijnlijk ontzettend veel moeilijker zijn, maar het is niet onmogelijk.
+
+Theoretisch gezien bestaan er modellen van computers die krachtiger zijn dan de turingmachine, bijvoorbeeld een Orakelmachine, die elk beslissingsprobleem kan beantwoorden (zoals een orakel dat doet, door te 'gokken'), dus ook problemen die formeel onbeslisbaar zijn, zoals het haltingprobleem. Deze machines, of equivalente machines, zijn echter fysiek niet te realiseren. Dit heeft sommigen de hypothese doen opwerpen dat het universum zelf berekenbaar is, dus gesimuleerd zou kunnen worden op een turingmachine. Dit zou betekenen dat een computer krachtiger dan de turingmachine niet mogelijk is, aangezien onder deze hypothese een turingmachine deze computer zou kunnen emuleren.
+
+Voorbeelden van turing(on)volledigheid
+Alle veelgebruikte programmeertalen zijn turingvolledig. Dit zijn imperatieve talen zoals C, objectgeoriënteerde talen zoals Java, maar ook functionele talen zoals LISP en Haskell en logische programmeertalen zoals Prolog. Dit betekent dat voor elk programma dat in Prolog geschreven kan worden er een equivalent programma in C geschreven kan worden, en omgekeerd. Equivalent moet hier strikt formeel opgevat worden, de manier waarop het resultaat berekend wordt kan volledig anders zijn.
+
+Ook heel basale talen, zoals de ongetypeerde lambdacalculus, die maar een paar constructies kennen, zijn turingvolledig. Sommige getypeerde lambdacalculi, zoals de tweede orde lambda calculus, zijn niet turingvolledig.
+
+Een voorbeeld van een taal die niet turingvolledig is, is een spreadsheet zonder wederzijdse afhankelijkheden (dus lussen) in de cellen. Ook reguliere expressies zijn niet turingvolledig, aangezien deze gemodelleerd kunnen worden door eindige automaten, apparaten met hooguit eindig veel geheugen.
+
+Kenmerken van turingvolledigheid
+Een belangrijk resultaat uit de berekenbaarheidstheorie is dat het in het algemeen onmogelijk is om te zeggen of een programma dat geschreven is in een turingvolledige taal een keer ophoudt, of dat het oneindig blijft doorrekenen, het zogenaamde stopprobleem. Methodes die ervoor zorgen dat er zekerheid is dat een programma stopt, zoals het programma stoppen na een vaste tijd, of de mogelijkheden om oneindige lussen te maken te beperken, leiden dan ook tot turingonvolledige talen.
+
+Een gerelateerd resultaat is dan ook dat er problemen zijn die een turingvolledige taal wel kan oplossen, maar die niet opgelost kunnen worden door een taal met eindige herhalingsmogelijkheden — talen die dus garanderen dat programma's stoppen.

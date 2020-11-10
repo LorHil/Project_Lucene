@@ -1,0 +1,43 @@
+In de theoretische informatica is een alternerende eindige automaat een variant op een eindige automaat. Een toestand van een eindige automaat accepteert een woord {\displaystyle w=ax}{\displaystyle w=ax}, waarbij {\displaystyle a}a een symbool van het alfabet is en {\displaystyle x}x de rest van het woord, wanneer minstens één van zijn {\displaystyle a}a-opvolgertoestanden de {\displaystyle x}x accepteert. Een alternerende eindige automaat past echter een willekeurige booleaanse functie op de acceptatiewaardes van zijn opvolgertoestanden toe.
+
+De naam baseert zich op het volgende: Als we lege overgangen toestaan (wat in het geval van eindige automaten niet gebruikelijk is), hebben we slechts twee soorten toestanden nodig om alle mogelijke booleaanse functies te kunnen uitdrukken: toestanden die {\displaystyle ax}{\displaystyle ax} accepteren als alle opvolgertoestanden {\displaystyle x}x accepteren, en toestanden die {\displaystyle ax}{\displaystyle ax} accepteren als minstens één opvolgertoestand {\displaystyle x}x accepteert. De automaat alterneert dan als het ware tussen "alle"- en "één"-toestanden.
+
+
+Inhoud
+1	Formele definitie
+2	Voorbeeld
+3	Eigenschappen
+4	Literatuur
+Formele definitie
+Een alternerende eindige automaat is een tupel {\displaystyle {\mathcal {A}}=(Q,\Sigma ,q_{1},F,g)}{\displaystyle {\mathcal {A}}=(Q,\Sigma ,q_{1},F,g)} waarbij
+
+{\displaystyle Q=\{q_{1},\ldots ,q_{k}\}}{\displaystyle Q=\{q_{1},\ldots ,q_{k}\}} een eindige verzameling toestanden is;
+{\displaystyle \Sigma }\Sigma  het eindige invoeralfabet;
+{\displaystyle q_{1}\in Q}{\displaystyle q_{1}\in Q} de begintoestand;
+{\displaystyle F\subseteq Q}{\displaystyle F\subseteq Q} de verzameling eindtoestanden; en
+{\displaystyle g\colon Q\to (\Sigma \to \mathbb {B} ^{k}\to \mathbb {B} )}{\displaystyle g\colon Q\to (\Sigma \to \mathbb {B} ^{k}\to \mathbb {B} )} de transitiefunctie.
+{\displaystyle \mathbb {B} =\{0,1\}}{\displaystyle \mathbb {B} =\{0,1\}} staat hier voor de verzameling van waarheidswaarden. De transitiefunctie {\displaystyle g}g kent aan elke toestand {\displaystyle q}q een functie {\displaystyle g(q)\colon \Sigma \times \mathbb {B} ^{k}\to \mathbb {B} }{\displaystyle g(q)\colon \Sigma \times \mathbb {B} ^{k}\to \mathbb {B} } toe, die gegeven een alfabetsymbool en een waarheidswaarde voor elke toestand, een waarheidswaarde teruggeeft.
+
+Om makkelijk functies van toestanden naar waarheidswaarden op te kunnen schrijven, worden de toestanden geordend. We kunnen een functie van toestanden naar waarheidswaarden nu als tupels opschrijven. Als {\displaystyle Q=\{q_{1},q_{2},q_{3}\}}{\displaystyle Q=\{q_{1},q_{2},q_{3}\}}, dan wordt met {\displaystyle \mathbf {u} =(1,0,0)}{\displaystyle \mathbf {u} =(1,0,0)} de functie met {\displaystyle \mathbf {u} (q_{1})=1}{\displaystyle \mathbf {u} (q_{1})=1}, {\displaystyle \mathbf {u} (q_{2})=0}{\displaystyle \mathbf {u} (q_{2})=0} en {\displaystyle \mathbf {u} (q_{3})=0}{\displaystyle \mathbf {u} (q_{3})=0} bedoeld. De functie {\displaystyle \mathbf {f} }{\displaystyle \mathbf {f} } is de karakteristieke functie van de verzameling eindtoestanden, dat wil zeggen:
+
+{\displaystyle \mathbf {f} (q)={\begin{cases}1&{\text{als }}q\in F\\0&{\text{als }}q\notin F\end{cases}}}{\displaystyle \mathbf {f} (q)={\begin{cases}1&{\text{als }}q\in F\\0&{\text{als }}q\notin F\end{cases}}}
+We definiëren nu de functie {\displaystyle H\colon Q\to (\Sigma ^{*}\to \mathbb {B} ^{k}\to \mathbb {B} )}{\displaystyle H\colon Q\to (\Sigma ^{*}\to \mathbb {B} ^{k}\to \mathbb {B} )} als de uitbreiding van de transitiefunctie {\displaystyle g}g van symbolen naar woorden:
+
+{\displaystyle H(q)(\epsilon )(\mathbf {u} )=\mathbf {u} (q)}{\displaystyle H(q)(\epsilon )(\mathbf {u} )=\mathbf {u} (q)}
+{\displaystyle H(q)(ax)(\mathbf {u} )=g(q)(a)(H(q_{1})(x),\ldots ,H(q_{k})(x))}{\displaystyle H(q)(ax)(\mathbf {u} )=g(q)(a)(H(q_{1})(x),\ldots ,H(q_{k})(x))}
+en definiëren de taal van een automaat {\displaystyle {\mathcal {A}}}{\mathcal  {A}}, dat wil zeggen, de verzameling van woorden die door {\displaystyle {\mathcal {A}}}{\mathcal  {A}} geaccepteerd worden, als:
+
+{\displaystyle L({\mathcal {A}})=\{w\mid H(q_{1})(w)(\mathbf {f} )=1\}}{\displaystyle L({\mathcal {A}})=\{w\mid H(q_{1})(w)(\mathbf {f} )=1\}}.
+Voorbeeld
+De volgende alternerende eindige automaat over het alfabet {\displaystyle \Sigma =\{a,b\}}{\displaystyle \Sigma =\{a,b\}} zij gegeven:
+
+{\displaystyle {\mathcal {A}}=(\{q_{1}\},\Sigma ,q_{1},\{q_{1}\},g)}{\displaystyle {\mathcal {A}}=(\{q_{1}\},\Sigma ,q_{1},\{q_{1}\},g)}, waarbij
+{\displaystyle g(q_{1})(a)(x)=\neg x}{\displaystyle g(q_{1})(a)(x)=\neg x}
+{\displaystyle g(q_{1})(b)(x)=0}{\displaystyle g(q_{1})(b)(x)=0}
+De automaat {\displaystyle {\mathcal {A}}}{\mathcal  {A}} accepteert de volgende taal:
+
+{\displaystyle L({\mathcal {A}})=\{a^{2n}\mid n\in \mathbb {N} \}\cup \{a^{2n+1}bw\mid n\in \mathbb {N} ,w\in \Sigma ^{*}\}}{\displaystyle L({\mathcal {A}})=\{a^{2n}\mid n\in \mathbb {N} \}\cup \{a^{2n+1}bw\mid n\in \mathbb {N} ,w\in \Sigma ^{*}\}}
+Deze alternerende eindige automaat heeft 1 toestand. De kleinste niet-deterministische eindige automaat die dezelfde taal accepteert heeft 2 toestanden; de kleinste deterministische eindige automaat zelfs 4.
+
+Eigenschappen
+Niet-deterministische eindige automaten (NFAs) zijn een speciaal geval van alternerende automaten; voor elke reguliere taal bestaat dus een alternerende eindige automaat die de taal accepteert. Andersom is ook het geval: elke alternerende eindige automaat kan in een equivalente NFA worden omgevormd. De alternerende eindige automaten accepteren dus precies de klasse der reguliere talen. Alternerende eindige automaten kunnen echter veel kleiner zijn dan equivalente eindige automaten. Voor elke {\displaystyle k\in \mathbb {N} }{\displaystyle k\in \mathbb {N} } bestaat er een alternerende eindige automaat met {\displaystyle k}k toestanden, waarvoor geldt dat de kleinste equivalente NFA {\displaystyle 2^{k}}{\displaystyle 2^{k}} en de kleinste equivalente deterministische eindige automaat (DFA) zelfs {\displaystyle 2^{2^{k}}}{\displaystyle 2^{2^{k}}} toestanden heeft (zie het voorbeeld hierboven).

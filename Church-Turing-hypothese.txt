@@ -1,0 +1,25 @@
+Church-Turing-hypothese
+Naar navigatie springenNaar zoeken springen
+De Church-Turing-hypothese (Engels: Church-Turing thesis) is een stelling in de berekenbaarheidstheorie, geformuleerd door Alonzo Church en Alan Turing. Deze stelling is eigenlijk een hypothese, aangezien deze nooit bewezen zal kunnen worden. Enkele afgeleide hypotheses zijn zelfs al ontkracht.
+
+De stelling
+De stelling is: Elke mogelijke berekening kan door een algoritme op een turingmachine uitgevoerd worden, mits er genoeg geheugen en tijd beschikbaar is.
+
+Over het algemeen worden aan het algoritme de volgende voorwaarden gesteld:
+
+Het algoritme bestaat uit een eindig aantal duidelijk gedefinieerde instructies.
+Het algoritme geeft een antwoord binnen een eindig aantal stappen.
+Het algoritme kan met pen en papier uitgevoerd worden. (in theorie)
+Er is geen kennis nodig behalve hoe de instructies uitgevoerd moeten worden.
+Dit lijkt allemaal duidelijk maar is niet formeel genoeg. Wat zijn bijvoorbeeld elke mogelijke berekening, een duidelijk gedefinieerde instructie en de kennis hoe de instructies uitgevoerd moeten worden?
+
+Vanwege deze onduidelijkheden is deze stelling moeilijk te bewijzen of te ontkrachten.
+
+Afgeleide stellingen
+Physical Church–Turing thesis (PCTT): Elke functie die fysiek berekend kan worden kan door een turingmachine berekend worden.
+
+Deze bewering is mogelijk ontkracht toen Willem Fouché in 2002 ontdekte dat een turingmachine waarschijnlijk niet de waarden kan benaderen voor een eendimensionale brownse beweging op rationale punten in de tijd.
+
+Strong Church–Turing thesis (SCTT): Elk 'redelijk' berekeningsmodel kan efficiënt gesimuleerd worden door een probabilistische turingmachine.
+
+Er lijkt echter bewijs te zijn dat dit niet waar is: een getal kan wel efficiënt worden gefactoriseerd op een kwantumcomputer, maar er is nog geen algoritme gevonden dat dit kan doen met een turingmachine. Er is echter nog niet bewezen dat dit algoritme niet bestaat.

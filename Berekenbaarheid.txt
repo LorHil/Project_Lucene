@@ -1,0 +1,179 @@
+Berekenbaarheid is een deelprobleem van de complexiteitstheorie. Het vraagstuk van berekenbaarheid gaat over het bepalen van de grens tussen wat berekenbaar is en wat niet.
+
+
+Inhoud
+1	Basis van het probleem
+1.1	Historische context
+1.2	Nadere uitwerking van "berekenbaarheid"
+2	Grens van het berekenbare
+2.1	Het stopprobleem: het onbeslisbare probleem van Turing
+2.1.1	Aftelbaarheid van het aantal berekenbare problemen
+2.1.2	Bewijs van onbeslisbaarheid
+2.2	Niet alles is herkenbaar
+3	Reductie
+Basis van het probleem
+Een wiskundige functie is berekenbaar als er een automatische procedure bestaat die voor elk willekeurig element van het domein (bijvoorbeeld een getal) de functiewaarde ervan bepaalt. Dit blijkt voor lang niet alle functies het geval.
+
+Een wiskundige verzameling is beslisbaar als er een automatische procedure bestaat die voor elk willekeurig mogelijk element bepaalt of het tot de verzameling behoort. Met andere woorden, een verzameling is beslisbaar dan en slechts dan als de karakteristieke functie ervan berekenbaar is. Dit is voor lang niet alle verzamelingen zo.
+
+Een wiskundige eigenschap is beslisbaar als er een automatische procedure bestaat die voor elk object waar het predicaat op kan worden toegepast bepaalt of het de eigenschap heeft. Met andere woorden, als de verzameling van objecten die er aan voldoen beslisbaar is.
+
+De berekenbaarheidstheorie houdt zich bezig met methoden om van functies te bepalen of ze berekenbaar zijn, en van verzamelingen en eigenschappen of ze beslisbaar zijn.
+
+Dit gebeurt op basis van de turingmachine, een simpel, maar algemeen wiskundig model van het rekenen. Andere wiskundige modellen voor het rekenen en redeneren zijn allemaal equivalent gebleken aan het rekenen met de turingmachine.
+
+Een belangrijke techniek bij het bepalen of een probleem berekenbaar/beslisbaar is is reductie. Een reductie van een probleem naar een andere probleem is een vertaling van alle gevallen van het eerste probleem naar gevallen van het tweede, zodanig dat een beslissings- of berekeningsprocedure voor het tweede probleem overeenkomt met een beslis/berekeningsprocedure voor het eerste probleem.
+
+Historische context
+Sinds het moment dat mensen begonnen zijn dingen op te schrijven, hebben ze zich al afgevraagd of ze bepaalde zaken zouden kunnen voorspellen uit wat ze eerder gezien hadden. De Egyptenaren wilden de overstromingen van de Nijl kunnen voorspellen aan de hand van hun observaties van eerder gedrag van de rivier. In Babylonië moest de productie van graan bijgehouden worden en moesten verwachtingen uitgesproken worden over de benodigde opslagruimte. De noodzaak om zaken te modelleren en vanuit het model antwoorden te kunnen bepalen op de vraag over toekomstige ontwikkelingen was het begin van de wiskunde.
+
+Vanaf 1870 raakte de wiskunde in een stroomversnelling. De abstracte logica deed haar intrede en abstractiemechanismen werden steeds beter begrepen. De mogelijkheden van de wiskunde leken eindeloos en voor alles kon een oplossing gevonden worden. De enige beperking was het vinden van de manier om een oplossing op te stellen. In 1900 publiceerde David Hilbert zijn 23 problemen, een hoopvolle uitdaging aan de wiskundige wereld om binnen de volgende 100 jaar toch eindelijk die 23 rottige probleempjes op te ruimen.
+
+In 1931 werd de droom van de onbeperkte wiskunde wreed verstoord: Kurt Gödel bewees dat, in een voldoende expressief systeem van wiskunde, er altijd zaken moeten zijn die niet bewezen of ontkracht kunnen worden. En de rekenkunde was een dergelijke, expressieve wiskunde. Met de ontdekking van Gödel rees de vraag of zelfs wel voor ieder rekenprobleem een oplossing bestond.
+
+Het antwoord op deze vraag kwam in 1935 en 1936, toen de eerste modellen van berekeningen gepubliceerd werden. Deze modellen demonstreerden hoe een berekening eigenlijk uitgevoerd wordt. Met een berekeningsmodel in de hand kon precies uitgelegd worden hoe een gegeven probleem opgelost moest worden, stap voor stap. En er kon ook gekeken worden of er iets was dat niet berekend kon worden: was er een probleem waarbij het berekeningsmodel vastliep?
+
+In 1936 publiceerde Alan Turing een - inmiddels wereldberoemd - artikel getiteld "On Computable Numbers, with an Application to the Entscheidungsproblem". In dit artikel introduceerde hij het bekendste berekeningsmodel dat de wiskunde kent, de turingmachine. En hij deed dat om aan te kunnen tonen dat hij een probleem had gevonden dat onoplosbaar, onberekenbaar was: het stopprobleem.
+
+Nadere uitwerking van "berekenbaarheid"
+De turingmachine is een zeer simpel, mechanisch model van berekening. De machine verdeelt een berekening in een groot aantal zeer kleine stappen. Deze stappen worden een voor een uitgevoerd, totdat de machine aangeeft dat hij klaar is. De machine gebruikt een geheugenband voor het lezen van invoer, en tevens als werkgeheugen en voor uitvoer.
+
+We beperken ons voor het gemak tot de beslissingsproblemen: problemen waarop het antwoord altijd ja of nee is. Bijvoorbeeld:
+
+de vraag "is X een priemgetal?" is een beslissingsprobleem;
+de vraag "is 5 een priemgetal?" is een ja-instantie van dat probleem;
+de vraag "is 18 een priemgetal?" is een nee-instantie van het probleem.
+Voor zulke problemen gebruiken we turingmachines die in twee mogelijke toestanden kunnen eindigen: de accepterende toestand (met als betekenis ja) of de afwijzende toestand (met als betekenis nee). De instantie van het probleem (bijvoorbeeld het getal X in het bovenstaande voorbeeld) geven we als invoer aan de machine door deze te coderen als een rij symbolen en op de band te zetten voordat we de machine starten.
+
+De vraag of een beslissingsprobleem P berekenbaar is, komt neer op het volgende:
+
+Bestaat er een turingmachine TMP zodanig dat TMP altijd de accepterende toestand bereikt wanneer we de machine aanzetten met een ja-instantie op de band, en altijd de afwijzende toestand bereikt wanneer we de machine aanzetten met een nee-instantie op de band?
+De bovenstaande formulering geeft een belangrijke beperking aan in het soort turingmachine dat we als oplossing kunnen gebruiken: het moet een turingmachine zijn die altijd een antwoord oplevert (ja of nee). Het mag niet een machine zijn die ja op kan leveren of nee of ook gewoon eeuwig door kan blijven lopen. Dergelijke machines bestaan wel (we noemen dat herkenners), maar die leveren niet gegarandeerd voor iedere instantie een oplossing op - voor sommige instanties kunnen ze eeuwig blijven lopen. We zijn echt op zoek naar machines die altijd een antwoord opleveren (dit zijn de zogeheten beslissers).
+
+Als we zeggen dat een probleem berekenbaar is, dan is er dus een belisser voor dat probleem - er is een turingmachine TM die iedere instantie van het probleem beslist.
+
+Grens van het berekenbare
+In dit hoofdstuk zullen we ingaan op de vragen of er wiskundige problemen zijn die niet beslisbaar zijn, of zelfs herkenbaar zijn. Die vragen zullen we positief beantwoorden: er zijn problemen die niet berekenbaar zijn en zelfs problemen die niet herkenbaar zijn.
+
+We zullen beginnen met aan te tonen dat er een onbeslisbaar probleem is. Hiervoor zullen we een aantal technische details overnemen uit het bewijs van Alan Turing. Vervolgens komen we op een onherkenbaar probleem.
+
+Het stopprobleem: het onbeslisbare probleem van Turing
+In het vorige hoofdstuk hebben we gesproken over een probleem P en een instantie van P. Dit is eigenlijk alweer een abstractieniveau hoger dan het niveau waarop de turingmachine werkt. De turingmachine kent helemaal geen problemen en instanties. Een turingmachine kent alleen haar regels voor het zetten van stappen (de transitiefunctie) en de rij symbolen op haar band. Dat wij mensen daar problemen en instanties in zien, is iets dat er niet toe doet. Het gaat om toestanden, transities en symbolen, meer niet.
+
+In plaats van te praten over problemen en instanties, kun je het dus ook heel algemeen hebben over een gegeven turingmachine TM en een rij symbolen s. Indien gestart met invoer s zal TM ofwel uiteindelijk stoppen, ofwel altijd door blijven lopen zonder te stoppen.
+
+Het volgende beslissingsprobleem staat bekend als het stopprobleem: Stopt de gegeven turingmachine TM indien gestart op invoer s?.
+
+Is het stopprobleem berekenbaar? Met andere woorden: bestaat er een turingmachine die in de accepterende toestand eindigt voor elke invoer <TM, s> waarbij TM stopt op invoer s, en in de afwijzende toestand eindigt voor elke invoer <TM, s> waarbij TM niet stopt op invoer s. Nee, bewees Turing, dit probleem is niet berekenbaar.
+
+Aftelbaarheid van het aantal berekenbare problemen
+Turings argumentatie begint met de vaststelling dat er weliswaar oneindig veel wiskundige problemen zijn, maar dat het aantal berekenbare problemen gelijk is aan het aantal natuurlijke getallen: aftelbaar veel. Dat wil zeggen, de verzameling die het beslissingsprobleem voorstelt is isomorf met {\displaystyle (\mathbb {N} \times S^{*})}(\mathbb{N} \times S^{*}), waarbij S de verzameling van alle symbolen is.
+
+Stel, {\displaystyle M}M is een turingmachine. Uiteraard bestaat de volledige machine {\displaystyle M}M uit een tupel van zeven elementen (toestanden, bandalfabet, begintoestand, accepterende toestand, afwijzende toestand en transitiefunctie). Maar stel nu dat we {\displaystyle M}M licht aanpassen tot {\displaystyle M^{+}}M^{+}:
+
+{\displaystyle M^{+}}M^{+} bevat alle toestanden van {\displaystyle M}M - maar dan wel hernoemd tot de vorm {\displaystyle q_{0},q_{1},q_{2},\ldots }q_{0},q_{1},q_{2},\ldots 
+{\displaystyle M^{+}}M^{+} bevat alle symbolen die {\displaystyle M}M bevat in zijn alfabet - maar dan wel hernoemd tot {\displaystyle k_{0},k_{1},k_{2},\ldots }k_{0},k_{1},k_{2},\ldots 
+In de transitiefunctie van {\displaystyle M^{+}}M^{+} zijn alle toestanden en symbolen correct vervangen
+De begintoestand van {\displaystyle M}M is in {\displaystyle M^{+}}M^{+} hernoemd tot {\displaystyle q_{0}}q_{0}
+De accepterende toestand van {\displaystyle M}M is in {\displaystyle M^{+}}M^{+} hernoemd tot {\displaystyle q_{1}}q_{1}
+De afwijzende toestand van {\displaystyle M}M is in {\displaystyle M^{+}}M^{+} hernoemd tot {\displaystyle q_{2}}q_{2}
+De hele machine {\displaystyle M^{+}}M^{+} kan nu worden samengevat door haar transitiefunctie {\displaystyle \delta _{M^{+}}}\delta _{{M^{+}}}. Immers:
+
+{\displaystyle q_{0}}q_{0} is per definitie de begintoestand; {\displaystyle q_{1}}q_{1} en {\displaystyle q_{2}}q_{2} per definitie de accepterende en afwijzende toestanden
+Het totaal aantal toestanden kan gevonden worden door in de transitiefunctie te zoeken naar de toestand {\displaystyle q_{i}}q_i met de hoogste waarde van i - alle toestanden {\displaystyle q_{0}}q_{0} t/m {\displaystyle q_{i}}q_i horen per definitie tot de verzameling toestanden van {\displaystyle M^{+}}M^{+}
+Voor de symbolen geldt iets soortgelijks
+De transitiefunctie blijft de transitiefunctie
+Alle elementen van {\displaystyle \delta _{M^{+}}}\delta _{{M^{+}}} zijn afbeeldingen. Het domein van {\displaystyle \delta _{M^{+}}}\delta _{{M^{+}}} is een tuple van toestand en symbool, het bereik een triple van toestand, symbool en L of R - dat is de definitie van de transitiefunctie van een turingmachine. Het domein en bereik van ieder element van {\displaystyle \delta _{M^{+}}}\delta _{{M^{+}}} kunnen we echter ook opschrijven als een tupel van vijf elementen:
+
+{\displaystyle \{q_{i},k_{m}\}\rightarrow \{q_{j},k_{n},D\}}\{q_{i},k_{m}\}\rightarrow \{q_{j},k_{n},D\}
+wordt dan
+
+{\displaystyle (q_{i},k_{m},q_{j},k_{n},D)}(q_{i},k_{m},q_{j},k_{n},D).
+Ook deze vorm kunnen we weer omschrijven. In plaats van een tupel schrijven we alles dan aan elkaar als een "woord":
+
+{\displaystyle q_{i}k_{m}q_{j}k_{n}D}q_{i}k_{m}q_{j}k_{n}D.
+In deze vorm kunnen we de hele transitiefunctie {\displaystyle \delta _{M^{+}}}\delta _{{M^{+}}} aan elkaar schrijven, gescheiden door spaties of puntkomma's of iets dergelijks. Ten slotte kunnen we de hele transitiefunctie nog eens omschrijven, volgens de volgende regels:
+
+{\displaystyle q_{i}}q_i wordt 2 gevolgd door i 1'en
+{\displaystyle k_{i}}k_{i} wordt 3 gevolgd door i 1'en
+{\displaystyle L}L wordt 4
+{\displaystyle R}R wordt 5
+het scheidingsteken tussen de elementen van de transitiefunctie wordt 6
+Stel dat we in het voorbeeld hierboven i, j, m, n en D als volgt invullen:
+
+{\displaystyle q_{3}k_{3}q_{4}k_{7}R}q_{3}k_{3}q_{4}k_{7}R.
+Dan wordt de omgeschreven vorm
+
+{\displaystyle 21113111211113111111156}21113111211113111111156
+Op deze manier kunnen we de hele transitiefunctie omschrijven naar een natuurlijk getal.
+
+Deze omschrijving kan toegepast worden op iedere turingmachine. Op deze manier correspondeert iedere turingmachine een-op-een met een natuurlijk getal. De mogelijke turingmachines zijn dus isomorf met een deelverzameling van de natuurlijke getallen. En omdat iedere oneindige deelverzameling van de natuurlijke getallen (net als de natuurlijke getallen zelf) aftelbaar is, is het aantal berekenbare problemen ook aftelbaar.
+
+Tenminste, als de turingmachines werkelijk alle berekenbare problemen kunnen beschrijven.
+
+Bewijs van onbeslisbaarheid
+Met de bovenstaande kennis in de hand is er een simpel bewijs te geven dat het stopprobleem onbeslisbaar is.
+
+Ten eerste heb je een turingmachine nodig, die iedere transitiefunctie uit kan voeren (een universele Turing-machine). En een dergelijke machine bestaat. Turing geeft er in zijn artikel een complete beschrijving van, maar om het overzichtelijk te houden laten wij die beschrijving hier achterwege. Zij simpelweg gezegd dat het idee dit is: je neemt een turingmachine die gecodeerd is tot een getal zoals hierboven beschreven. Die zet je op de band. Op de band reserveer je ook ruimte voor een natuurlijk getal - hiermee wordt de toestand van de gecodeerde machine bijgehouden. De rest van de band is voor de invoer van de gecodeerde machine en om als kladruimte te gebruiken. De universele turingmachine speelt nu de gecodeerde turingmachine na op de gegeven invoer. Er is ruimte om de toestand bij te houden, de invoer staat op de band en de transities zijn uit de codering op te zoeken.
+
+Stel nu dat het mogelijk was om een machine B te maken, die het beslissingsprobleem beslist. Deze machine zou natuurlijk lijken op de bovenstaande, universele machine - machine B zou een paar {\displaystyle \langle {\mathit {TM}},s\rangle }\langle {\mathit  {TM}},s\rangle  als invoer meekrijgen, een gecodeerde turingmachine en de invoer daarvan. B zou dan TM naspelen op s en als volgt resultaat opleveren (we noteren even {\displaystyle B(\langle {\mathit {TM}},s\rangle )}B(\langle {\mathit  {TM}},s\rangle ) in de betekenis "het resultaat van het uitvoeren van B met invoer {\displaystyle \langle {\mathit {TM}},s\rangle }\langle {\mathit  {TM}},s\rangle "):
+
+{\displaystyle B(\langle {\mathit {TM}},s\rangle )=\left\{{\begin{array}{l}{\mbox{Als }}{\mathit {TM}}\ s{\mbox{ accepteert}}\rightarrow {\mbox{accepteer}}\\{\mbox{Als }}{\mathit {TM}}\ s{\mbox{ niet accepteert}}\rightarrow {\mbox{wijs af}}\end{array}}\right.}B(\langle {\mathit  {TM}},s\rangle )=\left\{{\begin{array}{l}{\mbox{Als }}{\mathit  {TM}}\ s{\mbox{ accepteert}}\rightarrow {\mbox{accepteer}}\\{\mbox{Als }}{\mathit  {TM}}\ s{\mbox{ niet accepteert}}\rightarrow {\mbox{wijs af}}\end{array}}\right.
+Merk op dat B afwijst als TM afwijst, maar ook als TM gewoon niet eindigt (hier zit overigens de kneep van het probleem).
+
+Stel dat we een dergelijk apparaat B hebben. Dan kunnen we B ook gebruiken om andere turingmachines te maken - we spelen gewoon na hoe B andere machines naspeelt. Op een dergelijke manier kunnen we bijvoorbeeld een specialistische machine {\displaystyle B^{+}}B^{+} bouwen, die als symboolrij s alleen maar beschrijvingen heeft van turingmachines:
+
+Zij M de codering van een turingmachine als hierboven. Dan
+{\displaystyle B^{+}(\langle {\mathit {TM}},M\rangle )=\left\{{\begin{array}{l}{\mbox{Als }}{\mathit {TM}}\ M{\mbox{ accepteert}}\rightarrow {\mbox{accepteer}}\\{\mbox{Als }}{\mathit {TM}}\ M{\mbox{ niet accepteert}}\rightarrow {\mbox{wijs af}}\end{array}}\right.}B^{+}(\langle {\mathit  {TM}},M\rangle )=\left\{{\begin{array}{l}{\mbox{Als }}{\mathit  {TM}}\ M{\mbox{ accepteert}}\rightarrow {\mbox{accepteer}}\\{\mbox{Als }}{\mathit  {TM}}\ M{\mbox{ niet accepteert}}\rightarrow {\mbox{wijs af}}\end{array}}\right.
+Of nog iets anders: machine {\displaystyle B^{*}}B^{*}, die precies het tegenovergestelde van {\displaystyle B^{+}}B^{+} doet:
+
+Zij M de codering van een turingmachine als hierboven. Dan
+{\displaystyle B^{*}(\langle {\mathit {TM}},M\rangle )=\left\{{\begin{array}{l}{\mbox{Als }}{\mathit {TM}}\ M{\mbox{ accepteert}}\rightarrow {\mbox{wijs af}}\\{\mbox{Als }}{\mathit {TM}}\ M{\mbox{ niet accepteert}}\rightarrow {\mbox{accepteer}}\end{array}}\right.}B^{*}(\langle {\mathit  {TM}},M\rangle )=\left\{{\begin{array}{l}{\mbox{Als }}{\mathit  {TM}}\ M{\mbox{ accepteert}}\rightarrow {\mbox{wijs af}}\\{\mbox{Als }}{\mathit  {TM}}\ M{\mbox{ niet accepteert}}\rightarrow {\mbox{accepteer}}\end{array}}\right.
+Op dit punt is het even belangrijk om goed door te hebben wat machine {\displaystyle B^{*}}B^{*} eigenlijk doet: deze machine geeft aan dat een turingmachine TM niet een beslisser is voor de codering van turingmachine M.
+
+Wat gebeurt er nu als we het resultaat {\displaystyle B^{*}(\langle B^{*},B^{*}\rangle )}B^{*}(\langle B^{*},B^{*}\rangle ) laten uitrekenen? We krijgen dan:
+
+{\displaystyle B^{*}(\langle B^{*},B^{*}\rangle )=\left\{{\begin{array}{l}{\mbox{Als }}B^{*}{\mbox{ }}B^{*}{\mbox{ accepteert}}\rightarrow {\mbox{wijs af}}\\{\mbox{Als }}B^{*}{\mbox{ }}B^{*}{\mbox{ niet accepteert}}\rightarrow {\mbox{accepteer}}\end{array}}\right.}B^{*}(\langle B^{*},B^{*}\rangle )=\left\{{\begin{array}{l}{\mbox{Als }}B^{*}{\mbox{ }}B^{*}{\mbox{ accepteert}}\rightarrow {\mbox{wijs af}}\\{\mbox{Als }}B^{*}{\mbox{ }}B^{*}{\mbox{ niet accepteert}}\rightarrow {\mbox{accepteer}}\end{array}}\right.
+Maar hierboven staat feitelijk: als {\displaystyle B^{*}}B^{*} een beslisser is voor de codering van {\displaystyle B^{*}}B^{*}, geef dan aan dat {\displaystyle B^{*}}B^{*} niet een beslisser is voor {\displaystyle B^{*}}B^{*}. En als {\displaystyle B^{*}}B^{*} niet een beslisser is voor {\displaystyle B^{*}}B^{*}, geef dan aan van wel. Oftewel: als {\displaystyle B^{*}}B^{*} een beslisser is voor {\displaystyle B^{*}}B^{*}, dan is {\displaystyle B^{*}}B^{*} niet een beslisser voor {\displaystyle B^{*}}B^{*}. En andersom.
+
+Dat is een tegenspraak. We hebben dus een machine {\displaystyle B^{*}}B^{*} ontdekt die tegelijkertijd wel en niet een beslisser moet zijn. En die machine konden we bouwen, omdat we aangenomen hadden dat we het stopprobleem konden beslissen. Die aanname is dus verkeerd.
+
+Conclusie: het stopprobleem is onbeslisbaar.
+
+Niet alles is herkenbaar
+Een herkenner voor een probleem P is een turingmachine die alle ja-instanties van het probleem herkent, maar niet noodzakelijk alle nee-instanties van het probleem afwijst. Gegeven een ja-instantie van P zal de herkenner altijd in de accepterende toestand eindigen, maar gegeven een nee-instantie mag de machine ofwel in de afwijzende toestand eindigen ofwel eindeloos door blijven lopen.
+
+De herkenners zijn een krachtigere (meer expressieve) klasse van turingmachines dan de beslissers; er zijn problemen (bijvoorbeeld het stopprobleem) die niet beslisbaar zijn, maar wel herkenbaar. De reden hiervoor is dat het acceptabel is dat een herkenner niet altijd een antwoord oplevert. Andersom geldt dat elk beslisbaar probleem ook herkenbaar is, omdat elke beslisser per definitie ook een herkenner is voor hetzelfde probleem.
+
+Hoewel sommige onbeslisbare problemen wel herkenbaar zijn, geldt dit niet voor alle problemen. Er bestaan problemen die niet herkenbaar zijn (en dus ook niet beslisbaar). We zullen dat nu aantonen.
+
+Elk probleem P heeft een complement, aangeduid met co-P. Het complement is het probleem waarvoor het antwoord altijd exact tegengesteld is. Dus elke ja-instantie van P is een nee-instantie van co-P en andersom.
+
+Stel nu dat we voor P een herkenner TMP hebben voor co-P een herkenner TMco-P. We kunnen die twee herkenners dan gebruiken om een beslisser voor P te bouwen:
+
+Laat de machines TMP en TMco-P gelijktijdig lopen op een eigen kopie van de invoer. Dit kan bijvoorbeeld door die machines om beurten een stap te laten doen. Ga naar de accepterende toestand zodra TMP de accepterende toestand bereikt, en ga naar de afwijzende toestand zodra TMco-P de accepterende toestand bereikt.
+Aangezien elke instantie van P ofwel een ja-instantie van P is ofwel een ja-instantie van co-P, zal een van de twee beslissers uiteindelijk de accepterende toestand bereiken. De hierboven geconstrueerde machine eindigt dus altijd, en ook altijd in precies de juiste toestand.
+
+Volgens bovenstaande constructie is het onmogelijk dat een onbeslisbaar probleem en het complement daarvan beiden herkenbaar zijn; we zouden dan immers een beslisser voor het probleem kunnen bouwen. Eerder hebben we al gezien dat er onbeslisbare problemen bestaan. Het bestaan van niet herkenbare problemen is daarmee aangetoond.
+
+Als voorbeeld nemen we weer het stopprobleem. Dit probleem is niet beslisbaar, maar wel herkenbaar. Daaruit volgt dat het complement van het stopprobleem niet herkenbaar kan zijn.
+
+Reductie
+Een belangrijk hulpmiddel bij het bepalen of een gegeven probleem berekenbaar is of niet, is de techniek van reductie.
+
+Een reductie van een probleem P naar een ander probleem Q is een formele manier om P uit te drukken in termen van Q, zodanig dat een oplossing voor Q ook gebruikt kan worden om P op te lossen. Enerzijds kun je zo'n reductie gebruiken om P op te lossen indien voor Q al een oplossing bekend is. Anderzijds, indien al bekend is dat P een onberekenbaar probleem is, kun je middels een reductie aantonen dat Q ook onberekenbaar is.
+
+Voor beslissingsproblemen wordt meestal gebruikgemaakt van many-one reducties. Een many-one reductie van P naar Q is een formule of regel die elke ja-instantie van P omvormt in een ja-instantie van Q, en elke nee-instantie van P in een nee-instantie van Q.
+
+Als voorbeeld beschouwen we het volgende probleem Q: Gegeven een turingmachine TMX, accepteert deze machine elke invoer?.
+
+We tonen aan dat dit probleem niet berekenbaar is door het stopprobleem naar Q te reduceren. Ter herinnering: een instantie van het stopprobleem <TMY, s> is een ja-instantie indien TMY stopt met invoer s, anders is het een nee-instantie. De reductie bestaat uit het construeren van een machine TMX met het volgende gedrag:
+
+Gooi de invoer van de band af, en zet de rij symbolen s ervoor in de plaats.
+Simuleer het gedrag van de machine TMY totdat deze zou stoppen. (Het is altijd mogelijk is om op deze manier een machine in een andere machine in te bouwen, maar het bewijs daarvan is nogal technisch.)
+Ga naar de accepterende toestand en stop.
+Indien <TMY, s> een ja-instantie is, zal TMX uiteindelijk in de accepterende toestand komen ongeacht de invoer (die immers in stap 1 weggegooid wordt). TMX accepteert dus elke invoer en is een ja-instantie van Q. Indien daarentegen <TMY, s> een nee-instantie is, zal de machine in stap 2 vast blijven zitten omdat de simulatie van TMY niet stopt. TMX stopt nooit, accepteert dus zeker niet elke invoer, en is daarmee een nee-instantie van Q.
+
+Stel nu dat we een oplossing voor het probleem Q hebben, dan kunnen we middels de beschreven reductie ook het stopprobleem oplossen. Van het stopprobleem is echter bewezen dat het onberekenbaar is, dus kan er ook voor het probleem Q geen oplossing bestaan.
+
+Reductie is niet alleen een belangrijk hulpmiddel bij berekenbaarheidsbepaling, maar ook bij het bepalen van de complexiteit van een probleem. Zo wordt bijvoorbeeld NP-volledigheid van een nieuw probleem meestal niet vanaf het begin bewezen, maar door een bekend NP-volledig probleem naar het nieuwe probleem te reduceren.

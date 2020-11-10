@@ -1,0 +1,163 @@
+De propositielogica is een tak van logica die zich bezighoudt met het redeneren met proposities. Proposities zijn uitspraken of beweringen die ofwel waar, ofwel onwaar zijn. Voorbeelden hiervan zijn
+
+De Winkler Prins is een encyclopedie
+en
+
+Wicky heeft een noormannenhelm op.
+In de propositielogica kunnen uitspraken alleen waar of onwaar zijn, dit in tegenstelling tot meerwaardige logica's waarbij uitspraken ook andere waarden kunnen hebben.
+
+In vergelijking met andere types van logica is de propositielogica eenvoudig van opbouw (structuur, grammatica) maar beperkt in uitdrukkingsmogelijkheid.
+
+
+Inhoud
+1	Informele inleiding
+2	Syntaxis en semantiek
+2.1	Formules
+2.2	Valuaties
+2.3	Geldigheid en vervulbaarheid
+2.4	Identiteitswet
+2.5	Waarheidstabellen
+3	Bewijssystemen
+3.1	Bewijssysteem in de stijl van Hilbert
+3.2	Semantische tableaus
+3.3	Natuurlijke deductie
+3.4	Resolutie
+4	Complexiteitstheorie
+Informele inleiding
+De propositielogica gaat over het redeneren met proposities. Een propositie is een uitspraak die waar of onwaar kan zijn. Proposities kunnen enkelvoudig zijn ("Morgen schijnt de zon" of "We gaan morgen picknicken"), maar ook zijn samengesteld uit twee of meer andere proposities met behulp van (logische) voegwoorden, in deze context connectieven (soms ook voegtekens) genoemd ("Morgen schijnt de zon en we gaan morgen picknicken", "Als morgen de zon schijnt, dan gaan we morgen picknicken.").
+
+In de propositielogica worden de volgende connectieven gebruikt om proposities samen te stellen:
+
+negatie (ontkenning): {\displaystyle \neg A}\neg A of ~{\displaystyle A}A (lees als: niet {\displaystyle A}A).
+conjunctie: {\displaystyle A\land B}A \land B (lees als: {\displaystyle A}A en {\displaystyle B}B).
+disjunctie: {\displaystyle A\lor B}A \lor B (lees als: {\displaystyle A}A of {\displaystyle B}B).
+implicatie (gevolgtrekking): {\displaystyle A\to B}A \to B (lees als: als {\displaystyle A}A dan {\displaystyle B}B).
+equivalentie (gelijkwaardigheid): {\displaystyle A\leftrightarrow B}A \leftrightarrow B (lees als: {\displaystyle A}A dan en slechts dan als {\displaystyle B}B).
+Verder is er één propositieconstante, falsum geheten en aangeduid met {\displaystyle \perp }\perp, dat staat voor een altijd onware propositie.
+
+In de propositielogica hangt de waarheid van samengestelde proposities alleen af van het gebruikte connectief en van de waarheid van de samenstellende delen. Zo is {\displaystyle A\land B}A \land B waar, als {\displaystyle A}A en {\displaystyle B}B beide waar zijn, terwijl {\displaystyle A\lor B}A \lor B waar is, als {\displaystyle A}A waar is, {\displaystyle B}B waar is, of zowel {\displaystyle A}A als {\displaystyle B}B waar zijn.
+
+Stel bijvoorbeeld dat {\displaystyle A}A voor de enkelvoudige propositie "Morgen schijnt de zon" staat, en {\displaystyle B}B voor "We gaan morgen picknicken". Dan geldt:
+
+{\displaystyle A\lor B}A \lor B is de uitspraak: Morgen schijnt de zon of we gaan morgen picknicken. Deze uitspraak is waar als morgen inderdaad de zon schijnt of als we gaan picknicken of allebei, en onwaar als morgen de zon niet schijnt en we ook niet gaan picknicken.
+{\displaystyle A\land B}A \land B is de uitspraak: Morgen schijnt de zon en we gaan morgen picknicken. Deze uitspraak is waar als morgen de zon schijnt en we ook gaan picknicken. Als de zon morgen niet schijnt, of als we niet gaan picknicken, of allebei (als de zon morgen niet schijnt en we niet gaan picknicken), is de uitspraak onwaar.
+{\displaystyle A\to B}A \to B is de uitspraak: Als morgen de zon schijnt, dan gaan we morgen picknicken. Aangezien de waarheid van deze uitspraak alleen mag afhangen van de waarheid van de samenstellende delen, vinden veel mensen de implicatie tegenintuïtief. Als de zon schijnt en we niet gaan picknicken, is de uitspraak uiteraard niet waar. In alle andere gevallen, als de zon niet schijnt, of als de zon wel schijnt en we ook gaan picknicken, is de uitspraak waar. Zo komen we tot de conclusie dat de uitspraak hetzelfde betekent als Morgen schijnt de zon niet of we gaan morgen picknicken
+{\displaystyle \neg A}\neg A is de uitspraak: Morgen schijnt de zon niet. Deze uitspraak is waar als de zon morgen niet schijnt, en onwaar als de zon dan wel schijnt.
+De bewering {\displaystyle A\lor B}A \lor B is waar als ten minste een van de twee beweringen waar is. De bewering is dus ook waar als beide beweringen waar zijn, iets wat in natuurlijke taal vaak niet zo bedoeld wordt. Dus er geldt:
+
+{\displaystyle (1=1)\lor (2=2)}{\displaystyle (1=1)\lor (2=2)} is waar,
+{\displaystyle (1=1)\lor (1=2)}{\displaystyle (1=1)\lor (1=2)} is waar, maar
+{\displaystyle (1=2)\lor (1>1)}{\displaystyle (1=2)\lor (1>1)} is niet waar.
+Hoewel waarheid een basisbegrip van de propositielogica is, richt ze zich ook vooral op geldigheid en onvervulbaarheid. Een propositie is geldig (een tautologie) als ze altijd waar is, onafhankelijk van welke waarheidswaarden aan de enkelvoudige proposities wordt toegekend. Zo is de propositie {\displaystyle (A\land B)\leftrightarrow \neg (\neg A\lor \neg B)}{\displaystyle (A\land B)\leftrightarrow \neg (\neg A\lor \neg B)} altijd waar. Een propositie is onvervulbaar als ze altijd onwaar is.
+
+Ook onderzoekt de logica de geldigheid van redeneerstappen. Als {\displaystyle A}A een ware propositie is en {\displaystyle A\to B}A \to B is dat ook, dan is {\displaystyle B}B eveneens een ware propositie. Dit geldt voor alle waarheidswaarden van {\displaystyle A}A en {\displaystyle B}B. Uit de premissen {\displaystyle A}A en {\displaystyle A\to B}A \to B kan dus de conclusie {\displaystyle B}B worden afgeleid. Deze redeneerregel wordt modus ponens genoemd.
+
+Syntaxis en semantiek
+Als men over propositielogica spreekt, heeft men het meestal over de klassieke propositielogica. Hieronder wordt de syntaxis en semantiek van deze logica gegeven.
+
+Formules
+Laat een aftelbaar oneindige verzameling van enkelvoudige proposities, ook propositievariabelen genoemd, gegeven zijn. Dan definiëren we de verzameling van formules als de kleinste verzameling waarvoor geldt:
+
+propositievariabelen: als {\displaystyle p}p een propositievariabele is, dan is {\displaystyle p}p ook een formule;
+conjunctie: als {\displaystyle A}A en {\displaystyle B}B formules zijn, dan is ook {\displaystyle (A\land B)}(A \land B) een formule;
+disjunctie: als {\displaystyle A}A en {\displaystyle B}B formules zijn, dan is ook {\displaystyle (A\lor B)}(A \lor B) een formule;
+negatie: als {\displaystyle A}A een formule is, dan is ook {\displaystyle \neg A}\neg A een formule.
+Bovendien definiëren we de volgende afkortingen:
+
+implicatie: {\displaystyle (A\to B)}(A \to B) betekent: {\displaystyle \neg A\lor B}\neg A \lor B.
+equivalentie: {\displaystyle (A\leftrightarrow B)}(A \leftrightarrow B) betekent: {\displaystyle (A\to B)\land (B\to A)}(A \to B) \land (B \to A).
+Bewerkingsvolgorde: We spreken af dat negatie ({\displaystyle \neg }\neg) het sterkste bindt, daarna conjunctie ({\displaystyle \land }\land), daarna disjunctie ({\displaystyle \lor }\lor), en daarna implicatie ({\displaystyle \to }\to ) en bi-implicatie ({\displaystyle \leftrightarrow }\leftrightarrow). Bovendien spreken we af dat de implicatie rechts-associatief is. Dat betekent dat we {\displaystyle p\to \neg q\to p\land \neg q}p \to \neg q \to p \land \neg q mogen schrijven in plaats van {\displaystyle (p\to (\neg q\to (p\land \neg q)))}(p \to (\neg q \to (p \land \neg q))).
+
+Valuaties
+Om de semantiek, dat wil zeggen de betekenis, van een formule te definiëren hebben we het begrip valuatie nodig. Een valuatie v is een functie die aan (een deel van) de propositievariabelen een waarheidswaarde, waar (1) of onwaar (0), toekent. Op basis van de waarheidswaarden van de propositievariabelen die in een formule voorkomen, kunnen we dan de waarheidswaarde van de volledige formule bepalen. Daarvoor breiden we het begrip valuatie uit zodat ook aan formules waarheidswaarden worden toegekend, en wel als volgt:
+
+{\displaystyle v(A\land B)={\begin{cases}1&{\mbox{als }}v(A)=1{\mbox{ en }}v(B)=1\\0&{\mbox{anders}}\end{cases}}}v(A \land B) = \begin{cases} 1 & \mbox{als } v(A)=1 \mbox{ en } v(B)=1 \\ 0 & \mbox{anders} \end{cases}
+{\displaystyle v(A\lor B)={\begin{cases}0&{\mbox{als }}v(A)=0{\mbox{ en }}v(B)=0\\1&{\mbox{anders}}\end{cases}}}v(A \lor B) = \begin{cases} 0 & \mbox{als } v(A)=0 \mbox{ en } v(B)=0 \\ 1 & \mbox{anders} \end{cases}
+{\displaystyle v(\neg A)={\begin{cases}0&{\mbox{als }}v(A)=1\\1&{\mbox{als }}v(A)=0\end{cases}}}v(\neg A) = \begin{cases} 0 & \mbox{als } v(A) = 1 \\ 1 & \mbox{als } v(A) = 0 \end{cases}
+Geldigheid en vervulbaarheid
+Een formule {\displaystyle A}A is vervulbaar als er ten minste één valuatie {\displaystyle v}v bestaat zodat {\displaystyle v(A)=1}{\displaystyle v(A)=1}. Een formule is onvervulbaar als ze niet vervulbaar is; dat wil zeggen, als er geen valuatie {\displaystyle v}v bestaat zodat {\displaystyle v(A)=1}{\displaystyle v(A)=1} is.
+
+Een formule {\displaystyle A}A is geldig (een is een tautologie) als voor alle valuaties {\displaystyle v}v geldt, dat {\displaystyle v(A)=1}{\displaystyle v(A)=1}. Een geldige formule wordt ook wel logische wet genoemd. Het feit dat een formule {\displaystyle A}A geldig is, wordt genoteerd als {\displaystyle \models A}\models A. Voorbeelden van geldige formules zijn:
+
+{\displaystyle A\to A}A \to A
+{\displaystyle (A\land B)\to (A\lor B)}(A \land B) \to (A \lor B)
+{\displaystyle A\lor \neg A}A \lor \neg A (wet van de uitgesloten derde; deze geldt bij de klassieke propositielogica, maar niet bij de intuitionistische propositielogica)
+{\displaystyle \neg (A\land B)\leftrightarrow (\neg A\lor \neg B)}\neg (A \land B) \leftrightarrow (\neg A \lor \neg B) en {\displaystyle \neg (A\lor B)\leftrightarrow (\neg A\land \neg B)}\neg (A \lor B) \leftrightarrow (\neg A \land \neg B) (de wetten van De Morgan)
+{\displaystyle (A\to B)\leftrightarrow (\neg B\to \neg A)}(A \to B) \leftrightarrow (\neg B \to \neg A) (contrapositie)
+Een gevolgtrekking heeft een aantal hypotheses en een conclusie. Een gevolgtrekking is geldig als in alle valuaties waarin de hypotheses waar zijn, de conclusie ook waar is. De notatie {\displaystyle A_{1},\ldots ,A_{n}\models B}A_1,\ldots,A_n \models B geeft aan, dat de gevolgtrekking met hypotheses {\displaystyle A_{1},\ldots ,A_{n}}A_1,\ldots,A_n en conclusie {\displaystyle B}B geldig is. In de klassieke propositielogica geldt {\displaystyle A_{1},\ldots ,A_{n}\models B}A_1,\ldots,A_n \models B dan en slechts dan als {\displaystyle (A_{1}\land \cdots \land A_{n})\to B}(A_1\land\cdots\land A_n)\to B geldig is.
+
+Twee formules {\displaystyle A}A en {\displaystyle B}B zijn logisch equivalent als {\displaystyle A}A en {\displaystyle B}B waar zijn in precies dezelfde valuaties. Dat betekent dat voor alle valuaties {\displaystyle v}v moet gelden, dat als {\displaystyle v(A)=1}{\displaystyle v(A)=1} is, dan ook {\displaystyle v(B)=1}{\displaystyle v(B)=1}, en dat als {\displaystyle v(B)=1}{\displaystyle v(B)=1} is, dan ook {\displaystyle v(A)=1}{\displaystyle v(A)=1}. In de klassieke propositielogica zijn {\displaystyle A}A en {\displaystyle B}B dan en slechts dan logisch equivalent, als {\displaystyle A\leftrightarrow B}A\leftrightarrow B een geldige formule is.
+
+Identiteitswet
+Zijn {\displaystyle F}F en {\displaystyle T}T proposities met {\displaystyle v(F)=0}{\displaystyle v(F)=0} en {\displaystyle v(T)=1}{\displaystyle v(T)=1}, dan is:
+
+{\displaystyle (A\lor F)\leftrightarrow A}{\displaystyle (A\lor F)\leftrightarrow A}
+{\displaystyle (A\land T)\leftrightarrow A}{\displaystyle (A\land T)\leftrightarrow A}
+Deze equivalenties vormen de identiteitswet van de propositielogica.
+
+Waarheidstabellen
+1rightarrow blue.svg Zie Waarheidstabel voor het hoofdartikel over dit onderwerp.
+Waarheidstabellen vormen een methode om te onderzoeken of een formule geldig of vervulbaar is. Bovendien kunnen waarheidstabellen worden gebruikt om uit te zoeken, of een gevolgtrekking geldig is en of twee formules logisch equivalent zijn. In een waarheidstabel worden alle mogelijkheden om aan de propositievariabelen waarheidswaarden toe te kennen opgesomd. Elke rij in de tabel correspondeert met een valuatie, terwijl elke kolom correspondeert met een formule. In de tabel wordt dan opgenomen of de formule onder de gegeven valuatie waar is of niet. Een voorbeeld van een waarheidstabel met enkele eenvoudige formules:
+
+{\displaystyle A}A	{\displaystyle B}B	{\displaystyle \neg A}\neg A	{\displaystyle A\land B}A \land B	{\displaystyle A\lor B}A \lor B	{\displaystyle A\to B}A \to B	{\displaystyle A\leftrightarrow B}A \leftrightarrow B
+0	0	1	0	0	1	1
+0	1	1	0	1	1	0
+1	0	0	0	1	0	0
+1	1	0	1	1	1	1
+Een formule is geldig, als er in de waarheidstabel alleen maar 1'en in de kolom eronder staan. De formule is vervulbaar als er minstens één 1 in de kolom staat. Zo blijkt uit de bovenstaande waarheidstabel dat {\displaystyle \neg A}\neg A, {\displaystyle A\land B}A \land B, {\displaystyle A\lor B}A \lor B, {\displaystyle A\to B}A \to B en {\displaystyle A\leftrightarrow B}A \leftrightarrow B alle vervulbaar maar niet geldig zijn.
+
+Een nadeel van een waarheidstabel bij het onderzoeken van een complexe logische stelling zoals A → (B ∧ ¬C) is dat het aantal mogelijke combinaties van de verschillende variabelen (hier A, B en C) exponentieel toeneemt met het aantal variabelen in de stelling. De waarheidstabel van een stelling met n variabelen telt 2n rijen. Voor een formule met 3 of zelfs 4 variabelen is dat met de hand nog wel te doen (de tabel telt 8 of 16 rijen), maar bij veel praktische toepassingen ontstaan formules die honderden of zelfs duizenden propositievariabelen bezitten. In zulke gevallen is het zelfs met de computer praktisch niet meer mogelijk de volledige waarheidstafel uit te rekenen, en moeten andere methoden worden gevonden om te beslissen of een formule geldig of vervulbaar is.
+
+Bewijssystemen
+In tegenstelling tot waarheidstabellen, waar de betekenis van de logische connectieven een belangrijke rol speelt, wordt in een bewijssysteem slechts gewerkt met syntactische constructies. Formules worden aan de hand van regels omgeschreven in andere formules totdat een bepaalde voorwaarde vervuld is en geconcludeerd wordt dat de formule geldig (of in sommige gevallen onvervulbaar) is. Belangrijke eigenschappen die een bepaald bewijssysteem moet hebben zijn correctheid (als een formule met het bewijssysteem bewezen kan worden is ze ook geldig) en volledigheid (als een formule geldig is kan ze ook bewezen worden).
+
+Voor de propositielogica bestaan verschillende correcte en volledige bewijssystemen.
+
+Bewijssysteem in de stijl van Hilbert
+Een bewijssysteem in de stijl van Hilbert bestaat uit een aantal axioma's en een aantal inferentieregels. Een bewijs in zo'n systeem is een eindig rijtje formules dat eindigt in de formule die bewezen moet worden, zo dat voor elk element van het rijtje geldt dat het ofwel een axioma is, ofwel door een inferentieregel volgt uit formules die eerder in het rijtje voorkomen (en daardoor al bewezen zijn). Anders dan de meeste andere bewijssystemen die met inferentieregels werken, zoals natuurlijke deductie, introduceren inferentieregels in een Hilbert-systeem geen aannames. Omdat daardoor de structuur van bewijssystemen in de stijl van Hilbert heel eenvoudig is, worden zulke bewijssystemen vaak gebruikt in de bewijstheorie, waar formele bewijzen niet alleen een manier zijn om de waarheid van uitspraken te bepalen, maar zelf ook het onderwerp van studie zijn. (Dat de structuur van een bewijssysteem eenvoudig is, betekent overigens niet dat het ook eenvoudig is een bewijs erin op te stellen.)
+
+Het bekendste Hilbert-bewijssysteem voor de propositielogica bevat de volgende inferentieregels:
+
+modus ponens: uit {\displaystyle A}A en {\displaystyle A\to B}A\to B volgt {\displaystyle B}B (hierbij staan {\displaystyle A}A en {\displaystyle B}B voor willekeurige propositielogische formules);
+uniforme substitutie: uit {\displaystyle A}A volgt {\displaystyle A[p/B]}A[p/B], de formule die ontstaat door in {\displaystyle A}A alle voorkomens van de propositie {\displaystyle p}p te vervangen door {\displaystyle B}B.
+Bovendien bevat het de volgende axioma's:
+
+P1: {\displaystyle p\to p}p \to p
+P2: {\displaystyle p\to (q\to p)}p \to (q \to p)
+P3: {\displaystyle (p\to (q\to r))\to ((p\to q)\to (p\to r))}(p \to (q \to r)) \to ((p \to q) \to (p \to r))
+P4: {\displaystyle (\neg p\to \neg q)\to (q\to p)}(\neg p \to \neg q) \to (q \to p)
+De bovenstaande axioma's zijn voldoende voor formules die alleen de logische connectieven {\displaystyle \to }\to  en {\displaystyle \neg }\neg bevatten. Voor formules die conjucties ({\displaystyle \land }\land) en disjuncties ({\displaystyle \lor }\lor) bevatten, kunnen we de volgende axioma's toevoegen:
+
+{\displaystyle p\to q\to (p\land q)}p \to q \to (p \land q)
+{\displaystyle (p\land q)\to p}(p \land q) \to p
+{\displaystyle (p\land q)\to q}(p \land q) \to q
+{\displaystyle p\to (p\lor q)}p \to (p \lor q)
+{\displaystyle q\to (p\lor q)}q \to (p \lor q)
+{\displaystyle (p\to r)\to (q\to r)\to (p\lor q)\to r}(p \to r) \to (q \to r) \to (p \lor q) \to r
+Het axioma P1 is eigenlijk niet nodig, omdat het op de volgende manier uit de axioma's P2 en P3 kan worden afgeleid:
+
+1.	{\displaystyle (p\to (q\to r))\to ((p\to q)\to (p\to r))}(p \to (q \to r)) \to ((p \to q) \to (p \to r))	(P3)
+2.	{\displaystyle (p\to (q\to p))\to ((p\to q)\to (p\to p))}(p \to (q \to p)) \to ((p \to q) \to (p \to p))	Universele subst. uit 2, {\displaystyle [r/p]}[r/p]
+3.	{\displaystyle p\to (q\to p)}p \to (q \to p)	(P2)
+4.	{\displaystyle (p\to q)\to (p\to p)}(p \to q) \to (p \to p)	Modus ponens uit 2, 3
+5.	{\displaystyle (p\to (q\to p))\to (p\to p)}(p \to (q \to p)) \to (p \to p)	Universele subst. uit 4, {\displaystyle [q/(q\to p)]}[q/(q \to p)]
+6.	{\displaystyle p\to p}p \to p	Modus ponens uit 3, 5
+Toch wordt P1 meestal wel in de axioma's van dit bewijssysteem opgenomen.
+
+Semantische tableaus
+1rightarrow blue.svg Zie Semantisch tableau voor het hoofdartikel over dit onderwerp.
+Een semantisch tableau onderzoekt een stelling door de implicaties van een stelling te ontleden. Als een stelling waar is, wat betekent dat voor de waarheidswaarde van de variabelen in de stelling? Als A∧B waar is, dan moeten zowel A als B waar zijn. Als A→B waar is, dan moeten A en B allebei waar zijn, of A is niet waar en de waarde van B maakt niet uit. Op deze manier kan een boom getekend worden die een complexe formule opsplitst in steeds kleinere delen, totdat duidelijk is welke waarden de variabelen aan moeten nemen om de stelling waar te maken. Semantische tableaus worden vaak gebruikt in combinatie met het bewijs uit het ongerijmde om te bewijzen dat een stelling volgt uit een aantal hypothesen.
+
+Natuurlijke deductie
+1rightarrow blue.svg Zie Natuurlijke deductie voor het hoofdartikel over dit onderwerp.
+Natuurlijke deductie is een door Gerhard Gentzen ontwikkeld bewijssysteem dat gebaseerd is op een natuurlijke manier van redeneren. Kenmerkend aan natuurlijke deductie is dat bewijzen een boomstructuur hebben, en dat aannames ingevoerd en weer teruggetrokken kunnen worden. Daardoor ontstaat een natuurlijke notie van deelbewijs. Elk logische connectief heeft een regel die vastlegt hoe gewenste conclusies die dit connectief als hoofdconnectief hebben bewezen kunnen worden (de zogenaamde introductieregels) en een regel die vastlegt hoe aannames die dit connectief als hoofdconnectief hebben kunnen worden gebruikt (de zogenaamde eliminatieregels).
+
+Resolutie
+1rightarrow blue.svg Zie Resolutie (logica) voor het hoofdartikel over dit onderwerp.
+Met de bewijsmethode resolutie kan van formules in conjunctieve normaalvorm de onvervulbaarheid worden aangetoond. Resolutie is gebaseerd op de geldige gevolgtrekking
+
+{\displaystyle (A\lor B_{1}\lor \ldots \lor B_{n})\land (\neg A\lor C_{1}\lor \ldots \lor C_{m})\models B_{1}\lor \ldots \lor B_{n}\lor C_{1}\lor \ldots \lor C_{m}}{\displaystyle (A\lor B_{1}\lor \ldots \lor B_{n})\land (\neg A\lor C_{1}\lor \ldots \lor C_{m})\models B_{1}\lor \ldots \lor B_{n}\lor C_{1}\lor \ldots \lor C_{m}}
+Er wordt geprobeerd door steeds deze gevolgtrekking toe te passen op de conjuncten van de formule de lege disjunctie af te leiden. Als dat is gelukt, is de formule niet vervulbaar. Resolutie wordt vaak toegepast in automatische stellingbewijzers.
+
+Complexiteitstheorie
+Het probleem om van een gegeven propositielogische formule uit te vinden of het vervulbaar is wordt het vervulbaarheidsprobleem genoemd (meestal afgekort tot SAT, van het Engelse satisfiability). SAT is beslisbaar. We kunnen namelijk voor elke formule automatisch de waarheidstabel opstellen en kijken of de formule in één rij daarvan waar is. Het aantal rijen in de waarheidstabel neemt echter exponentieel toe in verhouding met het aantal propositievariabelen dat in de formule voorkomt. Al voor een relatief klein aantal propositievariabelen is het in de praktijk niet meer mogelijk om de gehele waarheidstabel op te stellen. Aangezien SAT NP-volledig is bestaat er op dit moment geen algoritme dat van alle formules efficiënt kan achterhalen of ze vervulbaar zijn of niet. Er bestaan echter algoritmes die in de praktijk zeer goede resultaten boeken.

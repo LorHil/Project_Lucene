@@ -1,0 +1,30 @@
+De stelling van Rice is een belangrijke stelling in de theoretische informatica, meer in het bijzonder in de berekenbaarheidstheorie. Informeel zegt de stelling dat het onmogelijk is een algoritme te schrijven dat als invoer een ander algoritme en een bepaalde niet-triviale eigenschap krijgt en in alle gevallen correct beslist of het algoritme die eigenschap bezit. Uit de stelling volgt dat automatische verificatie van software in het algemeen niet mogelijk is.
+
+De stelling is genoemd naar de Amerikaanse logicus en wiskundige Henry Gordon Rice, die hem in 1954 in zijn proefschrift voor het eerst bewees.
+
+
+Inhoud
+1	Formele bewering
+2	Voorbeelden
+2.1	Voorbeeld 1
+2.2	Voorbeeld 2
+3	Gevolgen in de praktijk
+4	Literatuur
+Formele bewering
+Voor een woord {\displaystyle w}w noteren we de turingmachine die door {\displaystyle w}w wordt gecodeerd als {\displaystyle M_{w}}M_w. Laat {\displaystyle R}R de klasse van turingberekenbare partiële functies zijn, en een {\displaystyle S}S een deelverzameling daarvan zodat {\displaystyle S\neq \emptyset }{\displaystyle S\neq \emptyset } en {\displaystyle S\neq R}{\displaystyle S\neq R}. De stelling van Rice zegt dat de taal {\displaystyle \{w\mid M_{w}{\text{ berekent een functie uit }}S\}}{\displaystyle \{w\mid M_{w}{\text{ berekent een functie uit }}S\}} niet beslisbaar is.
+
+Behalve voor turingmachines geldt de stelling ook voor andere turingvolledige berekenmodellen.
+
+De eigenschappen van turingmachines waarover de stelling van Rice gaat, doen uitspraken over de soort functie die de turingmachine berekent. De stelling van Rice doet geen uitspraak over andere eigenschappen van turingmachines. Het aantal toestanden van een turingmachine kan men bijvoorbeeld gewoon tellen, de taal {\displaystyle \{w\mid M_{w}{\text{ heeft }}k{\text{ toestanden}}\}}{\displaystyle \{w\mid M_{w}{\text{ heeft }}k{\text{ toestanden}}\}} is (voor een constante {\displaystyle k}k) dus beslisbaar. Ook worden twee deelverzamelingen van berekenbare functies uitgesloten. Aangezien alle turingmachines een functie berekenen, bestaat {\displaystyle \{w\mid M_{w}{\text{ berekent een functie uit }}R\}}{\displaystyle \{w\mid M_{w}{\text{ berekent een functie uit }}R\}} uit alle turingmachines, en de verzameling van alle turingmachines is beslisbaar. Aan de andere kant geldt ook dat {\displaystyle \{w\mid M_{w}{\text{ berekent een functie uit }}\emptyset \}=\emptyset }{\displaystyle \{w\mid M_{w}{\text{ berekent een functie uit }}\emptyset \}=\emptyset } een beslisbare verzameling is.
+
+Voorbeelden
+Voorbeeld 1
+Laat {\displaystyle f_{0}}{\displaystyle f_{0}} de functie zijn die gedefinieerd is door {\displaystyle f_{0}(x)=0}f_0(x)=0 ({\displaystyle f_{0}}{\displaystyle f_{0}} is dus de constante 0-functie) en {\displaystyle S=\{f_{0}\}}{\displaystyle S=\{f_{0}\}}. Dan geldt dat {\displaystyle S\subseteq R}{\displaystyle S\subseteq R}, {\displaystyle S\neq \emptyset }{\displaystyle S\neq \emptyset } en {\displaystyle S\neq R}{\displaystyle S\neq R}. Uit de stelling van Rice volgt dus dat het onmogelijk is algoritmisch in alle gevallen te bepalen of een gegeven turingmachine de constante 0-functie berekent.
+
+Voorbeeld 2
+Laat {\displaystyle S}S uit alle totale functies bestaan. Dan is {\displaystyle S}S een niet-lege, echte deelverzameling van {\displaystyle R}R en dus volgt uit de stelling van Rice dat {\displaystyle \{w\mid M_{w}{\text{ berekent een totale functie}}\}}{\displaystyle \{w\mid M_{w}{\text{ berekent een totale functie}}\}} (dit is gelijk aan {\displaystyle \{w\mid M_{w}{\text{ termineert voor elke invoer}}\}}{\displaystyle \{w\mid M_{w}{\text{ termineert voor elke invoer}}\}}) niet beslisbaar is. Uit dit voorbeeld blijkt dat het feit dat het stopprobleem onbeslisbaar is direct uit de stelling van Rice volgt.
+
+Gevolgen in de praktijk
+De stelling van Rice heeft verstrekkende gevolgen in de praktijk. Het volgt namelijk uit de stelling dat het onmogelijk is een computerprogramma te schrijven dat in alle gevallen correct beslist of een programma aan een functionele specificatie voldoet. Dat betekent dat automatische softwareverificatie in het algemeen niet mogelijk is.
+
+Dit betekent echter niet dat automatische softwareverificatie geen interessant gebied is. Ten eerste geldt de stelling van Rice niet voor minder krachtige berekeningsmodellen. Die minder krachtige berekeningsmodellen kunnen in de praktijk toch krachtig genoeg zijn voor praktische toepassingen. Ten tweede is het wel mogelijk een programma te schrijven dat weliswaar niet in alle gevallen een correct antwoord levert, maar wel in een groot deel van de gevallen.

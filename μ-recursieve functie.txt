@@ -1,0 +1,33 @@
+In de theoretische informatica vormen de μ-recursieve functies een klasse van functies. De klasse is gedefinieerd als de klasse van functies die de basisfuncties bevat (de constante nulfunctie, de opvolgerfunctie en de projectiefuncties) en afgesloten is onder compositie, primitieve recursie en minimalisatie. De klasse van primitief recursieve functies vormen een onderklasse van de μ-recursieve functies. De μ-recursieve functies komen precies overeen met de berekenbare functies.
+
+
+Inhoud
+1	Definitie
+2	Voorbeelden
+3	Verband met andere klassen van functies
+4	Literatuur
+Definitie
+μ-recursieve functies zijn partiële functies op de natuurlijke getallen, de verzameling {\displaystyle \mathbb {N} =\{0,1,2,3,\ldots \}}\mathbb{N}=\{0,1,2,3,\ldots\}; het zijn functies die een of meer natuurlijke getallen als argumenten nemen en als functiewaarde ofwel een natuurlijk getal opleveren, ofwel niet gedefinieerd zijn.
+
+De klasse der μ-recursieve functies is als volgt inductief gedefinieerd:
+
+de constante 0-functie, dat wil zeggen de functie {\displaystyle c_{0}\colon \mathbb {N} \to \mathbb {N} }c_0\colon\mathbb{N}\to\mathbb{N} zodat {\displaystyle c_{0}(x)=0}c_0(x)=0, voor alle {\displaystyle x\in \mathbb {N} }x\in\mathbb{N}, is μ-recursief;
+de opvolgerfunctie {\displaystyle s\colon \mathbb {N} \to \mathbb {N} }s\colon\mathbb{N}\to\mathbb{N}, gedefinieerd als {\displaystyle s(x)=x+1}s(x)=x+1, is μ-recursief;
+voor elke {\displaystyle 0<j\leq k}0<j\leq k is de projectiefunctie {\displaystyle \pi _{j,k}\colon \mathbb {N} ^{k}\to \mathbb {N} }\pi_{j,k}\colon\mathbb{N}^k\to\mathbb{N}, gedefinieerd als {\displaystyle \pi _{j,k}(n_{1},\ldots ,n_{k})=n_{j}}\pi_{j,k}(n_1,\ldots,n_k) = n_j, μ-recursief;
+de compositie van μ-recursieve functies is μ-recursief;
+primitieve recursie: als {\displaystyle g\colon \mathbb {N} ^{k}\to \mathbb {N} }g\colon\mathbb{N}^k\to\mathbb{N} en {\displaystyle h\colon \mathbb {N} ^{k+2}\to \mathbb {N} }h\colon\mathbb{N}^{k+2}\to\mathbb{N} μ-recursieve functies zijn, dan is ook de functie {\displaystyle f\colon \mathbb {N} ^{k+1}\to \mathbb {N} }f\colon \mathbb{N}^{k+1}\to\mathbb{N} die gedefinieerd wordt als
+{\displaystyle {\begin{aligned}f(0,n_{1},\ldots ,n_{k})&=g(n_{1},\ldots ,n_{k})\\f(m+1,n_{1},\ldots ,n_{k})&=h(m,n_{1},\ldots ,n_{k},f(m,n_{1},\ldots ,n_{k}))\end{aligned}}}\begin{align}f(0,n_1,\ldots,n_k) &= g(n_1,\ldots,n_k) \\ f(m+1,n_1,\ldots,n_k) &= h(m,n_1,\ldots,n_k,f(m,n_1,\ldots,n_k))\end{align}
+μ-recursief.
+minimalisatie: als {\displaystyle f\colon \mathbb {N} ^{k+1}\to \mathbb {N} }f\colon\mathbb{N}^{k+1}\to\mathbb{N} een μ-recursieve functie is, dan is ook {\displaystyle \mu f\colon \mathbb {N} ^{k}\to \mathbb {N} }\mu f\colon\mathbb{N}^k\to\mathbb{N}, die als volgt gedefinieerd is:
+{\displaystyle \mu f(n_{1},\ldots ,n_{k})=\min\{m\mid f(n_{1},\ldots ,n_{k},m)=0{\text{ en voor alle }}m'<m{\text{ is }}f(n_{1},\ldots ,n_{k},m'){\text{ gedefinieerd}}\}}\mu f(n_1,\ldots,n_k) = \min\{m \mid f(n_1,\ldots,n_k,m) = 0 \text{ en voor alle } m'<m \text{ is } f(n_1,\ldots,n_k,m') \text{ gedefinieerd}\}
+μ-recursief. Hierbij is {\displaystyle \min \varnothing }\min\varnothing niet gedefinieerd.
+De minimalisatie {\displaystyle \mu f}\mu f van een functie {\displaystyle f(x,y)}f(x,y) is de kleinste waarde van {\displaystyle y}y zodat {\displaystyle f(x,y)=0}f(x,y)=0. Als het zo is dat {\displaystyle f(x,y)\neq 0}f(x,y)\neq 0 voor alle {\displaystyle y}y, dan is {\displaystyle \mu f(x)}\mu f(x) niet gedefinieerd.
+
+Voorbeelden
+Alle primitief recursieve functies zijn ook μ-recursief.
+In het bijzonder is de primitief recursieve functie {\displaystyle f(x,y)=1}f(x,y)=1 voor alle {\displaystyle x,y\in \mathbb {N} }x,y\in\mathbb{N} μ-recursief, want ze is de compositie van de opvolgerfunctie, de constante 0-functie en een projectiefunctie.
+De overal ongedefinieerde functie {\displaystyle \omega }\omega, met {\displaystyle \omega (x)}\omega(x) is niet gedefinieerd voor alle {\displaystyle x}x, is μ-recursief. Deze functie {\displaystyle \omega }\omega is gelijk aan de minimalisatie {\displaystyle \mu f}\mu f van {\displaystyle f}f (zie hierboven), omdat er geen {\displaystyle m}m bestaat zodat {\displaystyle f(x,m)=0}f(x, m) = 0. Dat wil zeggen: {\displaystyle \omega =\mu f}\omega=\mu f.
+Verband met andere klassen van functies
+De μ-recursieve functies komen precies overeen met de berekenbare functies. Dat wil zeggen dat er voor elke μ-recursieve functie een turingmachine bestaat die de functie berekent, en andersom, dat elke turingmachine een μ-recursieve functie berekent. Functies die niet berekenbaar zijn, zoals de busy beaver-functie, zijn daarom ook niet μ-recursief.
+
+De primitief recursieve functies vormen een echte onderklasse van de μ-recursieve functies. De klasse der μ-recursieve functies ontstaat als we de klasse der primitief recursieve functies onder minimalisatie afsluiten. Alle primitief recursieve functies zijn dus ook μ-recursief. Aan de andere kant bestaan er μ-recursieve functies die niet primitief recursief zijn, zoals de Ackermannfunctie.

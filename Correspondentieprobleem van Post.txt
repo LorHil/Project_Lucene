@@ -1,0 +1,41 @@
+Het correspondentieprobleem van Post (Engels: Post Correspondence Problem) is een onbeslisbaar probleem uit de theoretische informatica dat in 1946 door Emil Leon Post werd geformuleerd. Het wordt vaak gebruikt om de onbeslisbaarheid van andere problemen te bewijzen. Het probleem is ook bekend onder zijn (Engelse) afkorting: PCP.
+
+
+Inhoud
+1	Informele definitie
+2	Formele definitie
+3	Onbeslisbaarheid
+4	Literatuur
+Informele definitie
+Gegeven is een aantal stenen (een soort dominostenen) waarop boven en onder een rijtje letters staat. Het is de bedoeling de stenen zo aan elkaar te leggen, dat boven en onder hetzelfde woord staat. Hierbij hoeven niet alle stenen gebruikt te worden, en mogen stenen bovendien meerdere keren worden gebruikt.
+
+Beschouw bijvoorbeeld de volgende stenen:
+
+a
+aaa
+abaaa
+ab
+ab
+b
+Een oplossing voor het bovenstaande correspondentieprobleem is:
+
+abaaa	a	a	ab
+ab	aaa	aaa	b
+waar zowel boven als onder het woord "abaaaaaab" staat.
+
+Niet alle instanties van PCP hebben een oplossing. Dat is bijvoorbeeld het geval in het volgende voorbeeld, omdat er geen enkele steen geschikt is om als meest linkse steen te dienen:
+
+aa
+b
+bba
+babb
+ab
+aa
+Formele definitie
+Laat een eindige verzameling {\displaystyle \Sigma }\Sigma  (het alfabet) gegeven zijn. Een instantie van het PCP is een eindige rij {\displaystyle (x_{1},y_{1}),\ldots ,(x_{n},y_{n})}{\displaystyle (x_{1},y_{1}),\ldots ,(x_{n},y_{n})}, waarbij {\displaystyle (x_{i},y_{i})\in \Sigma ^{*}\times \Sigma ^{*}}{\displaystyle (x_{i},y_{i})\in \Sigma ^{*}\times \Sigma ^{*}} voor alle {\displaystyle 0<i\leq n}{\displaystyle 0<i\leq n}. Een oplossing voor een PCP-instantie is een eindige rij van indices, {\displaystyle i_{1},\ldots ,i_{k}}{\displaystyle i_{1},\ldots ,i_{k}}, zodat
+
+{\displaystyle x_{i_{1}}\ldots x_{i_{k}}=y_{i_{1}}\ldots y_{i_{k}}}{\displaystyle x_{i_{1}}\ldots x_{i_{k}}=y_{i_{1}}\ldots y_{i_{k}}}
+Het eerste voorbeeld hierboven wordt bijvoorbeeld gerepresenteerd door de rij {\displaystyle {\text{(a,aaa), (abaaa,ab), (ab,b)}}}{\displaystyle {\text{(a,aaa), (abaaa,ab), (ab,b)}}}. Een oplossing voor deze instantie is 2,1,1,3, omdat {\displaystyle x_{2}x_{1}x_{1}x_{3}={\text{abaaaaaab}}=y_{2}y_{1}y_{1}y_{3}}{\displaystyle x_{2}x_{1}x_{1}x_{3}={\text{abaaaaaab}}=y_{2}y_{1}y_{1}y_{3}}.
+
+Onbeslisbaarheid
+De vraag of een bepaalde PCP-instantie een oplossing heeft is niet beslisbaar. Dat betekent dat er geen algoritme bestaat dat in alle gevallen in eindige tijd kan beslissen, of een gegeven PCP-instantie een oplossing heeft. Dat kan bewezen worden door het stopprobleem naar PCP te reduceren. Hiervoor wordt uit een turingmachine een instantie van het PCP gegenereerd, die precies dan een oplossing heeft als de oorspronkelijke turingmachine termineert. Door deze reductie zou uit de beslisbaarheid van het PCP de beslisbaarheid van het stopprobleem volgen, maar aangezien het stopprobleem niet beslisbaar is, moet het PCP ook onbeslisbaar zijn.

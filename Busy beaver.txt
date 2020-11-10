@@ -1,0 +1,24 @@
+Een busy beaver met {\displaystyle n}n toestanden is een terminerende turingmachine die een zo groot mogelijk aantal stappen doet. De busybeaverfunctie wijst aan een getal {\displaystyle n}n het aantal stappen toe dat de busy beaver met {\displaystyle n}n toestanden doet. De busybeaverfunctie is een totale functie die niet berekenbaar is.
+
+Definitie
+Een busy beaver met {\displaystyle n}n toestanden is een turingmachine {\displaystyle M}M waarvoor het volgende geldt:
+
+{\displaystyle M}M heeft {\displaystyle n}n toestanden plus een eindtoestand;
+het bandalfabet van {\displaystyle M}M is {\displaystyle \{\Box ,1\}}{\displaystyle \{\Box ,1\}}, waarbij {\displaystyle \Box }{\displaystyle \Box } het blank-symbool is;
+als {\displaystyle M}M wordt aangezet met de lege band als invoer, termineert {\displaystyle M}M na een eindig aantal stappen;
+alle andere turingmachines met {\displaystyle n}n toestanden en een eindtoestand, die dezelfde bandalfabet hebben, termineren met de lege band als invoer na minder dan of even veel stappen als {\displaystyle M}M.
+De busybeaverfunctie is de wiskundige functie {\displaystyle S:\mathbb {N} \rightarrow \mathbb {N} }{\displaystyle S:\mathbb {N} \rightarrow \mathbb {N} } die gedefinieerd is als: {\displaystyle S(n)}S(n) is het aantal stappen dat de busy beaver met {\displaystyle n}n toestanden doet voordat hij stopt. Enkele waarden van {\displaystyle S(n)}S(n):
+
+{\displaystyle S(1)=1}{\displaystyle S(1)=1}
+{\displaystyle S(2)=6}{\displaystyle S(2)=6}
+{\displaystyle S(3)=21}{\displaystyle S(3)=21}
+{\displaystyle S(4)=107}{\displaystyle S(4)=107}
+{\displaystyle S(5)\geq 47176870}{\displaystyle S(5)\geq 47176870}
+{\displaystyle S(6)>10^{2879}}{\displaystyle S(6)>10^{2879}}
+Bewijs van niet-berekenbaarheid
+Hoewel de busybeaverfunctie voor alle invoerwaarden gedefinieerd is, is ze niet berekenbaar; dat wil zeggen dat er geen turingmachine bestaat die de busybeaverfunctie berekent.
+
+Om dit te bewijzen, doen we een bewijs uit het ongerijmde. Stel dat de busybeaverfunctie wel berekenbaar is. Dan bestaat er een turingmachine die deze functie berekent. Nu heeft men echter een oplossing voor het stopprobleem op lege band: gegeven een turingmachine {\displaystyle M}M met {\displaystyle n}n toestanden, dan kan men {\displaystyle S(n)}S(n) berekenen. We simuleren {\displaystyle M}M op een andere turingmachine en bekijken de toestand van {\displaystyle M}M na {\displaystyle S(n)}S(n) stappen. Is {\displaystyle M}M gestopt, dan weten we dus dat {\displaystyle M}M na een eindig aantal stappen stopt. Is {\displaystyle M}M dan nog niet gestopt, dan weten we zeker dat {\displaystyle M}M oneindig lang door zal gaan. Omdat {\displaystyle M}M willekeurig gekozen was, hebben we nu dus een oplossing gevonden voor het stopprobleem. Het stoppprobleem op lege band is, net als het eigenlijke stopprobleem, onbeslisbaar. Daarom hebben we nu een tegenspraak afgeleid, en moeten we concluderen dat de busybeaverfunctie niet berekenbaar is.
+
+Groeisnelheid
+Er bestaat geen berekenbare functie die sneller stijgt dan de busybeaverfunctie. We voeren weer een bewijs uit het ongerijmde. Neem aan dat er wel een berekenbare functie is die sneller stijgt dan de busybeaverfunctie, dan kan men die in plaats van de busybeaverfunctie gebruiken in het bovenstaande bewijs.

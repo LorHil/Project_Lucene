@@ -1,0 +1,33 @@
+In de theoretische informatica vormen de primitief recursieve functies een klasse van totale, berekenbare functies. De klasse is gedefinieerd als de kleinste klasse van functies die de basisfuncties (constante functies, opvolgerfunctie en projectie) bevat, en afgesloten is onder compositie en primitieve recursie. Alle primitief recursieve functies zijn totaal en berekenbaar, maar er bestaan totale en berekenbare functies die niet primitief recursief zijn, zoals de Ackermannfunctie. Als we de klasse van primitief recursieve functies ook onder minimalizering afsluiten, ontstaat de klasse van μ-recursieve functies, die wel precies met de berekenbare functies overeenkomt.
+
+
+Inhoud
+1	Definitie
+2	Voorbeelden
+3	Functies die niet primitief recursief zijn
+4	Literatuur
+Definitie
+Primitief recursieve functies zijn functies op de natuurlijke getallen, de verzameling {\displaystyle \mathbb {N} =\{0,1,2,3,\ldots \}}\mathbb{N}=\{0,1,2,3,\ldots\}; het zijn functies die een of meer natuurlijke getallen als argumenten nemen en als functiewaarde een natuurlijk getal opleveren.
+
+De klasse der primitief recursieve functies is als volgt inductief gedefinieerd:
+
+de constante 0-functie, dat wil zeggen de functie {\displaystyle f_{0}\colon \mathbb {N} \to \mathbb {N} }f_0\colon\mathbb{N}\to\mathbb{N} zodat {\displaystyle f_{0}(x)=0}f_0(x)=0, voor alle {\displaystyle x\in \mathbb {N} }x\in\mathbb{N}, is een primitief recursieve functie;
+de opvolgerfunctie {\displaystyle s\colon \mathbb {N} \to \mathbb {N} }s\colon\mathbb{N}\to\mathbb{N}, gedefinieerd als {\displaystyle s(x)=x+1}s(x)=x+1, is een primitief recursieve functie;
+voor elke {\displaystyle 0<j\leq k}0<j\leq k is de projectiefunctie {\displaystyle \pi _{j,k}\colon \mathbb {N} ^{k}\to \mathbb {N} }\pi_{j,k}\colon\mathbb{N}^k\to\mathbb{N}, gedefinieerd als {\displaystyle \pi _{j,k}(n_{1},\ldots ,n_{k})=n_{j}}\pi_{j,k}(n_1,\ldots,n_k) = n_j, een primitief recursieve functie;
+de compositie van primitief recursieve functies is primitief recursief;
+als {\displaystyle g\colon \mathbb {N} ^{k}\to \mathbb {N} }g\colon\mathbb{N}^k\to\mathbb{N} en {\displaystyle h\colon \mathbb {N} ^{k+2}\to \mathbb {N} }h\colon\mathbb{N}^{k+2}\to\mathbb{N} primitief recursieve functies zijn, dan is ook de functie {\displaystyle f\colon \mathbb {N} ^{k+1}\to \mathbb {N} }f\colon \mathbb{N}^{k+1}\to\mathbb{N} die gedefinieerd wordt als
+{\displaystyle {\begin{aligned}f(0,n_{1},\ldots ,n_{k})&=g(n_{1},\ldots ,n_{k})\\f(m+1,n_{1},\ldots ,n_{k})&=h(m,n_{1},\ldots ,n_{k},f(m,n_{1},\ldots ,n_{k}))\end{aligned}}}\begin{align}f(0,n_1,\ldots,n_k) &= g(n_1,\ldots,n_k) \\ f(m+1,n_1,\ldots,n_k) &= h(m,n_1,\ldots,n_k,f(m,n_1,\ldots,n_k))\end{align}
+primitief recursief. (Dit laatste heet primitieve recursie.)
+Het laatste geval, de primitieve recursie, kan worden gezien als een definitie van {\displaystyle f}f in twee gevallen: het basisgeval, als het eerste argument gelijk 0 is, wordt gegeven door de functie {\displaystyle g}g, terwijl het recursieve geval, als het eerste argument groter dan 0 is, wordt gegeven door de functie {\displaystyle h}h.
+
+Voorbeelden
+Voorbeelden van primitief recursieve functies zijn:
+
+Optellen
+{\displaystyle {\begin{aligned}{\mathit {plus}}(0,n)&=n\\{\mathit {plus}}(m+1,n)&=s({\mathit {plus}}(m,n))\end{aligned}}}\begin{align} \mathit{plus}(0,n) &= n \\ \mathit{plus}(m+1,n) &= s(\mathit{plus}(m,n)) \end{align}
+Vermenigvuldigen
+{\displaystyle {\begin{aligned}{\mathit {maal}}(0,n)&=0\\{\mathit {maal}}(m+1,n)&={\mathit {plus}}(n,{\mathit {maal}}(m,n))\end{aligned}}}\begin{align} \mathit{maal}(0,n) &= 0 \\ \mathit{maal}(m+1,n) &= \mathit{plus}(n, \mathit{maal}(m,n)) \end{align}
+Machtsverheffen
+{\displaystyle {\mathit {exp}}(n,m)={\mathit {exp}}'(m,n)}\mathit{exp}(n,m) = \mathit{exp}'(m,n), waarbij {\displaystyle {\mathit {exp}}'(0,n)=1}\mathit{exp}'(0,n) = 1 en {\displaystyle {\mathit {exp}}'(m+1,n)={\mathit {maal}}(n,{\mathit {exp}}'(m,n))}\mathit{exp}'(m+1,n) = \mathit{maal}(n,\mathit{exp}'(m,n))
+Functies die niet primitief recursief zijn
+De primitief recursieve functies vormen een onderklasse van de berekenbare functies; dat wil zeggen dat niet-berekenbare functies, zoals de busy beaver-functie, ook niet primitief recursief zijn. Aangezien het eerste argument van recursief gedefinieerde functies in de recursieve aanroep altijd wordt verlaagd, zijn primitief recursieve functies altijd totale functies. Dat wil zeggen dat berekenbare functies die niet overal gedefinieerd zijn niet primitief recursief kunnen zijn. Ten derde zijn er ook totale, berekenbare functies die niet primitief recursief zijn. Het bekendste voorbeeld van zo'n functie is de Ackermannfunctie.

@@ -1,0 +1,113 @@
+In de informatica is de turingmachine een model van berekening en berekenbaarheid, ontwikkeld door de wiskundige Alan M. Turing in zijn beroemde artikel "On computable numbers, with an application to the Entscheidungsproblem" uit 1936-37.
+
+De turingmachine is een uiterst eenvoudig mechanisme dat symbolen manipuleert en ondanks deze eenvoud kan men hiermee de logica van elke mogelijke computer simuleren. Hoewel technisch realiseerbaar (zo lang we willekeurige hoeveelheden band kunnen aanleveren) zijn deze machines niet bedoeld voor praktische computertechnologie, maar als een gedachte-experiment rond de limieten van mechanische berekeningen; ze worden dus niet echt gebouwd.
+
+
+Inhoud
+1	Het turingmechaniek
+1.1	Het concept
+1.2	Het formalisme
+2	Betekenis van de turingmachine
+3	Varianten op de basismachine en hun uitdrukkingskracht
+4	De turingmachine en de Von Neumann-cyclus
+5	Zie ook
+Het turingmechaniek
+De turingmachine is in principe een zeer eenvoudig apparaat dat niet meer kan dan in één stap twee verschillende waarden aanpassen. Dit mechanisme is waarschijnlijk in staat om elke berekening die kan worden beschreven uit te voeren.
+
+Het concept
+Een turingmachine bestaat uit twee onderdelen:
+
+Een halfoneindige band (met een begin, maar van oneindige lengte, dus zonder einde), onderverdeeld in oneindig veel vakjes. Op elk moment is echter slechts een eindig deel van deze band beschreven.
+Een apparaat met een lees/schrijfkop (een eindigetoestandsautomaat genaamd), dat de band kan lezen en erop kan schrijven.
+Turingmachine
+De turingmachine
+Het actieve gedeelte van de machine is de eindigetoestandsautomaat. Deze automaat bevindt zich altijd in één bepaalde toestand. Deze toestand is er een uit een eindige verzameling van toestanden en de automaat kan, volgens bepaalde regels, overgaan van de ene toestand in de volgende.
+
+De toestandsautomaat herhaalt (mogelijk een oneindig aantal malen) de volgende cyclus:
+
+(in een toestand P): Lees wat er op de band staat op de plaats waar de lees/schrijfkop nu staat—noem dit bandkarakter K.
+(nog steeds in toestand P): Zoek voor de combinatie (P, K) in de lijst van toestandsovergangen de combinatie (Q, K', D) op.
+(nog steeds in toestand P): Schrijf K' op de band in plaats van K; verplaats het lees/schrijfhoofd één positie in de richting D (links of rechts); ga over naar toestand Q.
+(in toestand Q):
+Als Q een accepterende toestand is, dan is de berekening klaar en is het goed -- stop dan;
+Als Q een afwijzende toestand is, dan kan er niet verder gerekend worden en is het verkeerd -- stop dan;
+Q is niet accepterend of afwijzend -- begin weer vooraan.
+Een berekening door een turingmachine begint altijd in een speciaal aangewezen toestand (de begintoestand) met de leeskop aan het begin van de band.
+
+Als voorbeeld van een berekening tonen wij het optellen van twee getallen. Deze getallen staan op de band vanaf het begin (aan de linkerkant). Ieder getal is een serie van tekens '1' (bijvoorbeeld 3 is '111'). De twee afzonderlijke getallen worden gescheiden door een teken '0'. Verder staat er niets op de band ('lege' tekens). We beginnen in een begintoestand Qb. Een programma om deze getallen op te tellen ziet er als volgt uit:
+
+Herhaal totdat we in accepterende of afwijzende toestand zijn:
+Lees het karakter van de band op de plaats van de kop.
+Is de toestand Qb:
+- Is dit karakter een '0' of '1', schrijf er dan een '1' voor in de plaats, verplaats de kop naar rechts en blijf in toestand Qb.
+- Is dit karakter 'leeg', schrijf er dan een 'leeg' karakter voor in de plaats, verplaats de kop naar links en ga naar toestand Q0.
+Is de toestand Q0:
+- Is dit karakter een '1', schrijf er dan een 'leeg' karakter voor in de plaats, verplaats de kop naar links en ga naar de accepterende toestand.
+- Is dit karakter een '0' of 'leeg', schrijf er dan een 'leeg' karakter voor in de plaats en ga naar de afwijzende toestand.
+Zoals hieronder gedemonstreerd, is dit een correcte optelling.
+
+2 + 3 = 5
+2 + 3 = 5
+Het formalisme
+Formeel gezien is een turingmachine TM een tupel van 7 elementen:
+
+TM = ({\displaystyle {\mathcal {Q}}}{\mathcal {Q}}, {\displaystyle \Sigma }\Sigma , {\displaystyle \Gamma }\Gamma , {\displaystyle \delta }\delta , {\displaystyle q_{0}}q_{0}, {\displaystyle q_{a}}q_{a}, {\displaystyle q_{r}}q_{r}) met
+{\displaystyle {\mathcal {Q}}}{\mathcal {Q}} een verzameling toestanden
+{\displaystyle \Sigma }\Sigma  een verzameling tekens, samen het invoeralfabet -- de invoer voor de berekening bestaat uit deze tekens
+{\displaystyle \Gamma =\Sigma \cup \{\_\}}\Gamma =\Sigma \cup \{\_\} het bandalfabet, alle tekens die op de band voor mogen komen -- dit is het invoeralfabet plus het speciale blanco karakter
+{\displaystyle \delta :{\mathcal {Q}}\times \Gamma \mapsto {\mathcal {Q}}\times \Gamma \times \{L,R\}}\delta :{\mathcal {Q}}\times \Gamma \mapsto {\mathcal {Q}}\times \Gamma \times \{L,R\}, de transitiefunctie die de toestandsovergangen, schrijfacties en kopbewegingen van de eindige automaat beschrijft
+{\displaystyle q_{0}\in {\mathcal {Q}}}q_{0}\in {\mathcal {Q}}, de begintoestand
+{\displaystyle q_{a}\in {\mathcal {Q}}}q_{a}\in {\mathcal {Q}}, de accepterende toestand
+{\displaystyle q_{r}\in {\mathcal {Q}}}q_{r}\in {\mathcal {Q}}, de afwijzende toestand
+Deze tupel vat de gehele automaat samen. De bewegingen van de eindige automaat zoals hierboven beschreven zijn vervat in de transitiefunctie {\displaystyle \delta }\delta .
+
+Deze automaat (de basisautomaat TM) is de simpelste TM-variant die er is. De band is standaard, enkelzijdig oneindig (vanaf de beginstand van de kop gaat de band maar in één richting oneindig door) en ze is deterministisch: voor ieder paar (toestand, bandsymbool) staat de transitie maar één triple toe als reactie van de automaat. Bestaat dit triple niet, dan loopt de automaat vast en heeft de berekening gefaald (als alternatief kan het ook verplicht zijn om iedere mogelijk paar op te nemen in de beschrijving, waarbij de "verkeerde" paren allemaal een toestandsovergang naar de afwijzende toestand veroorzaken).
+
+Merk op dat de beschrijving geen informatie bevat over de beginpositie van de kop: deze is standaard aan het begin.
+
+Als voorbeeld geven we de formalisering van onze "optellende automaat" van hierboven. Deze automaat is
+
+{\displaystyle TM_{+}=}TM_{+}=
+({\displaystyle {\mathcal {Q}}=\{q_{b},q_{0},q_{a},q_{r}\}}{\mathcal {Q}}=\{q_{b},q_{0},q_{a},q_{r}\},
+{\displaystyle \Sigma =\{'0','1'\}}\Sigma =\{'0','1'\},
+{\displaystyle \Gamma =\Sigma \cup \{\_\}}\Gamma =\Sigma \cup \{\_\},
+{\displaystyle \delta ={\begin{matrix}(q_{b},'1')\mapsto (q_{b},'1',R)\\(q_{b},'0')\mapsto (q_{b},'1',R)\\(q_{b},'\_')\mapsto (q_{0},'\_',L)\\(q_{0},'1')\mapsto (q_{a},'\_',L)\\(q_{0},'0')\mapsto (q_{r},'\_',L)\\(q_{0},'\_')\mapsto (q_{r},'\_',L)\end{matrix}}}\delta ={\begin{matrix}(q_{b},'1')\mapsto (q_{b},'1',R)\\(q_{b},'0')\mapsto (q_{b},'1',R)\\(q_{b},'\_')\mapsto (q_{0},'\_',L)\\(q_{0},'1')\mapsto (q_{a},'\_',L)\\(q_{0},'0')\mapsto (q_{r},'\_',L)\\(q_{0},'\_')\mapsto (q_{r},'\_',L)\end{matrix}}
+{\displaystyle q_{b}}q_{b},
+{\displaystyle q_{a}}q_{a},
+{\displaystyle q_{r}}q_{r})
+Merk op dat we nergens iets zeggen over wat er op de band moet staan of hoe of wat dit betekent (de machine begrijpt dat toch niet). Het enige dat van belang is voor de berekening is dat machine op een bepaalde manier reageert op de invoer, zolang deze invoer bestaat uit het invoeralfabet.
+
+Betekenis van de turingmachine
+Al sinds de introductie van de turingmachine in 1936 bestaat het vermoeden (onbewijsbaar) dat de turingmachine een perfect model van berekenbaarheid is. Dat wil zeggen dat alles dat mechanisch berekend kan worden, berekend kan worden door een turingmachine - en wat niet berekend kan worden door een turingmachine, is niet mechanisch berekenbaar.
+
+Mechanisch berekenbaar wordt normaal gesproken algoritmisch berekenbaar genoemd. Een probleem P is algoritmisch berekenbaar als er een algoritme, een stappenplan, bestaat dat het probleem oplost. Als er een turingmachine bestaat dat een probleem oplost, dan bestaat een dergelijk algoritme. En omgekeerd.
+
+Wat betekent het als een turingmachine een probleem oplost? Een probleem P wordt opgelost door een turingmachine als er een turingmachine TM is die P beslist: voor iedere instantie van P (iedere invoer die een voorbeeld is van probleem P), eindigt de TM in de accepterende of afwijzende toestand. Een dergelijke turingmachine TM heet een beslisser voor probleem P.
+
+Daarnaast kennen we ook het concept van een herkenner voor P. Dit is een turingmachine die, voor iedere instantie van P, weliswaar niet vastloopt maar verder voor die instantie ook niet de accepterende of afwijzende toestand hoeft te bereiken. Een herkenner kan dus ook een oneindig lange berekening uitvoeren. Dit noemen we over het algemeen geen oplossing van P.
+
+Het bestaan van de turingmachine als model betekent dat wiskundigen kunnen nadenken over wat wel en niet berekenbaar is en hoe moeilijk klassen van problemen zijn om op te lossen (dit heet de complexiteit van een probleem).
+
+Sinds 1936 is bewezen dat er problemen zijn die niet turing-oplosbaar zijn (er kan geen beslisser voor bestaan). Een voorbeeld is het halting problem of stopprobleem. Ook is bewezen dat er problemen zijn die niet turing-herkenbaar zijn (er kan geen herkenner voor zijn).
+
+Merk overigens op dat het feit dat een probleem niet turing-oplosbaar is, niet betekent dat instanties van dat probleem geen oplossingen hebben. Het betekent wel dat er geen turingmachine bestaat die elke instantie van het probleem kan oplossen.
+
+Varianten op de basismachine en hun uitdrukkingskracht
+Sinds 1936 hebben onderzoekers gekeken naar zeer veel verschillende varianten van het turingmodel van berekenbaarheid en naar wat hun aanpassingen betekenden voor de beslissingskracht van de nieuwe machines.
+
+Voor de meeste varianten geldt dat de beslissingskracht niet verandert, omdat die varianten gesimuleerd kunnen worden op een "normale" turingmachine. Voorbeelden hiervan zijn turingmachines met meerdere banden (en koppen), turingmachines met één band met meerdere koppen (de parallelle machines, die gesimuleerd kunnen worden door iedere band te verplaatsen naar een eigen sectie van de band op een "normale" machine), machines met meerzijdig oneindige banden (zet de invoer in het midden van de "normale" band en laat de turingmachine beginnen met de band door te spoelen tot aan de invoer) en meer van die veranderingen.
+
+Een variant die niet krachtiger is, maar wel een bijzonder effect heeft is de non-deterministische turingmachine (de functie {\displaystyle \delta }\delta  verbindt ieder paar (toestand, teken) dan aan één of meer triples (toestand, teken, richting). Deze non-deterministische machine (NDTM) kan gesimuleerd worden door op de "normale" turingmachine alle mogelijke berekeningen van NDTM parallel aan elkaar uit te voeren. Eindigt een van de mogelijke berekeningen van NDTM in een accepterende toestand, dan komt de "normale" machine hem tegen. Dit maakt de "normale" machine wel extreem langzamer dan de NDTM: een TM die equivalent is aan een NDTM heeft voor dezelfde invoer als die NDTM, bestaande uit n tekens, {\displaystyle 2^{2^{n}}}2^{2^{n}} zoveel stappen als de NDTM nodig om de berekening uit te voeren.
+
+Een andere variant op de turingmachine is de enumerator: dit is een turingmachine met een "printer", die uitvoerstrings kan genereren als "bewijs" van berekening.
+
+Een andere variant is die met een eindige band. Dit is nauwelijks een turingmachine meer: een dergelijke machine is volledig equivalent met een standaard eindigetoestandsautomaat.
+
+Ten slotte is de variant opmerkenswaardig waarin de band weliswaar oneindig is, maar de machine alleen dat stuk mag gebruiken waar de invoer op stond. Deze machine beschrijft een klasse van problemen en formele talen bekend als de contextgevoelige talen.
+
+De turingmachine en de Von Neumann-cyclus
+De turingmachine heeft op twee manieren direct invloed gehad op de ontwikkeling van de computer en de informatica.
+
+Om te beginnen was het turingmodel een inspiratie voor de wiskundige John von Neumann, die naar een manier zocht om de eerste computers bruikbaar te maken. Naar aanleiding van Turings machine ontwikkelde hij de Von Neumann-cyclus, een cyclus van handelingen die het mogelijk maakt een elektronisch apparaat precies te laten doen wat een turingmachine doet.
+
+Daarnaast is de turingmachine het begin van een tak van wiskunde en informatica die vanuit formele specificaties van een probleem een programma afleidt dat het probleem oplost. Deze oplossingsstrategie (ontwikkeld door Tony Hoare, Edsger Dijkstra en anderen) gebruikt predicatencalculus om de stappen uit te rekenen die nodig zijn om een turingautomaat van de ene toestand naar een volgende te krijgen (maar niet om direct de stappen uit te rekenen die van de begintoestand tot de accepterende toestand leiden – dat probleem is niet turing-oplosbaar).

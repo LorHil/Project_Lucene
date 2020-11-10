@@ -1,0 +1,82 @@
+Een robotarm schrijft tekst op papier - de bewegingen worden berekend met verscheidene algoritmen.
+In robotica is bewegingsplanning (Engels: motion planning) het plannen van een beweging door het op te delen in kleinere bewegingen. Voorbeelden zijn het bewegen van een robotarm, het manipuleren van voorwerpen of het vinden van een pad van A naar B. Op het gebied van bewegingsplanning bestaan allerlei algoritmen die voor een gegeven probleem de informatie berekenen die nodig is om een beweging uit te kunnen voeren, bijvoorbeeld welk pad er gevolgd moet worden. Deze informatie kan vervolgens gebruikt worden om de motoren van de robot aan te sturen.
+
+Bewegingsplanning heeft toepassingen in de robotica, fotogrammetrie, de automatisering en het ontwerpen van robots met CAD-software maar ook andere gebieden, zoals het animeren van personages in virtuele werelden (zoals computerspellen), robotchirurgie, het ontwerpen van architectuur en het bestuderen van moleculen in de bio-informatica.
+
+
+Inhoud
+1	Overzicht
+2	Techniek
+2.1	Configuratieruimte
+2.2	Algoritmen
+2.2.1	Met sampling
+2.2.2	Geometrische algoritmen
+2.2.3	Virtual force field
+3	Kenmerken van een algoritme
+4	Externe links
+Overzicht
+Onder bewegingsplanning vallen onder andere de volgende problemen:
+
+Het vinden van een pad van A naar B (Engels: path finding) zonder voorwerpen te raken (Engels: collision detection)
+Het bewegen van een robotarm
+Het oppakken van voorwerpen
+Het immobiliseren van voorwerpen (zodat deze niet meer kunnen bewegen, vaak voor productieprocessen)
+Het manipuleren van voorwerpen (zodat deze bijvoorbeeld allemaal in dezelfde oriëntatie liggen op een lopende band)
+Er bestaan ook allerlei varianten op de genoemde problemen waarbij men rekening moet houden met extra beperkingen, zoals een robot die alleen vooruit kan rijden of bewegende voorwerpen in de omgeving. Daarnaast kan men te maken hebben met onzekerheden, zoals ontbrekende informatie.
+
+Techniek
+
+Voorbeeld van een werkruimte.
+
+Configuratieruimte voor een puntrobot die kan bewegen. Wit = Cfree, grijs = Cobs
+
+Configuratieruimte voor een rechthoekige robot die kan bewegen (het rode vlak). Wit = Cfree, grijs = Cobs (donkergrijs = de objecten, lichtgrijs = configuraties waarbij de robot een object zou raken of de werkruimte zou verlaten).
+Het vinden van een pad van A naar B zonder objecten in de omgeving te raken is een veelvoorkomend probleem binnen bewegingsplanning. Dit probleem heeft allerlei instanties, zoals een fysieke of virtuele robot die zich moet verplaatsen maar ook de bewegingen van atomen in een molecuul.
+
+Configuratieruimte
+1rightarrow blue.svg Zie Configuratieruimte voor het hoofdartikel over dit onderwerp.
+De omgeving van een robot wordt de werkruimte (Engels: workspace) genoemd, bijvoorbeeld een tweedimensionaal vlak of een driedimensionale ruimte. Om een pad te vinden wordt een configuratieruimte gebruikt, een ruimte waarin alle mogelijke locaties en oriëntaties van de robot (of het te bewegen voorwerp) worden gerepresenteerd. Een mogelijke toestand (een locatie of oriëntatie) wordt een configuratie genoemd.
+
+Een robot die zich over een tweedimensionaal vlak kan voortbewegen heeft bijvoorbeeld een configuratie die bestaat uit twee variabelen, (x, y). Als de robot zich ook kan ronddraaien dan bestaat de configuratie uit drie variabelen (x, y, θ). De bijbehorende configuratieruimten bestaan dus uit alle toegestane waarden voor deze variabelen. Het aantal dimensies van de configuratieruimte hangt dus af van de kenmerken van de werkruimte en van de robot.
+
+De objecten in de omgeving van de robot zorgen ervoor dat niet alle configuraties in de configuratieruimte geldig zijn: op bepaalde configuraties zal de robot namelijk in contact komen met een voorwerp in de werkruimte. De configuratieruimte is dus op te delen in twee delen: een toegankelijk deel, waar de robot wel kan komen, en een ontoegankelijk deel, waar de robot niet kan komen. Deze delen worden aangeduid met Cfree en Cobs (van obstacles).
+
+Het vinden van een pad in werkruimte W bestaat nu uit het vinden van een startconfiguratie s naar een doelconfiguratie g in Cfree, het vrije deel van configuratieruimte C.
+
+Algoritmen
+Er bestaan allerlei algoritmen om een pad te vinden in het toegankelijke deel van de configuratieruimte.
+
+Met sampling
+
+Voorbeeld van een routekaart (zwart = routekaart, rood = gevolgde pad via routekaart).
+Deze groep algoritmen maakt gebruik van samples: er worden configuraties uitgekozen (willekeurig of volgens een bepaald criterium) die als knoop worden toegevoegd aan een graaf. In deze graaf worden twee knopen met elkaar verbonden als er een (eenvoudig) pad bestaat tussen de bijbehorende configuraties. Door telkens configuraties te kiezen en deze, indien mogelijk, te verbinden met andere configuraties wordt een graaf opgebouwd die verbindingen tussen de configuraties weergeeft. Deze graaf wordt ook de routekaart (Engels: road map) genoemd.
+
+Deze routekaart dient als een snelwegnetwerk in een land waarbij men overal kan komen door eerst naar de snelweg te reizen, vervolgens via de snelweg te reizen tot een plek dicht bij de bestemming en vervolgens nog een laatste stuk om bij de bestemming te komen. Bij dit soort sampling-algoritmen kan men van een startconfiguratie naar een doelconfiguratie komen door eerst een pad te vinden naar de routekaart, vervolgens de configuraties van de routekaart te volgen en vervolgens via een pad naar de doelconfiguratie te komen. Om een pad te vinden in de routekaart kan men algoritmen als het A*-algoritme of het kortstepadalgoritme gebruiken.
+
+Deze algoritmen werken goed voor configuratieruimten met hoge dimensionaliteit aangezien de looptijd van het algoritme niet (expliciet) afhangt van het aantal dimensies van de configuratieruimte.
+
+Hoe meer configuraties gekozen worden, hoe groter de graaf wordt en hoe groter het deel van Cfree dat men kan bereiken via de routekaart (en eenvoudige paden van en naar deze routekaart). De kans dat een pad gevonden wordt, nadert 1 als er meer samples gekozen worden. Deze algoritmen kunnen niet garanderen dat een pad gevonden wordt als het bestaat: als er geen pad gevonden wordt dan kan het zijn dat het niet bestaat maar het kan ook zijn dat er niet voldoende samples gekozen zijn.
+
+In computerspellen wordt ook gebruikgemaakt van een routekaart voor het verplaatsen van de voertuigen of personages. In dit geval worden de samples niet gekozen maar aangegeven in het level door de level designer in de leveleditor. In deze context wordt geen gebruik gemaakt van een configuratieruimte maar alleen van een graaf met knopen die bepaalde punten in het level voorstellen. Deze punten worden ook waypoints genoemd. Een graafalgoritme wordt nu gebruikt om een pad te vinden van de ene plek naar een andere plek in het level. Om te voorkomen dat voertuigen of personages in elkaar terechtkomen, wordt botsingdetectie gebruikt.
+
+Geometrische algoritmen
+
+Voorbeeld van een geldig pad door een configuratieruimte.
+
+Voorbeeld van een ongeldig pad door een configuratieruimte (Cobs wordt meerdere malen betreden).
+Deze groep algoritmen maakt gebruik van geometrische technieken om een pad te vinden, zoals de Minkowski-som en het decomposeren van Cfree in cellen.
+
+Het idee achter celdecompositie is dat men eenvoudig een pad kan vinden tussen naast elkaar gelegen cellen en tussen configuraties binnen een cel. Vaak duidt men binnen een cel een centraal punt aan om het aantal configuraties te beperken. Op deze manier kan men een pad construeren van een start- naar een doelconfiguratie door eerst van de startconfiguratie naar het centrale punt van de cel te bewegen, vervolgens van cel naar cel een pad te volgen naar de cel van de doelconfiguratie en vervolgens vanaf het centrale punt in de cel van de doelconfiguratie naar de doelconfiguratie te bewegen.
+
+Er bestaan allerlei technieken voor celdecompositie: men kan Cfree opdelen volgens een bepaalde datastructuur (zoals een rooster, octree of een kd-tree) of door gebruik te maken van kenmerken van de objecten (door bijvoorbeeld bij elke hoek van een object een cel te laten beginnen). Voorbeelden hiervan zijn verticale celdecompositie en cilindrische celdecompositie.
+
+Bij het opdelen van Cfree met een rooster (punten verspreid over de configuratieruimte) tracht men een pad te vinden door van punt naar punt een pad te vinden. Het aantal punten groeit echter exponentieel wanneer het aantal dimensies van de configuratieruimte groter wordt. Deze aanpak is dus niet geschikt voor configuratieruimten met hoge dimensionaliteit.
+
+Virtual force field
+1rightarrow blue.svg Zie Virtual force field-algoritme voor het hoofdartikel over dit onderwerp.
+Het virtual force field-algoritme creëert een krachtenveld waarbij de doelconfiguratie de robot 'aantrekt' en de objecten een repulsieve kracht uitoefenen op de robot. Op deze manier wordt de robot gestuurd naar de doelconfiguratie, indien mogelijk.
+
+Kenmerken van een algoritme
+Een algoritme voor bewegingsplanning is compleet als het altijd een pad vindt als het bestaat. De meeste bewegingsplanningalgoritmen die compleet zijn maken gebruik van geometrische technieken. Een algoritme is incompleet als het niet altijd een pad vindt als het bestaat.
+
+Een algoritme is probablistisch compleet als de kans dat een bestaand pad niet gevonden wordt naar 0 daalt als het algoritme langer wordt uitgevoerd. Anders gezegd, de kans dat een bestaand pad wordt gevonden nadert 1 als het algoritme langer wordt uitgevoerd.

@@ -1,0 +1,38 @@
+De computationele leertheorie is een onderdeel van de theoretische informatica waarin algoritmes die gebruikt worden in het machinaal leren worden geanalyseerd.
+
+
+Inhoud
+1	Overzicht
+2	Zie ook
+3	Bibliografie
+3.1	Onderzoeken
+3.2	VC theorie
+3.3	Feature selection
+3.4	Inductieve gevolgtrekking
+3.5	Leren van Optimale O notatie
+3.6	Negatieve resultaten
+3.7	Boosting
+3.8	Ockhams scheermes
+3.9	Probably approximately correct learning
+3.10	Foutentolerantie
+3.11	Equivalentie
+4	Externe links
+Overzicht
+Binnen de computationele leertheorie wordt voornamelijk onderzoek gedaan naar een manier van inductief leren die supervised learning wordt genoemd. Bij supervised learning krijgt een algoritme voorbeelden (samples), die door de supervisor op een bepaalde bruikbare manier worden gelabeld. De samples kunnen bijvoorbeeld beschrijvingen van paddenstoelen zijn, en de labels kunnen aangeven of de paddenstoelen eetbaar zijn of niet. Het algoritme leidt een classificatiefunctie af uit de eerder gelabelde samples. Deze classificatiefunctie kent etiketten toe aan samples, inclusief samples die het algoritme nog nooit eerder is tegengekomen. Het doel van een algoritme voor supervised leren is om de prestatie op een bepaald gebied te optimaliseren, bijvoorbeeld het minimaliseren van het aantal fouten dat gemaakt wordt bij nieuwe samples.
+
+Computationele leertheoretici bestuderen, naast de grenzen van algoritmes voor machinaal leren, ook de tijdscomplexiteit en de haalbaarheid van het leren. In de computationele leertheorie wordt een berekening als haalbaar beschouwd als het in de polynomiale tijd uitgevoerd kan worden. Er zijn twee soorten resultaten bij tijdscomplexiteit:
+
+positieve resultaten laten zien dat een klasse van functies in polynomiale tijd kan worden geleerd;
+negatieve resultaten laten zien dat een klasse van functies niet in in polynomiale tijd kan worden geleerd.
+Negatieve resultaten hangen meestal af van veronderstellingen. Veel voorkomende veronderstellingen bij negatieve resultaten zijn:
+
+Computationele complexiteit: P ≠ NP
+Cryptografie - eenrichtingsfuncties bestaan.
+Er bestaan verschillende methodes in de computationele leertheorie. Ze verschillen in de veronderstellingen over de principes van gevolgtrekking die worden gebruikt om algemene conclusies te trekken op basis van een beperkt aantal gegevens. Hiertoe behoren de gebruikte vorm van kansrekening (bijvoorbeeld frequentistische kansrekening en Bayesiaanse kansrekening) en de verschillende veronderstellingen over de productie van samples. Voorbeelden van de verschillende benaderingen zijn:
+
+probably approximately correct learning (PAC-leren), ontwikkeld door Leslie Valiant;
+VC-theorie, ontwikkeld door Vladimir Vapnik;
+Bayesiaanse statistiek, ontstaan uit onderzoek dat werd begonnen door Thomas Bayes.
+algoritmische leertheorie, ontwikkeld door E.M. Gold;
+Online machinaal leren, ontwikkeld door Nick Littlestone.
+De computationele leertheorie heeft een aantal praktische algoritmes opgeleverd. Op basis van de PAC-theorie ontstond bijvoorbeeld boosting, de VC-theorie leverde support vector machines op en met behulp van de Bayesiaanse statistiek ontwikkelde Judea Pearl probabilistische netwerken.

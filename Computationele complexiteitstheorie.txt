@@ -1,0 +1,47 @@
+Computationele complexiteitstheorie is een tak van theoretische informatica en wiskunde die als doel heeft computationele problemen te classificeren in een aantal categorieën die de inherente moeilijkheidsgraad van deze problemen aangeven. Een computationeel probleem is een probleem dat door een computer kan worden opgelost. Een voorbeeld van een probleem dat computationeel is, is de vraag of een getal wel of niet priem is. Dit kan worden bepaald door middel van een priemgetaltest. Een probleem wordt gezien als inherent moeilijk, als het voor alle denkbare algoritmes veel tijd of geheugen in beslag neemt. Computationele complexiteitstheorie beschrijft dus de praktische limieten van computers.
+
+
+Inhoud
+1	Geschiedenis
+2	Computationele problemen
+2.1	Probleemgevallen
+2.2	Beslissingsproblemen
+2.3	Grootte van probleemgevallen
+3	Modellen en maatstaven van complexiteit
+3.1	Turingmachine
+4	Zie ook
+Geschiedenis
+De complexiteitstheorie is ontstaan in de jaren 20 en 30 van de 20e eeuw. Die decennia vormden het hoogtepunt van een enorme "groeispurt" in de wiskunde, die begonnen was rond 1870. De wiskunde had zichzelf sindsdien getransformeerd van een verzameling losse rekentechnieken tot een abstracte wetenschap, een geheel van principes, axioma's, taalstructuren en filosofische inzichten. Achtereenvolgende publicaties van Peano, Dedekind, Frege, Whitehead en Russell hadden een geheel van theorie en begrip opgebouwd waardoor het leek of er aan de mogelijkheden geen einde zou komen.
+
+Aan het begin van de 20e eeuw vond de wiskunde echter haar eigen limieten, in de vorm van het werk van Gödel, die bewees dat in iedere theorie van voldoende complexiteit altijd stellingen bestaan die onbewijsbaar zijn. Deze vaststelling was voor wiskundigen echter in het geheel geen domper. In plaats daarvan wierpen wiskundigen zich vol overgave op de vraag waar de waterscheiding lag: wat was wel bewijsbaar, wat niet? Wat kon berekend worden en wat niet?
+
+Het begin van het antwoord op die vragen begon zich rond 1936 te vormen. Vrijwel vanaf het eerste moment dat de vraag gesteld werd of een probleem oplosbaar was of niet, was duidelijk dat die vraag alleen beantwoord kon worden door eerst vast te stellen wat een berekening precies is. Hoe verloopt een berekening? Wat doen we precies, als we een berekening uitvoeren? Het is uiteraard heel leuk om uit het hoofd te kunnen zeggen "2 + 2 = 4", maar wat gebeurt er dan precies in ons hoofd dat we er 2 en 2 in stoppen en er 4 uit komt rollen?
+
+In 1936 publiceerde Alan Turing zijn Turing-machine, een van de eerste berekeningsmodellen: een schema van hoe een berekening precies verloopt. Rond dezelfde tijd publiceerde Alonzo Church een totaal ander berekeningsmodel, de lambdacalculus. De publicaties resulteerden in een spectaculair "wedstrijdje" tussen Church en Turing om aan te tonen welk model in staat was het grootste aantal problemen en algoritmen tot uitdrukking te brengen (wat nu expressiviteit van een model wordt genoemd).
+
+Na het einde van de "tweestrijd" (besloten in een wonderbaarlijk gelijkspel), gaf de introductie van de berekeningsmodellen aanleiding tot een heel nieuwe tak van wiskundige sport: de complexiteitstheorie. Met name het model van Turing leende zich erg goed voor het onderzoek dat centraal staat in deze wetenschap, omdat Turings model een algoritme heel mechanisch beschrijft: in termen van de kleinst mogelijke stappen, heel precies, in de vorm van "eerst doe je dit en dan doe je dat". Beide modellen van berekening maakten het mogelijk om een antwoord te geven op de vraag wat wel en niet berekenbaar is. Turings model maakte echter ook de vraag mogelijk hoelang een bepaalde berekening dan wel niet duurt. Hiermee ontstond de tweede, centrale vraag van de complexiteitstheorie: het gedrag van algoritmen. Het Turingmodel werd voor het eerst gebruikt om de complexiteit van algoritmen te meten in de publicatie On the computational complexity of algorithms van Juris Hartmanis en Richard E. Stearns in 1965.
+
+Turings model van berekening won zeer snel daarna enorm aan betekenis buiten de harde wiskunde. In 1939 brak de Tweede Wereldoorlog uit en Groot-Brittannië had behoefte aan een manier om snel Duitse codes te breken. Turings berekeningsmodel bleek al snel uitstekend uitvoerbaar in een elektrische machine – de eerste computer was geboren. Na de oorlog bleef de fascinatie voor de mogelijkheden van Turings machine bij velen beklijven. Overal ter wereld begonnen wiskunde-faculteiten zich ermee bezig te houden. Uiteindelijk zozeer dat de studie van de mogelijkheden van de machine een eigen leven ging leiden en een eigen naam kreeg: de informatica.
+
+Tegenwoordig houdt de complexiteitstheorie zich nog altijd bezig met de classificatie van algoritmen naar graad van complexiteit en met de vraag waar de grens precies ligt tussen berekenbaar en onberekenbaar en tussen makkelijk berekenbaar en moeilijk.
+
+De complexiteitstheorie heeft inmiddels ook haar weg gevonden naar andere wetenschappen. Zo lijkt de paradigmatische kijk ook zeer bruikbaar in bijvoorbeeld de sociologie.
+
+Computationele problemen
+Probleemgevallen
+Een computationeel probleem kan gezien worden als een oneindige verzameling van probleemgevallen met voor elk geval een oplossing. De invoer voor een computational wordt gezien als een probleemgeval en moet niet verward worden met het probleem zelf. In het geval van een priemgetaltest is het probleemgeval een getal en de oplossing "ja" als het getal priem is en "nee" als dat niet het geval is.
+
+Deze probleemgevallen worden gezien als een string in een alfabet. Vaak wordt het alfabet genomen als het binaire alfabet: {0, 1} Net zoals met echte computers moeten wiskundige objecten die niet een binaire string zijn, gecodeerd worden als zodanig. Een getal kan gecodeerd worden als de binaire representatie. Een graaf kan worden gerepresentateerd door de bogenmatrix of een aangrenzenheidslijst.
+
+Beslissingsproblemen
+Beslissingsproblemen staan centraal in de computationele complexiteitstheorie. Het zijn speciale computationele problemen, waarbij het antwoord bestaat uit "ja" of "nee", of equivalent: 1 of 0. Een beslissingsprobleem kan gezien worden als een formele taal, waarbij een woord bij de taal hoort als het probleemgeval het antwoord "ja" heeft. Het doel is om te beslissen, met behulp van een algoritme, of een gegeven invoer string bij de formele taal hoort. Als dit algoritme het antwoord "ja" geeft, wordt gezegd dat deze de invoer string accepteert. Zo niet, dan wordt gezegd dat hij de invoerstring afwijst.
+
+Grootte van probleemgevallen
+Om de moeilijkheidsgraad van een computationeel probleem te meten, zou men kunnen kijken naar de tijd die het kost voor het beste algoritme om het probleem op te lossen. De looptijd kan echter afhangen van het probleemgeval. Om precies te zijn, grotere probleemgevallen hebben een langere looptijd. Daarom wordt de looptijd (of andere maatstaf van complexiteit, zoals ruimte) berekend als functie van de grootte van het probleemgeval. Over het algemeen wordt de grootte gedefinieerd als het aantal bits dat nodig is voor de representatie van het probleemgeval.
+
+Als de grootte van de invoer n is, kan de looptijd worden uitgedrukt als functie van n. De tijd kan verschillend zijn voor probleemgevallen van dezelfde grootte. Daarom wordt de slechtste-geval complexiteit T(n) genomen als de maximale looptijd over alle invoer van grootte n. Als T(n) polynomiaal is ten opzichte van n, wordt er gezegd dat dit een polynomiale tijd algoritme is.
+
+Modellen en maatstaven van complexiteit
+Turingmachine
+1rightarrow blue.svg Zie Turingmachine voor het hoofdartikel over dit onderwerp.
+Een turingmachine is een wiskundig model van een computer. Het is een theoretische machine die gebruikmaakt van stroken papier en daar symbolen op schrijft en vanaf leest. Turingmachines zijn niet bedoeld als echte computers, maar meer als gedachte-experiment dat lijkt op een computer. De Church-Turing-hypothese stelt dat als er een algoritme voor een probleem bestaat, er een turingmachine bestaat die dit probleem oplost. Het is bekend dat de turingmachine alle problemen die kunnen worden berekend in andere modellen die ons bekend zijn (zoals RAM machines, Conway's Game of Life, cellulaire automaten en alle programeertalen) ook kan oplossen. Omdat turingmachines zich goed lenen voor wiskundige analyse en men gelooft dat ze net zo krachtig zijn als andere modellen, worden turingmachines het meest gebruikt in de computationele complexiteitstheorie.

@@ -1,0 +1,42 @@
+Een stapelautomaat
+Een stapelautomaat, ofwel een push-down-automaat (PDA), is een eindige automaat die gebruikmaakt van een stack. De klasse van formele talen die door stapelautomaten wordt geaccepteerd, is de klasse van contextvrije talen. Dat wil zeggen dat stapelautomaten even krachtig zijn als contextvrije grammatica's.
+
+Formele Definitie
+Formeel is een PDA een automaat {\displaystyle M}M met
+
+{\displaystyle M=(Q,\Sigma ,\Gamma ,\delta ,q_{0},F)\ }M = ( Q, \Sigma , \Gamma , \delta , q_0 , F ) \ 
+met
+
+{\displaystyle Q\ }Q \  een eindige verzameling toestanden
+{\displaystyle \Sigma \ }\Sigma \  een eindige verzameling symbolen, het alfabet van de automaat geheten
+{\displaystyle \Gamma \ }\Gamma \  een eindige verzameling symbolen, het alfabet van de stack
+{\displaystyle \,\delta }\,\delta: {\displaystyle Q\times \Sigma _{\epsilon }\times \Gamma _{\epsilon }\longrightarrow {\mathcal {P}}(Q\times \Gamma _{\epsilon })}Q \times \Sigma_{\epsilon} \times \Gamma_{\epsilon} \longrightarrow \mathcal{P}( Q \times \Gamma_{\epsilon}) een transitiefunctie
+{\displaystyle q_{0}\ }q_0 \  de begintoestand
+{\displaystyle F\subseteq Q}F\subseteq Q de verzameling accepterende toestanden
+waarbij {\displaystyle \Sigma _{\epsilon }=\Sigma \cup \{\epsilon \}}\Sigma_\epsilon=\Sigma\cup\{\epsilon\} en {\displaystyle \Gamma _{\epsilon }=\Gamma \cup \{\epsilon \}}\Gamma_\epsilon=\Gamma\cup\{\epsilon\}.
+
+Een stapelautomaat accepteert een woord w, als w geschreven kan worden als {\displaystyle w_{1}w_{2}\ldots w_{n}}w_1w_2\ldots w_n, waarbij {\displaystyle w_{i}\in \Sigma _{\epsilon }}w_i\in\Sigma_\epsilon, als er een rij {\displaystyle r_{0},\ldots ,r_{n}}r_0,\ldots,r_n van toestanden en een rij {\displaystyle s_{0},\ldots ,s_{n}}s_0,\ldots,s_n van stapelinhouden ({\displaystyle s_{i}\in \Gamma ^{*}}s_i\in\Gamma^*) zijn, zo dat
+
+{\displaystyle r_{0}=q_{0}}r_0 = q_0 en {\displaystyle s_{0}=\epsilon }s_0=\epsilon;
+voor alle {\displaystyle 0\leq i\leq n-1}0 \leq i \leq n-1 geldt: {\displaystyle (r_{i+1},\beta )\in \delta (r_{i},w_{i+1},\alpha )}(r_{i+1},\beta) \in \delta(r_i,w_{i+1},\alpha), waarbij {\displaystyle s_{i}=\alpha \omega }s_i=\alpha\omega en {\displaystyle s_{i+1}=\beta \omega }s_{i+1}=\beta\omega voor een {\displaystyle \omega \in \Gamma ^{*}}\omega\in\Gamma^*;
+{\displaystyle r_{n}\in F}r_n\in F.
+De taal van een stapelautomaat {\displaystyle M}M, genoteerd als {\displaystyle L(M)}L(M), is de verzameling van alle woorden die door {\displaystyle M}M geaccepteerd worden.
+
+Voorbeeld
+De stapelautomaat {\displaystyle M=(\{q_{0},q_{a},q_{b},q_{f}\},\{a,b\},\{S,1\},\delta ,q_{0},\{q_{f}\})}M = (\{q_0,q_a,q_b,q_f\},\{a,b\},\{S,1\},\delta,q_0,\{q_f\}) met
+
+{\displaystyle \delta (q_{0},a,\epsilon )=\{(q_{a},1)\}}\delta(q_0,a,\epsilon) = \{(q_a,1)\}
+{\displaystyle \delta (q_{a},a,\epsilon )=\{(q_{a},1)\}}\delta(q_a,a,\epsilon) = \{(q_a,1)\}
+{\displaystyle \delta (q_{a},b,1)=\{(q_{b},\epsilon )\}}\delta(q_a,b,1) = \{(q_b,\epsilon)\}
+{\displaystyle \delta (q_{b},b,1)=\{(q_{b},\epsilon ),(q_{f},\epsilon )\}}\delta(q_b,b,1) = \{(q_b,\epsilon),(q_f,\epsilon)\}
+{\displaystyle \delta (q,x,y)=\emptyset }\delta(q,x,y) = \emptyset voor alle andere combinaties van {\displaystyle q\in Q}q\in Q, {\displaystyle x\in \Sigma _{\epsilon }}x\in\Sigma_\epsilon en {\displaystyle y\in \Gamma _{\epsilon }}y\in\Gamma_\epsilon
+accepteert de contextvrije taal {\displaystyle \{a^{n}b^{n}\mid n\geq 1\}}\{a^nb^n \mid n \geq 1\}.
+
+Voor het woord {\displaystyle w=aabb}w = aabb hebben we bijvoorbeeld:
+
+{\displaystyle r_{0}=q_{0},s_{0}=\epsilon }r_0 = q_0, s_0 = \epsilon
+{\displaystyle r_{1}=q_{a},s_{1}=1}r_1 = q_a, s_1 = 1 (want {\displaystyle w_{1}=a}w_1=a en {\displaystyle (q_{a},1)\in \delta (q_{0},a,\epsilon )}(q_a,1)\in\delta(q_0,a,\epsilon))
+{\displaystyle r_{2}=q_{a},s_{2}=11}r_2 = q_a, s_2 = 11 (want {\displaystyle w_{2}=a}w_2=a en {\displaystyle (q_{a},1)\in \delta (q_{a},a,\epsilon )}(q_a,1)\in\delta(q_a,a,\epsilon))
+{\displaystyle r_{3}=q_{b},s_{3}=1}r_3 = q_b, s_3 = 1 (want {\displaystyle w_{3}=b}w_3=b en {\displaystyle (q_{b},\epsilon )\in \delta (q_{a},b,1)}(q_b,\epsilon)\in\delta(q_a,b,1))
+{\displaystyle r_{4}=q_{f},s_{4}=\epsilon }r_4 = q_f, s_4 = \epsilon (want {\displaystyle w_{4}=b}w_4=b en {\displaystyle (q_{f},\epsilon )\in \delta (q_{b},b,1)}(q_f,\epsilon)\in\delta(q_b,b,1))
+het woord wordt geaccepteerd omdat {\displaystyle q_{f}\in F}q_f\in F.

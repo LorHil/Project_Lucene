@@ -1,0 +1,15 @@
+In de wiskunde en de theoretische informatica, is een universele Turing-machine (UTM) (ook bekend als de universele rekenmachine, universele machine (UM), U-machine, U en ATM) een Turing-machine die elke willekeurige Turing-machine op elke willekeurige input kan simuleren. De universele Turing-machine slaagt hier in essentie in door zowel de beschrijving van de te simuleren machine als de input daarvan van haar eigen tape te lezen.
+
+Een universele Turing-machine is een Turing-machine die {\displaystyle \langle M,w\rangle }{\displaystyle \langle M,w\rangle } als input neemt, en deze input accepteert wanneer:
+
+{\displaystyle M}M een correcte stringcodering is van een Turing-machine,
+{\displaystyle w}w een woord is in het alfabet van de door {\displaystyle M}M gecodeerde Turing-machine, en
+{\displaystyle M}M voor het woord {\displaystyle w}w stopt in de accepterende toestand
+Pas wanneer {\displaystyle \langle M,w\rangle }{\displaystyle \langle M,w\rangle } aan al deze voorwaarden voldoet stopt de universele Turingmachine in de accepterende toestand[1]. Een formele notatie is: {\displaystyle A_{TM}=\{\langle M,w\rangle \mid M{\text{ is een Turing-machine en }}M{\text{ accepteert }}w\}}{\displaystyle A_{TM}=\{\langle M,w\rangle \mid M{\text{ is een Turing-machine en }}M{\text{ accepteert }}w\}}.
+
+Een belangrijke observatie is dat de universele Turingmachine een herkenner is van {\displaystyle \langle M,w\rangle }{\displaystyle \langle M,w\rangle }, en dus geen beslisser. Dit is het geval omdat het mogelijk is dat M oneindig doorrekent bij input {\displaystyle w}w en dus nooit de afwijzende toestand bereikt. De universele Turing-machine zou dan ook nooit de afwijzende toestand berkeiken. We hebben hier te maken met het stopprobleem.
+
+Het idee van een universele Turing-machine werd in 1936[2] geïntroduceerd door Alan Turing. Dit model wordt door sommigen (bijvoorbeeld Martin Davis (2000)) beschouwd als de oorsprong van de stored program-computer - door John von Neumann (1946) gebruikt voor zijn "Electronic Computing Instrument" dat nu zijn naam draagt: de von Neumann-architectuur.
+
+De alledaagse computer
+De alledaagse computer wordt ook wel eens een universele Turing-machine genoemd. Enerzijds is dit correct, aangezien het principe van de universele Turing-machine is dat het arbitrair programma met een arbitraire input kan uitvoeren; wat alledaagse praktisch gezien ook kunnen. Anderzijds heeft de theoretische universele Turing-machine een oneindig geheugen. Praktisch gezien kan wel gezegd worden dat een alledaagse computer een universele Turing-machine is, aangezien het geheugen dat de meeste computers hebben voor zeer veel problemen voldoende is, terwijl dit puur theoretisch gezien dus niet correct is.

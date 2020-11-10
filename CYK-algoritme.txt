@@ -1,0 +1,61 @@
+Het Cocke-Younger-Kasami (CYK)-algoritme (soms ook bekend als CKY) bepaalt of een string gegenereerd kan worden door een gegeven context-vrije grammatica en, als dit het geval is, levert het de manier waarop de string gegenereerd kan worden. Dit proces noemt men het parsen of ontleden van de string. Het algoritme is een voorbeeld van dynamisch programmeren.
+
+De standaard versie van CYK herkent talen gedefinieerd door contextvrije grammatica's die in Chomsky-normaalvorm zijn. Aangezien elke contextvrije grammatica op eenvoudige wijze in deze normaalvorm om te zetten is, kan CYK gebruikt worden om alle contextvrije talen te herkennen. Het is eveneens mogelijk het CYK-algoritme uit te breiden zodat de gegeven contextvrije grammatica niet noodzakelijk in Chomsky-normaalvorm moet staan. Zulke uitbreiding maakt het algoritme meer performant, maar ook moeilijker om de werking te begrijpen.
+
+In het slechtste geval is de asymptotische tijdscomplexiteit van CYK Θ(n3), waar n de lengte van de geparseerde string is. Dit maakt het een van de meest efficiënte algoritmes voor het herkennen van contextvrije talen qua tijdscomplexiteit. Er zijn echter wel andere algoritmes die nog beter presteren om bepaalde deelgroepen van de contextvrije talen te herkennen.
+
+Het algoritme is vernoemd naar John Cocke, Daniel H. Younger en Tadao Kasami.
+
+
+Inhoud
+1	Het algoritme
+1.1	Informeel
+1.2	Uitbreiding van het algoritme
+2	Voorbeeld
+3	Referenties
+Het algoritme
+Het CYK-algoritme is een bottom up-algoritme en is van theoretisch belang, aangezien het kan gebruikt worden om een constructief bewijs te leveren dat het behoren van een string tot een contextvrije taal beslisbaar is.
+
+Het algoritme werkt als volgt:
+
+Laat de string bestaan uit n letters, a1 ... an.
+Laat de grammatica r terminale en niet-terminale symbolen bevatten R1 ... Rr. 
+Deze grammatica bevat de deelverzameling Rs, de verzameling van de startsymbolen.
+Laat P[n,n,r] een array van booleans zijn. Initialiseer alle elementen van P met false.
+Voor elke i = 1 tot n
+  Voor elke unit productie Rj → ai, zet P[i,1,j] = true.
+Voor elke i = 2 tot n -- Lengte van de deelstring
+  Voor elke j = 1 to n-i+1 -- Start van de deelstring
+    Voor elke k = 1 to i-1 -- Gedeelte van de deelstring
+      Voor elke productie RA → RB RC
+        Als P[j,k,B] EN P[j+k,i-k,C] dan zet P[j,i,A] = true
+Als minstens één van P[1,n,x] true is (x itereert over de verzameling s, waar s alle indices zijn voor Rs)
+  Dan behoort de string tot de taal
+  Anders behoort de string niet tot de taal
+Informeel
+Simpeler uitgelegd: het algoritme beschouwt alle mogelijke onderdelen van de groep woorden en zet P[i,j,k] op true als de groep woorden beginnend vanaf letter i en van lengte j gegenereerd kan worden vanaf Rk. Zodra alle onderdelen van lengte 1 beschouwd zijn, worden alle onderdelen van lengte 2 beschouwd, enz. Voor onderdelen van lengte 2 en groter beschouwt het algoritme elke deelstring in 2 delen, en controleert zo of er een productie P → Q R is, zodat Q overeenkomt met het eerste deel en R met het tweede deel. Als dit positief is dan wordt besloten dat P er ook mee overeenkomt. Wanneer dit proces voltooid is, dan wordt de string herkend door de grammatica als de hele string overeenkomt met het startsymbool.
+
+Uitbreiding van het algoritme
+Het is eenvoudig om het bovenstaande algoritme uit te breiden zodat het, naast bepalen of een string tot een taal behoort, een syntaxisboom van de string opstelt door knopen van de boom op te slaan in de array, in plaats van de booleans. Aangezien de grammatica's die herkend worden dubbelzinnig kunnen zijn, is het nodig om een lijst van die knopen bij te houden (behalve als je maar interesse hebt in 1 mogelijke boom). Het resultaat kan dan bestaan uit meerdere bomen. Een alternatieve mogelijkheid is een tweede tabel B[n,n,r] bij te houden met zogenaamde backpointers.
+
+Het is eveneens mogelijk om het bovenstaande algoritme uit te breiden zodate het strings kan parseren door middel van gewogen en stochastische contextvrije grammatica's. In dat geval worden gewichten (of kansen) in de array P opgeslagen in plaats van booleans, zodat P[i,j,A] het minimum gewicht (of maximum kans) bevat waarmee de deelstring van i to j afgeleid kan worden uit A. Verdere uitbreidingen hierop laten toe om alle mogelijke parseringen van de string te vinden, gesorteerd van laagste naar hoogste gewicht (of hoogste naar laagste kans).
+
+Voorbeeld
+Veronderstel de volgende productieregels van een bepaalde contextvrije grammatica:
+
+Productieregel	Beschrijving
+E → OWS	Een Element bestaat uit een Opentag, een Woord en een Sluittag
+O → KLG	Een Opentag bestaat uit een Kleiner-dan, een Letter en een Groter-dan
+S → KDLG	Een Sluittag bestaat uit een Kleiner-dan, een Deelteken, een Letter en een Groter-dan
+W → LLLLLLLLL	Een Woord bestaat uit 9 Letters
+L → a | b | .. | z	Een Letter behoort tot het Nederlands alfabet
+K → <	Een Kleiner-dan is het teken <
+G → >	Een Groter-dan is het teken >
+D → /	Een Deelteken is het teken /
+De volgende invoerstring <b>wikipedia</b> levert dan volgende tabel op:
+
+E
+O	W	S
+K	L	G	L	L	L	L	L	L	L	L	L	K	D	L	G
+<	b	>	w	i	k	i	p	e	d	i	a	<	/	b	>
+We kunnen dus besluiten dat de invoerstring tot de taal behoort.
